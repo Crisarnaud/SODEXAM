@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_hr_fdfp">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+			<t t-call="hr_FDFP.fdfp_default_layout">
+				<div class="page">
+					 <div class="text-center">
+						 <p><h3>TAXE D’APPRENTISSAGE ET TAXE<br/>ADDITIONNELLE A LA FORMATION CONTINUE</h3></p>
+						 <p>(Articles 143 et suivants du CGI)</p>
+					 </div>
+					 <div>
+						 <div class="act_as_table data_table" >
+							 <div class="act_as_row labels">
+								 01 IDENTIFICATION DU CONTRIBUABLE
+							 </div>
+						 </div>
+						 <div class="act_as_table data_table" >
+							 <div class="act_as_row labels">
+								 <div class="act_as_cell act_as_libelle ">Raison sociale : </div>
+								 <div class="act_as_cell"><span t-field="o.company_id.name" /></div>
+							 </div>
+							 <div class="act_as_row labels">
+								 <div class="act_as_cell act_as_libelle ">NCC : </div>
+								 <div class="act_as_cell"><span t-field="o.company_id.num_contribuable" /></div>
+								 <div class="act_as_cell act_as_libelle ">Objet ou activité : </div>
+								 <div class="act_as_cell"></div>
+							 </div>
+							 <div class="act_as_row labels">
+								 <div class="act_as_cell act_as_libelle ">Localisation : </div>
+								 <div class="act_as_cell"><span t-field="o.company_id.street" /></div>
+								 <div class="act_as_cell act_as_libelle ">Téléphone : </div>
+								 <div class="act_as_cell"><span t-field="o.company_id.phone" /></div>
+							 </div>
+							 <div class="act_as_row labels">
+								 <div class="act_as_cell act_as_libelle ">Adresse : </div>
+								 <div class="act_as_cell"><span t-field="o.company_id.num_contribuable" /></div>
+								 <div class="act_as_cell act_as_libelle ">Cellulaire : </div>
+								 <div class="act_as_cell"><span t-field="o.company_id.mobile" /></div>
+							 </div>
+							 <div class="act_as_row labels">
+								 <div class="act_as_cell act_as_libelle ">Ville : </div>
+								 <div class="act_as_cell"><span t-field="o.company_id.city" /></div>
+								 <div class="act_as_cell act_as_libelle ">Sigle : </div>
+								 <div class="act_as_cell"></div>
+							 </div>
+							 <div class="act_as_row labels">
+								 <div class="act_as_cell act_as_libelle ">Réf. cadastrales Section : </div>
+								 <div class="act_as_cell"></div>
+								 <div class="act_as_cell act_as_libelle ">Parcelle : </div>
+								 <div class="act_as_cell"><span t-field="o.company_id.parcelle" /></div>
+							 </div>
+						 </div>
+						 <br/>
+						 <div class="act_as_table data_table" >
+							 <div class="act_as_row labels">
+								02 DETERMINATION DE LA BASE IMPOSABLE
+							 </div>
+						 </div>
+						 <div class="act_as_table data_table" >
+							 <div class="act_as_row labels">
+								2.1 EFFECTIF DES SALARIES
+							 </div>
+						 </div>
+						 <div class="act_as_table data_table" >
+							 <div class="act_as_row labels">
+								<div class="act_as_cell act_as_libelle" style="width: 75%;">Effectif des salariés</div>
+								<div class="act_as_cell amount"><span t-field="o.salaries_number" /></div>
+							 </div>
+						 </div>
+						 <br/>
+						 <div class="act_as_table data_table" >
+							 <div class="act_as_row labels">
+								2.2 DETERMINATION DES TAXES
+							 </div>
+						 </div>
+						 <div class="act_as_table data_table" >
+							 <div class="act_as_row labels">
+								 <div class="act_as_cell act_as_libelle ">NATURE DES TAXES</div>
+								 <div class="act_as_cell act_as_libelle ">REMUNERATIONS BRUTES TOTALES</div>
+								 <div class="act_as_cell act_as_libelle ">TAUX</div>
+								 <div class="act_as_cell act_as_libelle ">MONTANT MENSUEL</div>
+							 </div>
+							 <t t-foreach="o.line_ids" t-as="line">
+								 <div class="act_as_row labels">
+									 <div class="act_as_cell "><span t-field="line.rule_id.name" /></div>
+									 <div class="act_as_cell amount"><span t-field="line.brut_total" /></div>
+									 <div class="act_as_cell amount"><span t-field="line.taux" /></div>
+									 <div class="act_as_cell amount"><span t-field="line.amount_contributed"/></div>
+								 </div>
+							 </t>
+						 </div>
+						 <br/>
+						 <div class="act_as_table data_table" >
+							 <div class="act_as_row labels">
+								<div class="act_as_cell act_as_libelle" style="width: 75%;">MONTANT TOTAL A PAYER (FDFP)</div>
+								<div class="act_as_cell amount"><span t-field="o.amount_total_contributed" /></div>
+							 </div>
+						 </div>
+
+					 </div>
+				 </div>
+			</t>
+		</t>
+	</t>
+</template>
+</odoo>

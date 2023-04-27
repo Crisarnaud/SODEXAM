@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="patient_laboratory_test_request_form_aero_inherit" model="ir.ui.view">
+            <field name="name">Test Requests</field>
+            <field name="model">acs.laboratory.request</field>
+            <field name="inherit_id" ref="acs_laboratory.patient_laboratory_test_request_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='group_patient_ids']" position="after">
+                    <button name="%(import_laboratory_aero_view_action)s" type="action" class="oe_stat_button"
+                            string="Importer des clients" attrs="{'invisible': [('is_group_request','=',False)]}"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="hr_301_form_view">
+            <field name="name">hr.301 form_view</field>
+            <field name="model">hr.301</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <button name="compute" string="Générer le rapport" type="object"/>
+                        <button name="%(action_import_advantages)s" type="action"
+                                string="Importer les avantages (Natures et espèces)"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name" placeholder="Libellé"/>
+                        </group>
+                        <group col="4">
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                        <notebook>
+                            <page string="Lignes">
+                                <field name="line_ids">
+                                    <tree>
+                                        <field name="employee_id"/>
+                                        <field name="nature_employee"/>
+                                        <field name="total_worked_days"/>
+                                        <field name="amount_brut_total" sum="Total avant retraitement"/>
+                                        <field name="natural_advantage_software"
+                                               sum="Total avantage en nature logiciel"/>
+                                        <field name="natural_advantage_other" sum="Total autre avantage en nature"/>
+                                        <field name="cash_advantage" sum="Total avantage en espèce"/>
+                                        <field name="total_gross" sum="Total après retraitement"/>
+                                        <field name="amount_is" sum="Total IS"/>
+                                        <field name="amount_cn" sum="Total CN"/>
+                                        <field name="amount_igr" sum="Total IGR"/>
+                                    </tree>
+                                    <form>
+                                        <group col="4">
+                                            <field name="employee_id"/>
+                                            <field name="nature_employee"/>
+                                            <field name="total_worked_days"/>
+                                            <field name="amount_brut_total"/>
+                                            <field name="natural_advantage_software"/>
+                                            <field name="natural_advantage_other"/>
+                                            <field name="cash_advantage"/>
+                                            <field name="total_gross"/>
+                                            <field name="amount_is"/>
+                                            <field name="amount_cn"/>
+                                            <field name="amount_igr"/>
+                                            <field name="amount_tp"/>
+                                            <field name="amount_af"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Versements ou à Verser">
+                                <field name="versement_ids">
+                                    <tree editable="top">
+                                        <field name="month" required="1"/>
+                                        <field name="date" required="1"/>
+                                        <field name="type" required="1"/>
+                                        <field name="amount_total"/>
+                                        <field name="amount_is"/>
+                                        <field name="amount_cn"/>
+                                        <field name="amount_igr"/>
+                                        <field name="local_employee"/>
+                                        <field name="expat_employee"/>
+                                        <field name="etat_301_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Taxe à la formation">
+                                <group col="4" string="Régularisation à effectuer en f'in d'année (FDFP)">
+                                    <field name="total_payroll" readonly="1"/>
+                                    <field name="exercise_contribution" readonly="1"/>
+                                    <field name="payments_already_made"/>
+                                    <field name="commitment_on_plan"/>
+                                    <field name="payment_to_be_made" readonly="1"/>
+                                </group>
+                                <separator string="Versements obligatoires FDFP"/>
+                                <field name="training_tax_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="tax"/>
+                                        <field name="gross_salary"/>
+                                        <field name="tax_amount"/>
+                                    </tree>
+                                    <form>
+                                        <group col="4">
+                                            <field name="name"/>
+                                            <field name="tax"/>
+                                            <field name="gross_salary"/>
+                                            <field name="tax_amount"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_301_tree_view">
+            <field name="name">hr.301 tree_view</field>
+            <field name="model">hr.301</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_hr_301_tree_view" model="ir.actions.act_window">
+            <field name="name">Rapport ETAT 301</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.301</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="hr_301_menu" name="Etat 301" parent="hr_payroll_custom.menu_hr_payroll_social"
+                  action="action_hr_301_tree_view" groups="hr_payroll.group_hr_payroll_user,hr_payroll.group_hr_payroll_manager"/>
+    </data>
+</odoo>

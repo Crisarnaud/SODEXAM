@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="import_laboratory_aero_view_form">
+            <field name="name">acs.laboratory.request.aero.wizard view_form</field>
+            <field name="model">acs.laboratory.aero.request.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="csv_file"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="compute_data" string="Importer" type="object"/>
+                        or
+                        <button special="cancel" string="Annuler" type="object"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="import_laboratory_aero_view_action">
+            <field name="name">Import des patients</field>
+            <field name="res_model">acs.laboratory.aero.request.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

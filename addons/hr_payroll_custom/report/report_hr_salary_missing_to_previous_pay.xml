@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="paper_format_landscape" model="report.paperformat">
+            <field name="name">A4 - Landscape</field>
+            <field name="format">A4</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">15</field>
+            <field name="margin_bottom">30</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <template id="report_missing_previous_pay">
+            <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="hr_payroll_custom.doc_layout">
+                    <div class="page" style="font-family:DejaVu Serif;padding:20px 0px 100px 0px;">
+                        <table style="border-collapse:collapse;bordercolor=#111111; align:center;width:100%; margin-top:10%">
+                            <tbody>
+                                <tr>
+                                    <td style="border:none; width:10%;"></td>
+                                    <td style="border:3px solid black; width:80%; align:center; text-decoration: underline black; text-align:center;">
+                                        <h2 style="text-decoration: underline black;padding-top:10px; padding-bottom:5px;text-align:center;font-family:DejaVu Serif;">
+                                            <b>
+                                                Salariés absents de la précédente paie
+                                                <br/>
+                                                au mois de
+                                                <span t-esc="o.date_from.strftime('%B %Y')"
+                                                      style="font-family:DejaVu Serif;"/>
+                                            </b>
+                                        </h2>
+                                    </td>
+                                    <td style="border:none; width:10%;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <br/>
+                        <table style="border-collapse:collapse;bordercolor=#111111;align:center;width:100%;">
+                            <tr>
+                                <td style="border:1px solid;text-align:center;font-family:DejaVu Serif;">
+                                    <strong>Matricule</strong>
+                                </td>
+                                <td style="border:1px solid;text-align:center;font-family:DejaVu Serif;">
+                                    <strong>Nom</strong>
+                                </td>
+                                <td style="border:1px solid;text-align:center;font-family:DejaVu Serif;">
+                                    <strong>Prenom</strong>
+                                </td>
+                                <td style="border:1px solid;text-align:center;font-family:DejaVu Serif;">
+                                    <strong>Categorie</strong>
+                                </td>
+                                <td style="border:1px solid;text-align:center;font-family:DejaVu Serif;">
+                                    <strong>Date d'embauche</strong>
+                                </td>
+                                <td style="border:1px solid;text-align:center;font-family:DejaVu Serif;">
+                                    <strong>Libellé</strong>
+                                </td>
+                                <td style="border:1px solid;text-align:center;font-family:DejaVu Serif;">
+                                    <strong>Sortie</strong>
+                                </td>
+                            </tr>
+                            <tr t-foreach='o.employee_ids' t-as='line'>
+                                <t t-if="line.type == 'in'">
+                                    <td style="border:1px solid;text-align:center;">
+                                        <span t-esc="line.identification_id" style="font-family:DejaVu Serif;"/>
+                                    </td>
+                                    <td style="border:1px solid;text-align:center;">
+                                        <span t-esc="line.name" style="font-family:DejaVu Serif;"/>
+                                    </td>
+                                    <td style="border:1px solid;text-align:center;">
+                                        <span t-esc="line.employee_id.first_name" style="font-family:DejaVu Serif;"/>
+                                    </td>
+                                    <td style="border:1px solid;text-align:center;">
+                                        <span t-esc="line.employee_id.categorie_salariale_id.name"
+                                              style="font-family:DejaVu Serif;"/>
+                                    </td>
+                                    <td style="border:1px solid;text-align:center;">
+                                        <span t-esc="line.employee_id.start_date.strftime('%d-%m-%Y')"
+                                              style="font-family:DejaVu Serif;"/>
+                                    </td>
+                                    <td style="border:1px solid;text-align:center;font-family:DejaVu Serif;">Présent
+                                    </td>
+                                    <td style="border:1px solid;text-align:center;">
+                                        <span t-esc="o.old_date_from.strftime('%m-%Y')"
+                                              style="font-family:DejaVu Serif;"/>
+                                    </td>
+                                </t>
+                            </tr>
+                        </table>
+                    </div>
+                                        </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

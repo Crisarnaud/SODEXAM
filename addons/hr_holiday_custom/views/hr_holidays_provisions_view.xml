@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="hr_holidays_provision_form">
+            <field name="name">hr.holidays.provision.form</field>
+            <field name="model">hr.holidays.provision</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="compute" string="Calculer" type="object"/>
+                    </header>
+                    <sheet>
+                        <group col="4">
+                            <field name="name"/>
+                            <field name="type"/>
+                            <field name="date_end"/>
+                            <field name="employee_id" attrs="{'invisible':[('type', '=', 'all')]}"/>
+                            <field name="company_id"/>
+                        </group>
+                        <notebook>
+                            <page string="Les lignes de provisoins">
+                                <field name="line_ids" readonly="1">
+                                    <tree>
+                                        <field name="employee_id"/>
+                                        <field name="date_start"/>
+                                        <field name="date_end"/>
+                                        <field name="number_holidays"/>
+                                    </tree>
+                                    <form>
+                                        <field name="employee_id"/>
+                                        <field name="date_start"/>
+                                        <field name="date_end"/>
+                                        <field name="number_holidays"/>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_holidays_provision_tree">
+            <field name="name">hr.holidays.provision.tree</field>
+            <field name="model">hr.holidays.provision</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="date_end"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_hr_provision_holidays" model="ir.actions.act_window">
+            <field name="name">Provisions de congés</field>
+            <field name="res_model">hr.holidays.provision</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créer une nouvelle provision de congés
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Provisions" parent="hr_holidays.menu_hr_holidays_approvals" id="holidays_provision_menu"/>
+
+        <menuitem name="Provisions Congés" id="menu_hr_provision_holidays" parent="holidays_provision_menu"
+                  action="action_hr_provision_holidays"/>
+
+        <record model="ir.ui.view" id="hr_holidays_provision_line_tree">
+            <field name="name">hr.holidays.provision.line.tree</field>
+            <field name="model">hr.holidays.provision.line</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="employee_id"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="number_holidays"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_hr_provision_holidays_line" model="ir.actions.act_window">
+            <field name="name">Provisions de congés</field>
+            <field name="res_model">hr.holidays.provision.line</field>
+            <field name="view_mode">pivot,tree</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créer une nouvelle provision de congés
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Analyse Provisions Congés" id="menu_hr_provision_holidays_line" parent="holidays_provision_menu"
+                  action="action_hr_provision_holidays_line"/>
+
+
+    </data>
+</odoo>

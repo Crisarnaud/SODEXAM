@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_agent_on_leave">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+
+                        <div style="text-align: center; padding:140px 0px 100px 0px;">
+                            <center>
+                                <table style="border-collapse:collapse;bordercolor=#111111; align:center;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="border:3px solid black; width:100%; align:center; text-align:center; height:auto;padding-top:20px; padding-bootom:20px">
+                                                <h3 style="font-family:times new roman;">
+                                                    <b>LISTE DES AGENTS EN CONGE </b>
+                                                </h3>
+                                                <br/>
+                                                <h6 style="font-family:times new roman;">
+                                                </h6>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </center>
+                        </div>
+
+                        <div class="pull-right" style="padding-top: 50px;">
+                            <div>
+                                <h6>Fait à Abidjan, le
+                                    <span t-esc="datetime.datetime.now().strftime('%d %B %Y')"/>
+                                </h6>
+                            </div>
+                            <br/>
+                            <div style="margin-bottom: 30px;border-top:1px solid black;padding-top:10px;">
+                                <h6 style="text-justify: auto;">
+                                    <strong>Le Directeur des Ressources Humaines</strong>
+                                </h6>
+                            </div>
+                        </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- gestion des employés -->
+    <record model="ir.ui.view" id="hr_payslip_employee_inherit_form_view">
+        <field name="name">hr.employee.form</field>
+        <field name="model">hr.employee</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='oe_button_box']" position="inside">
+                <button name="%(balance_any_account_act_window)d" type="action" class="oe_stat_button"
+                        icon="fa-align-center" string="Solde de tout compte"></button>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="after">
+            </xpath>
+            <xpath expr="//field[@name='registration_number']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='nature_employe']" position="after">
+                <field name="is_crrae_contributor"/>
+            </xpath>
+            <xpath expr="//group[@name='departure']" position="replace">
+                <group name="Departure" string="Départ" attrs="{'invisible': [('active', '=', True)]}">
+                    <field name="motif_fin_contract_id"/>
+                    <field name="end_date"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_employee_motif_cloture_tree_view_inherit">
+        <field name="name">hr.employee.motif.cloture.tree.inherit</field>
+        <field name="model">hr.employee.motif.cloture</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="hr_employee_custom.hr_employee_motif_cloture_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='description']" position="after">
+                <field name="indemnity"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

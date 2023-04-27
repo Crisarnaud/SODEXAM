@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="aeronautics_department" model="hr.department">
+            <field name="name">Aeronautics</field>
+            <field name="patient_department">True</field>
+            <field name="department_type">aero</field>
+        </record>
+
+    </data>
+</odoo>

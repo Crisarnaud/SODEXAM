@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+		<report 
+            id="action_report_loaning"
+            model="hr.loaning.request"
+            string="Echeanciers"
+            menu= "False"
+            report_type="qweb-pdf"
+            name="loan_custom.report_loaning"
+            file="loan_custom.report_loaning"
+        />
+    </data>
+</openerp>

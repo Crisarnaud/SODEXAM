@@ -1,0 +1,46 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_abatement,res.abatement all,model_res_abatement,base.group_user,1,1,1,1
+access_hr_employee_degree,hr.employee.degree,model_hr_employee_degree,hr.group_hr_manager,1,1,1,1
+access_hr_diplomes_domaine,access_hr_diplomes_domaine,model_hr_diplomes_domaine,hr.group_hr_manager,1,1,1,1
+access_hr_diplomes_employee,access_hr_diplomes_employee,model_hr_diplomes_employee,hr.group_hr_manager,1,1,1,1
+access_hr_visit_medical,hr.visit.medical,model_hr_visit_medical,hr.group_hr_manager,1,1,1,1
+access_hr_visit_medical,hr.visit.medical,model_hr_visit_medical,hr.group_hr_user,1,1,1,1
+access_hr_sanctions,hr.sanctions,model_hr_sanctions,hr.group_hr_manager,1,1,1,1
+access_hr_sanctions,hr.sanctions,model_hr_sanctions,hr.group_hr_user,1,1,1,1
+access_hr_work_accident,hr.work_accident,model_hr_work_accident,hr.group_hr_manager,1,1,1,1
+access_hr_work_accident,hr.work_accident,model_hr_work_accident,hr.group_hr_user,1,1,1,1
+access_hr_employee_motif_cloture,hr.employee.motif.cloture,model_hr_employee_motif_cloture,hr.group_hr_manager,1,1,1,1
+access_hr_type_sanctions,hr.type_sanctions,model_hr_type_sanctions,hr.group_hr_manager,1,1,1,1
+access_hr_mission,hr.mission,model_hr_mission,hr.group_hr_manager,1,1,1,1
+access_hr_moyens_transport,hr.moyens_transport,model_hr_moyens_transport,hr.group_hr_manager,1,1,1,1
+access_hr_employee_document,hr.employee.document,model_hr_employee_document,hr.group_hr_manager,1,1,1,1
+access_hr_parent,hr.parent,model_hr_parent,hr.group_hr_manager,1,1,1,1
+access_hr_employee_type_document,hr.employee.type.document,model_hr_employee_type_document,hr.group_hr_manager,1,1,1,1
+access_hr_school,hr.school,model_hr_school,hr.group_hr_manager,1,1,1,1
+access_hr_school_field,hr.school.field,model_hr_school_field,hr.group_hr_manager,1,1,1,1
+access_hr_employee_custom_employee_resignation,hr_employee_custom.employee_resignation,model_hr_employee_custom_employee_resignation,hr.group_hr_manager,1,1,1,1
+access_hr_new_employees_wizard,hr.new.employees.wizard,model_hr_new_employees_wizard,,hr.group_hr_manager,1,1,1,1
+access_hr_destination,hr.destination,model_hr_destination,,hr.group_hr_manager,1,1,1,1
+access_hr_employee,hr.employee,model_hr_employee,hr.group_hr_manager,1,1,1,1
+access_hr_department,hr.department,model_hr_department,hr.group_hr_manager,1,1,1,1
+access_res_partner_bank_group_hr_manager,access_res_partner_bank_group_hr_manager,model_res_partner_bank,hr.group_hr_manager,1,1,1,1
+
+
+access_hr_employee_custom_employee_resignation_user,hr_employee_custom.employee_resignation_user,model_hr_employee_custom_employee_resignation,hr.group_hr_user,1,1,1,1
+access_hr_employee_user,hr.employee.user,model_hr_employee,hr.group_hr_user,1,1,0,0
+access_hr_mission,hr.mission,model_hr_mission,hr.group_hr_user,1,0,0,0
+access_hr_parent,hr.parent,model_hr_parent,hr.group_hr_user,1,1,1,1
+access_hr_department,hr.department,model_hr_department,hr.group_hr_user,1,0,0,0
+access_res_partner_bank_user,access_res_partner_bank_user,model_res_partner_bank,hr.group_hr_user,1,1,1,0
+
+
+
+access_hr_employee_motif_cloture_consultant,access_hr_employee_motif_cloture_consultant,model_hr_employee_motif_cloture,group_hr_employee_consultant,1,0,0,0
+access_hr_employee,hr.employee,model_hr_employee,group_hr_employee_consultant,1,0,0,0
+access_hr_department_consultant,access_hr_department_consultant,model_hr_department,hr_employee_custom.group_hr_employee_consultant,1,0,0,0
+access_hr_employee_consultant,access_hr_employee_consultant,model_hr_employee,hr_employee_custom.group_hr_employee_consultant,1,0,0,0
+access_res_partner_bank_consultant,access_res_partner_bank_consultant,model_res_partner_bank,hr_employee_custom.group_hr_employee_consultant,1,0,0,0
+
+access_hr_site,hr.site ,model_hr_site,hr.group_hr_manager,1,1,1,1
+access_hr_plateforme,hr.plateforme ,model_hr_plateforme,hr.group_hr_manager,1,1,1,1
+access_hr_profession,hr.profession,model_hr_profession,hr.group_hr_manager,1,1,1,1

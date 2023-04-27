@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="all_hr_new_employee_form_view" model="ir.ui.view">
+        <field name="name">hr_employee_custom.new.employee.wizard.form</field>
+        <field name="model">hr.new.employees.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group col="4">
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                </group>
+                <footer>
+                    <button name="print_report_new_employee_pdf" string="Imprimer en pdf" type="object" class="btn-primary"/>
+                    <button name="print_report_new_employee_xls" string="Imprimer en xls" type="object" class="btn-primary"/>
+                    <button string="Annuler" class="btn-default" special="cancel"/>
+                </footer>
+
+            </form>
+
+        </field>
+
+    </record>
+
+    <record id="action_all_new_employee_1" model="ir.actions.act_window">
+        <field name="name">Liste des nouvelles recrues</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.new.employees.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_rapport_xls_5"
+              name="Liste des nouvelles recrues"
+              parent="hr_employee_custom.menu_rapport_xls"
+              action="action_all_new_employee_1"
+              groups="hr.group_hr_user"
+              sequence="333"/>
+
+</odoo>

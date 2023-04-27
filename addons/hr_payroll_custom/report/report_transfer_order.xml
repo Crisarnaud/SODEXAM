@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_transfer_order">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="hr_payroll_custom.internal_layout">
+                        <style>
+                            table, td, th {
+                            border: none;
+                            font-family: sans-serif, "Gill Sans";
+                            font-size: 16px;
+                            border-collapse : separate;
+                            border-spacing : 10px;
+                            text-align:left;
+                            }
+
+                            .tab {
+                            margin-left: 50px;
+                            width: 100%;
+                            border-collapse : separate;
+                            border-spacing : 10px;
+                            text-align:center;
+                            }
+
+                            td {
+                            border: none;
+                            text-align: left;
+                            }
+
+                            .p {
+                            border-collapse: collapse;
+                            border: 1px solid black;
+                            width: 70%;
+
+                            }
+
+                            .footer{
+                            display: flex;
+                            justify-content: center;
+                            padding: 5px;
+                            }
+
+                        </style>
+                        <div class="page">
+
+                            <div>
+                                <p>
+                                    <h4 class="title" style="font-family:DejaVu Serif;"> Ordre de virement du mois de
+                                        <span t-field="o.name" style="font-family:DejaVu Serif;"/>
+                                    </h4>
+                                </p>
+                            </div>
+                            <br/>
+                            <div>
+                                <t t-if="o.groupby_bank">
+                                    <t t-foreach="o.bank_group_line()" t-as="page">
+                                        <t t-foreach="page" t-as="bank_category">
+                                            <table style="width: 100%;border:1px solid black;border-collapse: collapse;">
+                                                <thead style="width: 100%;border:1px solid black;border-collapse: collapse;">
+                                                    <tr>
+                                                        <th class="text-center" style="font-family:DejaVu Serif;border:1px solid black;border-collapse: collapse;">N°</th>
+                                                        <th class="text-center" style="font-family:DejaVu Serif;border:1px solid black;border-collapse: collapse;">MATRICULE</th>
+                                                        <th class="text-center" style="font-family:DejaVu Serif;border:1px solid black;border-collapse: collapse;">NOM ET PRENOMS</th>
+                                                        <th class="text-center" style="font-family:DejaVu Serif;border:1px solid black;border-collapse: collapse;">CODE BANQUE</th>
+                                                        <th class="text-center" style="font-family:DejaVu Serif;border:1px solid black;border-collapse: collapse;">CODE GUICHET</th>
+                                                        <th class="text-center" style="font-family:DejaVu Serif;border:1px solid black;border-collapse: collapse;">NUMERO DE COMPTE</th>
+                                                        <th class="text-center" style="font-family:DejaVu Serif;border:1px solid black;border-collapse: collapse;">CLE RIB</th>
+                                                        <th class="text-center" style="width: 12%;font-family:DejaVu Serif;border:1px solid black;border-collapse: collapse;">MONTANT (FCFA)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <t t-set="num_order" t-value="0"/>
+                                                    <tr class="active category">
+                                                        <td colspan="8" style="font-weight: bold; border: 1px solid black;">
+                                                            <t t-esc="bank_category['name']" style="font-family:DejaVu Serif;"/>
+
+                                                        </td>
+                                                    </tr>
+                                                    <t t-foreach="bank_category['lines']" t-as="line">
+                                                            <t t-set="num_order" t-value="num_order + 1" style="font-family:DejaVu Serif;"/>
+                                                            <tr>
+                                                                <td class="text-right"><span t-esc="num_order" style="font-family:DejaVu Serif;"/></td>
+                                                                <td class="text-left"><span t-esc="line.employee_id.identification_id" style="font-family:DejaVu Serif;"/></td>
+                                                                <td class="text-left"><span t-field="line.employee_id.name" style="font-family:DejaVu Serif;"/> <span t-field="line.employee_id.first_name" /></td>
+                                                                <td class="text-right"><t t-if="line.bank_id"><span t-field="line.bank_id.bic" style="font-family:DejaVu Serif;"/> </t></td>
+                                                                <td class="text-right"><t t-if="line.acc_bank_id"><span t-field="line.acc_bank_id.code_guichet" style="font-family:DejaVu Serif;"/></t></td>
+                                                                <td class="text-right"><t t-if="line.acc_bank_id"><span t-field="line.acc_bank_id.acc_number" style="font-family:DejaVu Serif;"/></t></td>
+                                                                <td class="text-right"><t t-if="line.acc_bank_id"><span t-field="line.acc_bank_id.rib" style="font-family:DejaVu Serif;"/></t></td>
+                                                                <td class="text-right"><span t-field="line.amount" style="font-family:DejaVu Serif;"/></td>
+                                                            </tr>
+                                                    </t>
+                                                    <tr>
+                                                        <t t-set="subtotal" t-value="sum(line.amount for line in bank_category['lines'])"/>
+                                                        <td colspan="7" class="text-left subtotal" style="font-family:DejaVu Serif;">
+                                                            <t t-esc="bank_category['name']" style="font-family:DejaVu Serif;"/>
+                                                            <strong> / SOUS TOTAL : </strong>
+                                                            <span t-esc="o.number_to_letter(subtotal)" style="font-family:DejaVu Serif;"/> francs CFA
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <strong><span t-esc="o.format_amount(subtotal)" style="font-family:DejaVu Serif;"/></strong>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div style="page-break-after: always;"/>
+                                        </t>
+                                    </t>
+                                </t>
+                                <t t-if="not o.groupby_bank">
+                                    <table style="width: 100%;border:1px solid black;border-collapse: collapse;">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center" style="font-family:DejaVu Serif;">N°</th>
+                                                <th class="text-center" style="font-family:DejaVu Serif;">MATRICULE</th>
+                                                <th class="text-center" style="font-family:DejaVu Serif;">NOM ET PRENOMS</th>
+                                                <th class="text-center" style="font-family:DejaVu Serif;">CODE BANQUE</th>
+                                                <th class="text-center" style="font-family:DejaVu Serif;">CODE GUICHET</th>
+                                                <th class="text-center" style="font-family:DejaVu Serif;">NUMERO DE COMPTE</th>
+                                                <th class="text-center" style="font-family:DejaVu Serif;">CLE RIB</th>
+                                                <th class="text-center" style="width: 12%;font-family:DejaVu Serif;">MONTANT (FCFA)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-set="num_order" t-value="0"/>
+                                            <t t-foreach="o.order_line_ids.sorted(key=lambda name: name.employee_id.identification_id)"
+                                               t-as="line">
+                                                <t t-set="num_order" t-value="num_order + 1"/>
+                                                <tr>
+                                                    <td class="text-right" style="border:1px solid black;border-collapse: collapse;"><span t-esc="num_order" style="font-family:DejaVu Serif;"/></td>
+                                                    <td class="text-left" style="border:1px solid black;border-collapse: collapse;"><span t-field="line.employee_id.identification_id" style="font-family:DejaVu Serif;"/></td>
+                                                    <td class="text-left" style="border:1px solid black;border-collapse: collapse;">
+                                                        <span t-field="line.employee_id.name" style="font-family:DejaVu Serif;"/>
+                                                        <span t-field="line.employee_id.first_name" style="font-family:DejaVu Serif;"/>
+                                                    </td>
+                                                    <td class="text-right" style="border:1px solid black;border-collapse: collapse;"><t t-if="line.bank_id"><span t-field="line.bank_id.bic" style="font-family:DejaVu Serif;"/> </t></td>
+                                                    <td class="text-right" style="border:1px solid black;border-collapse: collapse;"><t t-if="line.acc_bank_id"><span t-field="line.acc_bank_id.code_guichet" style="font-family:DejaVu Serif;"/></t></td>
+                                                    <td class="text-right" style="border:1px solid black;border-collapse: collapse;"><t t-if="line.acc_bank_id"><span t-field="line.acc_bank_id.acc_number" style="font-family:DejaVu Serif;"/></t></td>
+                                                    <td class="text-right" style="border:1px solid black;border-collapse: collapse;"><t t-if="line.acc_bank_id"><span t-field="line.acc_bank_id.rib" style="font-family:DejaVu Serif;"/></t></td>
+                                                    <td class="text-right" style="border:1px solid black;border-collapse: collapse;"><span t-field="line.amount" style="font-family:DejaVu Serif;"/></td>
+                                                </tr>
+                                            </t>
+                                            <tr class="total">
+                                                <td colspan="7" class="text-left" style="font-family:DejaVu Serif;border:1px solid black;border-collapse: collapse;">
+                                                    <strong>TOTAL GENERAL : </strong>
+                                                    <span t-esc="o.number_to_letter(o.total)" style="font-family:DejaVu Serif;"/> francs CFA
+                                                </td>
+                                                <td class="text-right" style="font-family:DejaVu Serif;border:1px solid black;border-collapse: collapse;">
+                                                    <strong><span t-field="o.total" style="font-family:DejaVu Serif;"/></strong>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </t>
+                            </div>
+                            <div class="footer" align="right">
+                                <div class="text-center">
+                                    <ul class="list-inline">
+                                        <li>Page: <span class="page" style="font-family:DejaVu Serif;"/> / <span class="topage" style="font-family:DejaVu Serif;"/></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+</data>
+</odoo>

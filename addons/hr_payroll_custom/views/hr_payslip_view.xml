@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_hr_payslip_form">
+            <field name="name">hr.payslip.form.inherit</field>
+            <field name="model">hr.payslip</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree[1]" position="attributes">
+                    <attribute name="create">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='work_entry_type_id']" position="replace">
+                    <field name="work_entry_type_id" readonly="0" force_save="1" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='work_entry_type_id']" position="before">
+                    <field name="salary_rule_id" readonly="0" force_save="1"/>
+                </xpath>
+                <xpath expr="//field[@name='work_entry_type_id']" position="after">
+                    <field name="code" readonly="0" force_save="1"/>
+                </xpath>
+                <xpath expr="//page/field[@name='worked_days_line_ids']/tree/field[@name='name']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+                <xpath expr="//page/field[@name='worked_days_line_ids']/tree/field[@name='code']" position="after">
+                    <field name="contract_id"/>
+                </xpath>
+                <xpath expr="//page/field[@name='worked_days_line_ids']/tree/field[@name='name']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//page/field[@name='worked_days_line_ids']/tree/field[@name='contract_id']"
+                       position="replace">
+                    <field name="contract_id" invisible="1"/>
+                </xpath>
+                <xpath expr="//page/field[@name='worked_days_line_ids']/tree/field[@name='number_of_days']"
+                       position="attributes">
+                    <attribute name="readonly">0</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='number_of_days']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='number_of_hours']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                    <attribute name="force_save">1</attribute>
+                </xpath>
+                <xpath expr="//page/field[@name='worked_days_line_ids']/tree/field[@name='amount']"
+                       position="attributes">
+                    <attribute name="readonly">0</attribute>
+                    <attribute name="force_save">1</attribute>
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_print_payslip']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_payslip__line_tree_view" model="ir.ui.view">
+            <field name="name">hr.payslip.line.tree_view</field>
+            <field name="model">hr.payslip.line</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="employee_id"/>
+                    <field name="slip_id"/>
+                    <field name="salary_rule_id"/>
+                    <field name="total"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_payslip_line_pivot_view">
+            <field name="name">hr.payslip.line.pivot</field>
+            <field name="model">hr.payslip.line</field>
+            <field name="arch" type="xml">
+                <pivot string="Analyse de paie" display_quantity="true">
+                    <field name="employee_id" type="row"/>
+                    <field name="salary_rule_id" type="col"/>
+                    <field name="total" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="action_hr_payslip_line_tree_view" model="ir.actions.act_window">
+            <field name="name">Lignes de Paie</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.payslip.line</field>
+            <field name="view_mode">pivot,tree</field>
+        </record>
+
+
+        <menuitem id="hr_payslip_line_view" name="Analyse des lignes de paie" sequence="51"
+                  parent="menu_hr_payroll_rapport"
+                  action="action_hr_payslip_line_tree_view"/>
+
+        <!--        <record model="ir.ui.view" id="hr_payslip_inh_form_view">-->
+        <!--            <field name="name">hr.payslip.form_inherit</field>-->
+        <!--            <field name="model">hr.payslip</field>-->
+        <!--            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//field[@name='line_ids']/tree/field[@name='category_id']" position="before">-->
+        <!--                    <field name="date_from" invisible='1'/>-->
+        <!--                    <field name="date_to" invisible='1'/>-->
+        <!--&lt;!&ndash;                    <field name="appears_on_payroll" invisible='1'/>&ndash;&gt;-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
+    </data>
+</odoo>

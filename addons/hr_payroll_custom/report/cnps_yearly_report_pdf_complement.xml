@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="disa_complement_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="page" style="text-align: center;padding:1px 0px 35px 0px;border: 3px solid black;">
+                        <center style="font-family:DejaVu Serif">
+                                <b>
+                                    <h3> CAISSE NATIONALE DE PREVOYANCE SOCIALE DE COTE D'IVOIRE </h3>
+                                    <h4> DECLARATION ANNUELLE DE SALAIRES ET DE COTISATIONS</h4>
+                                </b>
+                        </center>
+                        <br/>
+                        <div style="display:block">
+                            <span style="float:left;margin-left:10px">
+                                <table style="border-collapse:collapse;border:2px solid black;width:300px">
+                                    <tr>
+                                        <td style="font-size:11px;border:1px solid black;text-align:center"><b>Code Etab</b></td>
+                                        <td style="font-size:11px;border:1px solid black;text-align:center"><b>CDE ACT</b></td>
+                                        <td style="font-size:11px;border:1px solid black;text-align:center"><b>N°EMPLOYEUR</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size:17px;border:1px solid black;height:30px"></td>
+                                        <td style="font-size:17px;border:1px solid black"></td>
+                                        <td style="font-size:17px;border:1px solid black"></td>
+                                    </tr>
+                                </table>
+                            </span>
+                            <span style="float:right;font-size:14px;margin-right:175px">
+                                <p style="margin-left:20px;text-align:justify">
+                                    <b style="font-size:15px;">
+                                        EMPLOYEUR, Raison sociale: <span t-esc="o.company_id.name"/> <br/>
+                                    </b>
+                                    <b>ADRESSE: <span t-esc="o.company_id.street" style="margin-left:20px"/> </b>
+                                </p>
+                            </span>
+                        </div>
+                        <div style="display:block;padding-top:80px">
+                            <span style="float:left">
+                                <b style="font-size:14px;margin-left:10px">EXERCICE: <span t-esc="o.date_to.strftime('%Y')"/></b>
+                                <table style="border:1px solid black;border-collapse:collapse;margin-left:10px;width:250px">
+                                    <tr>
+                                        <td colspan="2" style="border:1px solid black;font-size:11px;">
+                                            RAPPEL DES COTISATIONS ENCAISSEES PAR <br/>
+                                            LA CNPS DEPUIS LE DEBUT DE L'EXERCICE
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;font-size:11px;"><b>MOIS OU <br/>TRIMESTRE</b></td>
+                                        <td style="border:1px solid black;font-size:11px;"><b>SOMME RECUES PAR <br/>LA CNPS</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;font-size:11px;"><b>JANVIER</b></td>
+                                        <td style="border:1px solid black;font-size:11px;text-align:center"><b>3986332</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;font-size:11px;"><b>FEVRIER</b></td>
+                                        <td style="border:1px solid black;font-size:11px;text-align:center"><b>400000</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;font-size:11px;"><b>MARS</b></td>
+                                        <td style="border:1px solid black;font-size:11px;text-align:center"><b>50000</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;font-size:11px;"><b>AVRIL</b></td>
+                                        <td style="border:1px solid black;font-size:11px;text-align:center"><b>10000000</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;font-size:11px;"><b>MAI</b></td>
+                                        <td style="border:1px solid black;font-size:11px;text-align:center"><b>50000</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;font-size:11px;"><b>JUIN</b></td>
+                                        <td style="border:1px solid black;font-size:11px;text-align:center"><b>870000</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;font-size:11px;"><b>JUILLET</b></td>
+                                        <td style="border:1px solid black;font-size:11px;text-align:center"><b>6500</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;font-size:11px;"><b>AOÛT</b></td>
+                                        <td style="border:1px solid black;font-size:11px;text-align:center"><b>8888</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;font-size:11px;"><b>SEPTEMBRE</b></td>
+                                        <td style="border:1px solid black;font-size:11px;text-align:center"><b>889950</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;font-size:11px;"><b>OCTOBRE</b></td>
+                                        <td style="border:1px solid black;font-size:11px;text-align:center"><b>7500</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;font-size:11px;"><b>NOVEMBRE</b></td>
+                                        <td style="border:1px solid black;font-size:11px;text-align:center"><b>870000</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;font-size:11px;"><b>DÉCEMBRE</b></td>
+                                        <td style="border:1px solid black;font-size:11px;text-align:center"><b>40000</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:2px solid black;font-size:11px;"><b>TOTAL I</b></td>
+                                        <td style="border:2px solid black;font-size:11px;text-align:center"> <b>20000000</b></td>
+                                    </tr>
+                                </table>
+                            </span>
+
+                            <span style="float:center;margin-right:175px;padding-top:5px">
+                                <b style="font-size:15px;">COMPLEMENT INDISPENSABLE A LA DISA</b> <br/>
+                                <p style="font-size:14px;margin-left:360px;text-align:justify;margin-right:100px;">
+                                    Le tableau recapitulatif destiné à effectuer la régularisation annuelle est à retourner
+                                    à la CNPS en même temps <br/> que la déclaration individuelle de salaires annuels (DISA). <br/>
+                                    Il ne se substitue en aucune façon à l'appel de cotisations du trimestre ou du mois de
+                                    décembre.
+                                </p>
+                                <table style="border-collapse:collapse;width:750px;margin-left:360px;text-align:center">
+                                    <tr>
+                                        <td style="border:1px solid black;font-size:12px;text-align:center">REGIMES</td>
+                                        <td style="border:1px solid black;font-size:12px;text-align:center">TAUX</td>
+                                        <td style="border:1px solid black;font-size:12px;text-align:center">TOTAL SALAIRES ANNUELS SOUMIS A <br/>COTISATION</td>
+                                        <td style="border:1px solid black;font-size:12px;text-align:center">COTISATIONS ANNUELLES</td>
+                                    </tr>
+                                    <t t-foreach="o.cumul_contribution_line_ids" t-as="line">
+                                        <tr>
+                                            <td style="border:1px solid black;font-size:14px;text-align:center">
+                                                <span t-esc="line.name"/>
+                                            </td>
+                                            <td style="border:1px solid black;font-size:14px;text-align:center">
+                                                <span t-esc="line.taux"/>%
+                                            </td>
+                                            <td style="border:1px solid black;font-size:14px;text-align:right">
+                                                <span t-esc="round(line.amount_submitted)"/>
+                                            </td>
+                                            <td style="border:1px solid black;font-size:14px;text-align:right">
+                                                <span t-esc="round(line.amount_contributed)"/>
+                                            </td>
+                                            <td style="border:none;font-size:14px;text-align:center;width:60px">
+                                                +
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <t t-set="sum_paid" t-value="round(o.total_assiette_cnps-o.total_cotisation_contributed)" />
+                                    <tr>
+                                        <td style="border:none;font-size:11px">
+                                            Code opér.
+                                        </td>
+                                        <td colspan="2" style="border:1px solid black;font-size:14px;text-align:center">
+                                            <b>TOTAL II COTISATIONS ANNUELLES </b>
+                                        </td>
+                                        <td style="border:1px solid black;font-size:14px;text-align:right">
+                                            <b>
+                                                <span t-esc="round(o.total_cotisation_contributed)"/>
+                                            </b>
+                                        </td>
+                                        <td style="border:none;text-align:center;width:60px">
+                                            =
+                                        </td>
+                                    </tr>
+                                    <tr style="border:none">
+                                        <td style="border:none"></td>
+                                        <td style="border:none"></td>
+                                        <td style="border:none"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:none"></td>
+                                        <td style="border:none"></td>
+                                        <td style="border:none;font-size:14px;text-align:center">
+                                            <b>
+                                                TOTAL I  =
+                                                <p style="font-size:11px;padding-top:2px">
+                                                    <b>des cotisations encaissées par la CNPS</b>
+                                                </p>
+                                            </b>
+                                        </td>
+                                        <td style="border:1px solid black;font-size:14px;text-align:right">
+                                            <b><span t-esc="round(o.total_assiette_cnps)"/></b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:none;width:150px">
+                                            <b style="font-size:12px;">A Abidjan, le <span t-esc="datetime.datetime.now().strftime('%d/%m/%Y')"/></b> <br/>
+                                            <b style="font-size:11px">SIGNATURE ET CACHET</b>
+                                        </td>
+                                        <td style="border:none"></td>
+                                        <td style="border:none"></td>
+                                        <td style="border:none"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:none"></td>
+                                        <td style="border:none"></td>
+                                        <td style="border:none;font-size:10px;text-align:center"><b>Somme à payer =</b></td>
+                                        <td style="border:2px solid black;font-size:14px;text-align:right;height:15px">
+                                            <b>
+                                                <t t-esc="sum_paid"/>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </span>
+                        </div>
+                        <div style="display:block;margin-left:10px;margin-right:10px">
+                            <center>
+                                <br/>
+                                <table style="width:100%;border-collapse:collapse;margin-left:10px;margin-right:50px;padding-bottom:30px">
+                                    <tr>
+                                        <td colspan="9" style="font-size:13px;border:1px solid black;text-align:center">
+                                            <b>CADRE RESERVE A LA C.N.P.S. (ne rien inscrire S.V.P)</b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size:12px;border:1px solid black;text-align:center">Date de journée</td>
+                                        <td style="font-size:12px;border:1px solid black;text-align:center">N°Pièce</td>
+                                        <td style="font-size:12px;border:1px solid black;text-align:center">Période</td>
+                                        <td style="font-size:12px;border:1px solid black;text-align:center">Code versement</td>
+                                        <td style="font-size:12px;border:1px solid black;text-align:center">Banque</td>
+                                        <td style="font-size:12px;border:1px solid black;text-align:center">Référence du titre de paiement</td>
+                                        <td style="font-size:12px;border:1px solid black;text-align:center">Emission du </td>
+                                        <td style="font-size:12px;border:1px solid black;text-align:center">Montant</td>
+                                        <td style="font-size:12px;border:1px solid black;text-align:center">Visa du DIRECTEUR</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size:12px;border:1px solid black;text-align:center;height:50px"></td>
+                                        <td style="font-size:12px;border:1px solid black;text-align:center"></td>
+                                        <td style="font-size:12px;border:1px solid black;text-align:center"></td>
+                                        <td style="font-size:12px;border:1px solid black;text-align:center"></td>
+                                        <td style="font-size:12px;border:1px solid black;text-align:center"></td>
+                                        <td style="font-size:12px;border:1px solid black;text-align:center"></td>
+                                        <td style="font-size:12px;border:1px solid black;text-align:center"></td>
+                                        <td style="font-size:12px;border:1px solid black;text-align:center"></td>
+                                        <td style="font-size:12px;border:1px solid black;text-align:center"></td>
+                                    </tr>
+                                </table>
+                                <br/><br/>
+                            </center>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <!--					 </div>-->
+            </t>
+        </t>
+        <!--	</t>-->
+    </template>
+</odoo>

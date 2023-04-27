@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="hr_cmu_rapport_form_view">
+            <field name="name">hr.cmu_rapport.form</field>
+            <field name="model">hr.cmu_rapport</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <button name="compute" string="Générer le rapport" type="object"/>
+                        <button name="export_xls" string="Imprimer le rapport" type="object"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group col="4">
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="company_id" invisible="1"/>
+                        </group>
+                        <notebook>
+                            <page string="lignes">
+                                <field name="line_ids">
+                                    <tree>
+                                        <field name="num_cnps"/>
+                                        <field name="num_cmu"/>
+                                        <field name="type"/>
+                                        <field name="name"/>
+                                        <field name="first_name"/>
+                                        <field name="birthday" optional="hide"/>
+                                        <field name="num_cmu_beneficiary"/>
+                                        <field name="name_beneficiary"/>
+                                        <field name="first_name_beneficiary" optional="hide"/>
+                                        <field name="birthday_beneficiary" optional="hide"/>
+                                        <field name="gender" optional="hide"/>
+                                    </tree>
+                                    <form>
+                                        <group col="4" string="Informations de l'assuré">
+                                            <field name="num_cnps" string="N° CNPS assuré"/>
+                                            <field name="num_cmu" string="N° CMU assuré"/>
+                                            <field name="name" string="Nom assuré"/>
+                                            <field name="first_name" string="Prénoms assuré"/>
+                                            <field name="birthday"/>
+                                        </group>
+                                        <group col="4" string="Informations du bénéficiaire">
+                                            <field name="num_cnps" string="N° CNPS assuré"/>
+                                            <field name="num_cmu_beneficiary" string="N° CMU bénéficiaire"/>
+                                            <field name="name_beneficiary" string="Nom bénéficiaire"/>
+                                            <field name="first_name_beneficiary" string="Prénoms bénéficiaire"/>
+                                            <field name="birthday_beneficiary" string="Anniversaire bénéficiaire"/>
+                                            <field name="gender"/>
+                                            <field name="type"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_cmu_rapport_tree_view">
+            <field name="name">hr.cmu_rapport.tree_view</field>
+            <field name="model">hr.cmu_rapport</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="company_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_hr_cmu_rapport_tree_view" model="ir.actions.act_window">
+            <field name="name">Rapport CMU</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.cmu_rapport</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="hr_cmu_menu" name="Rapports CMU"
+                  parent="hr_payroll_custom.menu_hr_payroll_social"
+                  action="action_hr_cmu_rapport_tree_view"/>
+    </data>
+</odoo>

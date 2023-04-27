@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="hr_payroll_custom.hr_301_list_report_recap_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="page" style="text-align: center; padding:30px 0px 100px 0px;">
+                        <p style="text-align:center">
+                            TABLEAU II- ETAT RECAPITULATIF DES SALAIRES ET RETRIBUTIONS DE TOUTE NATURE VERSE AUX
+                            SALARIES DE
+                            DE L'ENTREPRISE PENSIONS ET RENTES VIAGERES
+                        </p>
+                        <center>SERVIES PAR L'ENTREPRISE</center>
+                        <t t-set="num" t-value="1"/>
+                        <table style="border-collapse:collapse;table-layout:auto;width:100%;font-size:10px;">
+                            <tr style="height:50px;">
+                                <td rowspan="2"
+                                    style="border:1px solid black;text-align:center;-ms-transform:rotate(270deg);-webkit-transform: rotate(270deg);transform: rotate(270deg);width:10px;">
+                                    Matricule
+                                </td>
+                                <td rowspan="2"
+                                    style="border:1px solid black;text-align:center;-ms-transform:rotate(270deg);-webkit-transform: rotate(270deg);transform: rotate(270deg);">
+                                    Ordre
+                                </td>
+                                <td rowspan="2" style="border:1px solid black;text-align:center">
+                                    Nom et prenoms
+                                </td>
+                                <!--<td rowspan="2" style="border:1px solid black;text-align:center;width:50px;">
+                                    Emploi ou qualité
+                                </td>-->
+                                <td rowspan="2"
+                                    style="border:1px solid black;text-align:center;-ms-transform:rotate(270deg);-webkit-transform: rotate(270deg);transform: rotate(270deg);">
+                                    code emploi
+                                </td>
+                                <td rowspan="2"
+                                    style="border:1px solid black;text-align:center;-ms-transform:rotate(270deg);-webkit-transform: rotate(270deg);transform: rotate(270deg);width:30px;">
+                                    Reg (Nor.Agr)
+                                </td>
+                                <td rowspan="2"
+                                    style="border:1px solid black;text-align:center;-ms-transform:rotate(270deg);-webkit-transform: rotate(270deg);transform: rotate(270deg);">
+                                    Sexe
+                                </td>
+                                <td rowspan="2"
+                                    style="border:1px solid black;text-align:center;-ms-transform:rotate(270deg);-webkit-transform: rotate(270deg);transform: rotate(270deg);width:10px;">
+                                    Nationalité
+                                </td>
+                                <td rowspan="2"
+                                    style="border:1px solid black;text-align:center;-ms-transform:rotate(270deg);-webkit-transform: rotate(270deg);transform: rotate(270deg);">
+                                    Local ou expatrié
+                                </td>
+                                <td colspan="3" style="border:1px solid black;text-align:center">
+                                    Sit.Fam.La + Fav
+                                </td>
+                                <td rowspan="2"
+                                    style="border:1px solid black;text-align:center;-ms-transform:rotate(270deg);-webkit-transform: rotate(270deg);transform: rotate(270deg);">
+                                    Nbre de jours actualisé
+                                </td>
+                                <td rowspan="2"
+                                    style="border:1px solid black;text-align:center;-ms-transform:rotate(270deg);-webkit-transform: rotate(270deg);transform: rotate(270deg);">
+                                    Montant des salaires logiciel
+                                </td>
+                                <td rowspan="2"
+                                    style="border:1px solid black;text-align:center;-ms-transform:rotate(270deg);-webkit-transform: rotate(270deg);transform: rotate(270deg);">
+                                    Avantage en nature logiciel
+                                </td>
+                                <td rowspan="2"
+                                    style="border:1px solid black;text-align:center;-ms-transform:rotate(270deg);-webkit-transform: rotate(270deg);transform: rotate(270deg);">
+                                    Avantage en nature autre
+                                </td>
+                                <td rowspan="2"
+                                    style="border:1px solid black;text-align:center;-ms-transform:rotate(270deg);-webkit-transform: rotate(270deg);transform: rotate(270deg);">
+                                    Avantage en espèce
+                                </td>
+                                <td rowspan="2"
+                                    style="border:1px solid black;text-align:center;-ms-transform:rotate(270deg);-webkit-transform: rotate(270deg);transform: rotate(270deg);">
+                                    Tous personnel
+                                </td>
+                                <td rowspan="2" style="border:1px solid black;text-align:center;width:50px;">
+                                    IS
+                                </td>
+                                <td rowspan="2" style="border:1px solid black;text-align:center;width:50px;">
+                                    CN
+                                </td>
+                                <td rowspan="2" style="border:1px solid black;text-align:center;width:50px;">
+                                    IGR
+                                </td>
+                                <td colspan="2" style="border:1px solid black;text-align:center">
+                                    Indemnités exonérées
+                                </td>
+                            </tr>
+                            <tr style="height:150px;">
+                                <td style="border:1px solid black;text-align:center;-ms-transform:rotate(270deg);-webkit-transform: rotate(270deg);transform: rotate(270deg);">
+                                    Cel.Mar.Div.
+                                </td>
+                                <td style="border:1px solid black;text-align:center;-ms-transform:rotate(270deg);-webkit-transform: rotate(270deg);transform: rotate(270deg);">
+                                    Nbre d'enfts
+                                </td>
+                                <td style="border:1px solid black;text-align:center;-ms-transform:rotate(270deg);-webkit-transform: rotate(270deg);transform: rotate(270deg);">
+                                    Parts IGR
+                                </td>
+                                <td style="border:1px solid black;text-align:center;-ms-transform:rotate(270deg);-webkit-transform: rotate(270deg);transform: rotate(270deg);">
+                                    Montant logiciel(TP + ALLOC. FAM)
+                                </td>
+                                <td style="border:1px solid black;text-align:center;-ms-transform:rotate(270deg);-webkit-transform: rotate(270deg);transform: rotate(270deg);">
+                                    Désignation
+                                </td>
+                            </tr>
+                            <t t-foreach="o.line_ids" t-as="line">
+                                <tr>
+                                    <td style="border:1px solid black;text-align:left">
+                                        <t t-if="6 &gt; len(line.employee_id.identification_id)">
+                                            <t t-if="line.employee_id.identification_id">
+                                                0
+                                                <span t-esc="line.employee_id.identification_id"/>
+                                            </t>
+                                        </t>
+                                        <t t-else="">
+                                            00000
+                                        </t>
+                                    </td>
+                                    <td style="border:1px solid black;text-align:center">
+                                        <span t-esc="num"/>
+                                        <t t-set="num" t-value="num+1"/>
+                                    </td>
+                                    <td style="border:1px solid black;text-align:left">
+                                        <span t-esc="line.employee_id.name "/>
+                                        <span t-esc="line.employee_id.first_name"/>
+                                    </td>
+                                    <!--<td style="border:1px solid black;text-align:center">
+                                        <span t-esc="line.employee_id.job_id.name"/>
+                                    </td>-->
+                                    <td style="border:1px solid black;text-align:center">
+                                    </td>
+                                    <td style="border:1px solid black;text-align:center">
+                                        N
+                                    </td>
+                                    <td style="border:1px solid black;text-align:center">
+                                        <t t-if="line.employee_id.gender == 'male'">M</t>
+                                        <t t-if="line.employee_id.gender == 'female'">F</t>
+                                    </td>
+                                    <td style="border:1px solid black;text-align:center">
+                                        <span t-esc="line.employee_id.country_id.code"/>
+                                    </td>
+                                    <td style="border:1px solid black;text-align:center">
+                                        <span t-esc="line.nature_employee[0]" style="text-transform: uppercase"/>
+                                    </td>
+                                    <td style="border:1px solid black;text-align:center">
+                                        <span t-esc="line.employee_id.marital[0]" style="text-transform: uppercase"/>
+                                    </td>
+                                    <td style="border:1px solid black;text-align:center">
+                                        <span t-esc="line.employee_id.child_in_charge"/>
+                                    </td>
+                                    <td style="border:1px solid black;text-align:center">
+                                        <span t-esc="round(line.employee_id.part_igr)"/>
+                                    </td>
+                                    <td style="border:1px solid black;text-align:center">
+                                        <span t-esc="round(line.total_worked_days)"/>
+                                    </td>
+                                    <td style="border:1px solid black;text-align:center">
+                                        <span t-esc="'{0:,.0f}'.format(round(line.amount_brut_total)).replace(',', ' ')"/>
+                                    </td>
+                                    <td style="border:1px solid black;text-align:center">
+                                        <span t-esc="'{0:,.0f}'.format(round(line.natural_advantage_software)).replace(',', ' ')"/>
+                                    </td>
+                                    <td style="border:1px solid black;text-align:center">
+                                        <span t-esc="'{0:,.0f}'.format(round(line.natural_advantage_other)).replace(',', ' ')"/>
+                                    </td>
+                                    <td style="border:1px solid black;text-align:center">
+                                        <span t-esc="'{0:,.0f}'.format(round(line.cash_advantage)).replace(',', ' ')"/>
+                                    </td>
+                                    <td style="border:1px solid black;text-align:center">
+                                        <span t-esc="'{0:,.0f}'.format(round(line.total_gross)).replace(',', ' ')"/>
+                                    </td>
+                                    <td style="border:1px solid black;text-align:center">
+                                        <span t-esc="'{0:,.0f}'.format(round(line.amount_is)).replace(',', ' ')"/>
+                                    </td>
+                                    <td style="border:1px solid black;text-align:center">
+                                        <span t-esc="'{0:,.0f}'.format(round(line.amount_cn)).replace(',', ' ')"/>
+                                    </td>
+                                    <td style="border:1px solid black;text-align:center">
+                                        <span t-esc="'{0:,.0f}'.format(round(line.amount_igr)).replace(',', ' ')"/>
+                                    </td>
+                                    <td style="border:1px solid black;text-align:center">
+                                        <span t-esc="'{0:,.0f}'.format(round(line.amount_af + line.amount_tp)).replace(',', ' ')"/>
+                                    </td>
+                                    <td style="border:1px solid black;text-align:center">
+                                        <t t-if="line.employee_id.motif_fin_contract_id and line.employee_id.end_date">
+                                            <span t-esc="line.employee_id.motif_fin_contract_id.name"/>
+                                        </t>
+                                        <t t-else=""/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td colspan="12" style="border:none;border:1px solid black;text-align:center">
+                                    TOTAL
+                                </td>
+                                <td style="border:1px solid black;text-align:center">
+                                    <t t-set="sub_amount_brut_total"
+                                       t-value="sum(p.amount_brut_total for p in o.line_ids)"/>
+                                    <span t-esc="'{0:,.0f}'.format(round(sub_amount_brut_total)).replace(',', ' ')"
+                                          style="font-family:DejaVu Serif;"/>
+                                </td>
+                                <td style="border:1px solid black;text-align:center">
+                                    <t t-set="sub_natural_advantage_software"
+                                       t-value="sum(p.natural_advantage_software for p in o.line_ids)"/>
+                                    <span t-esc="'{0:,.0f}'.format(round(sub_natural_advantage_software)).replace(',', ' ')"
+                                          style="font-family:DejaVu Serif;"/>
+                                </td>
+                                <td style="border:1px solid black;text-align:center">
+                                    <t t-set="sub_natural_advantage_other"
+                                       t-value="sum(p.natural_advantage_other for p in o.line_ids)"/>
+                                    <span t-esc="'{0:,.0f}'.format(round(sub_natural_advantage_other)).replace(',', ' ')"
+                                          style="font-family:DejaVu Serif;"/>
+                                </td>
+                                <td style="border:1px solid black;text-align:center">
+                                    <t t-set="sub_cash_advantage" t-value="sum(p.cash_advantage for p in o.line_ids)"/>
+                                    <span t-esc="'{0:,.0f}'.format(round(sub_cash_advantage)).replace(',', ' ')"
+                                          style="font-family:DejaVu Serif;"/>
+                                </td>
+                                <td style="border:1px solid black;text-align:center">
+                                    <t t-set="sub_total_gross" t-value="sum(p.total_gross for p in o.line_ids)"/>
+                                    <span t-esc="'{0:,.0f}'.format(round(sub_total_gross)).replace(',', ' ')"
+                                          style="font-family:DejaVu Serif;"/>
+                                </td>
+                                <td style="border:1px solid black;text-align:center">
+                                    <t t-set="subtotal_is" t-value="sum(p.amount_is for p in o.line_ids)"/>
+                                    <span t-esc="'{0:,.0f}'.format(round(subtotal_is)).replace(',', ' ')"
+                                          style="font-family:DejaVu Serif;"/>
+                                </td>
+                                <td style="border:1px solid black;width:19px;text-align:center">
+                                    <t t-set="subtotal_cn" t-value="sum(p.amount_cn for p in o.line_ids)"/>
+                                    <span t-esc="'{0:,.0f}'.format(round(subtotal_cn)).replace(',', ' ')"
+                                          style="font-family:DejaVu Serif;"/>
+                                </td>
+                                <td style="border:1px solid black;width:19px;text-align:center">
+                                    <t t-set="subtotal_igr" t-value="sum(p.amount_igr for p in o.line_ids)"/>
+                                    <span t-esc="'{0:,.0f}'.format(round(subtotal_igr)).replace(',', ' ')"
+                                          style="font-family:DejaVu Serif;"/>
+                                </td>
+                                <td style="border:1px solid black;width:19px;text-align:center">
+                                    <t t-set="subtotal_tp_af"
+                                       t-value="sum(p.amount_tp + p.amount_af for p in o.line_ids)"/>
+                                    <span t-esc="'{0:,.0f}'.format(round(subtotal_tp_af)).replace(',', ' ')"
+                                          style="font-family:DejaVu Serif;"/>
+                                </td>
+                                <td style="border:1px solid black;width:19px">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="footer">
+                        <div class="pagination" style="margin-left: auto;margin-right: auto;width: 6em">
+                            <span class="page"/>/
+                            <span class="topage"/>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="cnps_mensuel_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <!--			<t t-call="web.internal_layout">-->
+                <div class="page">
+                    <div class="text-center">
+                        <b>
+                            <h2 style="margin-left:250px">CAISSE NATIONALE DE PREVOYANCE SOCIALE DE COTE D'IVOIRE</h2>
+                        </b>
+                        <table class="header" style="width:100%;text-align:center;padding-top:2px;border:none">
+                            <tr>
+                                <td style="border:none;width:10%;">
+                                    <span style="margin-left:10px">
+                                        <img src='/hr_payroll_custom/static/src/img/cnps.png'
+                                             style="height:40px;width:70px"/>
+                                    </span>
+                                </td>
+                                <td style="border:none;width:20%;">
+                                    <span>
+                                        <b>
+                                            <h6 style="text-align:justify">24, Avenue Lamblin.Plateau, 01 B.P.317
+                                                Abidjan01
+                                                <br/>
+                                                Tél: 20 32 08 66 / 20 32 76 22 Fax : 20 32 79 94
+                                                <br/>
+                                                Serveur Vocal : 20 305 305 - 20 306 306
+                                            </h6>
+                                        </b>
+                                    </span>
+                                </td>
+                                <td style="border:none;width:70%;">
+                                    <b>
+                                        <h3 style="text-align:center">
+                                            APPEL DE COTISATION MENSUELLE
+                                        </h3>
+                                    </b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <table style="width:300px;font-size:12px;height:50px;border-collapse:collapse;">
+                                        <tr>
+                                            <td style="border:1px solid black">
+                                                <b>Code Etab</b>
+                                            </td>
+                                            <td style="border:1px solid black">
+                                                <b>Code Activ.</b>
+                                            </td>
+                                            <td style="border:1px solid black">
+                                                <b>N°Employeur</b>
+                                            </td>
+                                            <td style="border:1px solid black">
+                                                <b>Periode</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:1px solid black"></td>
+                                            <td style="border:1px solid black"></td>
+                                            <td style="border:1px solid black"></td>
+                                            <td style="border:1px solid black">
+                                                <span t-esc="o.date_from.strftime('%m/%Y')"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="justify:auto;text-align:center;">
+                                    <p style="text-align:justify;margin-left:250px">
+                                        <b style="font-size:15px">Raison sociale</b>:
+                                        <span t-esc="o.company_id.name" style="font-size:15px"/>
+                                        <br/>
+                                        <b style="font-size:15px">Adresse</b>:
+                                        <span t-esc="o.company_id.street" style="font-size:15px"/>
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table style="width:700px;font-size:12px;height:15px; margin-left:45px;border:none;">
+                            <tr>
+                                <td style="width:450px;border:none;font-size:12px">
+                                    <b>TOTAL SALAIRES BRUTS PAYES AU COURS DE LA PERIODE :</b>
+                                </td>
+                                <td style="width:200px;border:2px solid black;text-align:right">
+                                    <b>
+                                        <span t-esc="round(o.total_salaire_brut)" style="font-size:17px"/>
+                                    </b>
+                                </td>
+                                <td style="width:12px;"></td>
+                            </tr>
+                        </table>
+
+                        <div style="display:block;padding-top:4px;">
+                            <span style="float:left">
+                                <table style="font-size:12px;width:980px;height:auto;border:none;text-align:center;border-collapse: collapse;">
+                                    <tr>
+                                        <td rowspan="2" style="border:1px solid black">
+                                            <b>CATEGORIE DE SALAIRES</b>
+                                        </td>
+                                        <td rowspan="2" style="border:1px solid black">
+                                            <b>Nombre<br/>de
+                                                <br/>
+                                                salariés
+                                            </b>
+                                        </td>
+                                        <td colspan="2" style="border:1px solid black">
+                                            <b>SALAIRES BRUTS SOUMIS A COTISATIONS</b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black">
+                                            <b>REGIME DE RETRAITE
+                                                <h8>
+                                                    <br/>
+                                                    Plafond = 2.700.000 F par mois
+                                                </h8>
+                                            </b>
+                                        </td>
+                                        <td style="border:1px solid black">
+                                            <b>
+                                                REGIME DES PREST.
+                                                <br/>
+                                                FAMIL. ET DES ACCID. DU
+                                                <br/>
+                                                TRAVAIL
+                                                <br/>
+                                                <h8>Plafond = 3231 F par jour ou 70.000 par
+                                                    mois
+                                                </h8>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                    <tr t-foreach="o.line_ids" t-as="line">
+                                        <td style="border:1px solid black">
+                                            <b>
+                                                <span t-field="line.name" style="text-align:left"/>
+                                            </b>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:right">
+                                            <span t-field="line.salaries_number"/>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:right">
+                                            <span t-field="line.regime_retraite"/>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:right">
+                                            <span t-field="line.regime_autre"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black">
+                                            <b>TOTAL</b>
+                                        </td>
+                                        <td style="border:1px solid black">
+                                            <b>
+                                                <span t-field="o.total_employee" style="text-align:right"/>
+                                            </b>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:right">
+                                            <b>
+                                                <span t-field="o.total_assiette_cnps" style="text-align:right"/>
+                                            </b>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:right">
+                                            <b>
+                                                <span t-field="o.total_assiette_other" style="text-align:right"/>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </span>
+<!--						</div>-->
+                            <span>
+                                <table style="width:220px;height:80px;font-size:13px;text-align:center;border:none;margin-left:10px">
+                                    <tr>
+                                        <td style="border:none;">
+                                            <br/>
+                                            <br/>
+                                            <p style="font-size:13px;margin-left:10px">
+                                                <b style="text-align:center;">Bordereau certifié exact,</b>
+                                                <br/>
+                                                <br/>
+                                                <b>A Abidjan, le
+                                                    <span t-esc="datetime.datetime.now().strftime('%d/%m/%Y')"/>
+                                                </b>
+                                                <br/>
+                                                <br/>
+                                                <br/>
+                                                <b>Signature et cachet</b>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </span>
+                        </div>
+<!--                        <div style="display:block;padding-top:3px;">-->
+                            <span style="float:left;padding-top:5px">
+                                <table style="font-size:12px;width:750px;height:auto;border:none;border-collapse:collapse;">
+                                    <tr>
+                                        <td style="border:none;width:50%;border:none"></td>
+                                        <td style="width:25%;text-align:center;border:1px solid black">
+                                            <b>NOMBRE</b>
+                                        </td>
+                                        <td style="width:25%;text-align:center;border:1px solid black">
+                                            <b>SALAIRES BRUTS</b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black">
+                                            <b>Personnes ne cotisant pas au Régime de la Retraite</b>
+                                        </td>
+                                        <td style="border:1px solid black"></td>
+                                        <td style="border:1px solid black"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black">
+                                            <b>
+                                                Personnes pour qui l’employeur ne cotise pas
+                                                <br/>
+                                                au Régime des Prestations Familiales
+                                            </b>
+                                        </td>
+                                        <td style="border:1px solid black"></td>
+                                        <td style="border:1px solid black"></td>
+                                    </tr>
+                                </table>
+                            </span>
+                            <div style="display:block;padding-top:2px">
+                                <span style="float:left;height:auto;width:750px">
+                                    <table style="width:750px;height:auto;font-size:12px;border:none;border-collapse: collapse;">
+                                        <tr style="border:none;">
+                                            <td colspan="4" style="border:none;">
+                                                <h7>
+                                                    <b>DECOMPTE DES COTISATIONS DUES</b>
+                                                </h7>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:center;width:40%;border:1px solid black">
+                                                <h7>
+                                                    <b>RUBRIQUES</b>
+                                                </h7>
+                                            </td>
+                                            <td style="text-align:center;;border:1px solid black">
+                                                <h7>
+                                                    <b>Salaires soumis à cotisations</b>
+                                                </h7>
+                                            </td>
+                                            <td style="text-align:center;border:1px solid black">
+                                                <h7>
+                                                    <b>Taux</b>
+                                                </h7>
+                                            </td>
+                                            <td style="text-align:center;border:1px solid black">
+                                                <h7>
+                                                    <b>Montant (Francs CFA)</b>
+                                                </h7>
+                                            </td>
+                                        </tr>
+                                        <tr t-foreach="o.cotisation_ids" t-as="line">
+                                            <td style="text-align:left;border:1px solid black">
+                                                <h7>
+                                                    <b>
+                                                        <span t-field="line.name"/>
+                                                    </b>
+                                                </h7>
+                                            </td>
+                                            <td style="border-bottom:none;border-top:none;border:1px solid black;text-align:right;">
+                                                <h7>
+                                                    <b>
+                                                        <span t-field="line.amount_submitted"/>
+                                                    </b>
+                                                </h7>
+                                            </td>
+                                            <td style="border-bottom:none;border-top:none;border:1px solid black;text-align:right;">
+                                                <h7>
+                                                    <b><span t-field="line.taux"/>%
+                                                    </b>
+                                                </h7>
+                                            </td>
+                                            <td style="border:1px solid black;text-align:right;">
+                                                <h7>
+                                                    <b>
+                                                        <span t-field="line.amount_contributed"/>
+                                                    </b>
+                                                </h7>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" style="border:1px solid black;text-align:right;">
+                                                <h7>
+                                                    <b>Total cotisation à payer</b>
+                                                </h7>
+                                            </td>
+                                            <td style="border:1px solid black;text-align:right">
+                                                <h7 style="text-align:right">
+                                                    <b>
+                                                        <span t-field="o.total_cotisation_contributed"/>
+                                                    </b>
+                                                </h7>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </span>
+                                <span style="float:right;padding-top:5px;width:350px">
+                                    <table style="font-size:13px;width:350px">
+                                        <tr>
+                                            <td style="border:1px solid black">
+                                                <p style="font-size:11px;">
+                                                    <p style="text-align:center;">
+                                                        <b>ATTENTION</b>
+                                                    </p>
+                                                    Il est vivement conseillé d’annexer à la présente déclaration votre
+                                                    titre de paiement
+                                                    faute de quoi vous serez responsable du retard des pertes et des
+                                                    erreurs de comptabilisation.
+                                                    <br/>
+                                                    Le titre de paiement (de préférence un chèque bancaire) doit être
+                                                    libellé à l’ordre de
+                                                    l’IPS-CNPS, même en l’absence de tout paiement.
+                                                    <br/>
+                                                    La présente déclaration doit être dument remplie et obligatoirement
+                                                    retournée à la C.N.P.S
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </span>
+                            </div>
+<!--                        </div>-->
+                        <div style="display:block;padding-top:10px">
+                            <br/>
+                            <table style="width:100%;font-size:13px;border:none;padding-top:30px;border-collapse: collapse;">
+                                <tr>
+                                    <td colspan="10" style="text-align:center;border:1px solid black">
+                                        <b>CADRE RESERVE A LA C.N.P.S. (NE RIEN INSCRIRE S.V.P)</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center;border:1px solid black">
+                                        <b>Code op.</b>
+                                    </td>
+                                    <td style="text-align:center;border:1px solid black">
+                                        <b>Date de journée</b>
+                                    </td>
+                                    <td style="text-align:center;border:1px solid black">
+                                        <b>N°Pièce</b>
+                                    </td>
+                                    <td style="text-align:center;border:1px solid black">
+                                        <b>Période</b>
+                                    </td>
+                                    <td style="text-align:center;border:1px solid black">
+                                        <b>Code Virement</b>
+                                    </td>
+                                    <td style="text-align:center;border:1px solid black">
+                                        <b>Banque</b>
+                                    </td>
+                                    <td style="text-align:center;border:1px solid black">
+                                        <b>Référence du titre de paiement</b>
+                                    </td>
+                                    <td style="text-align:center;border:1px solid black">
+                                        <b>Emission du</b>
+                                    </td>
+                                    <td style="text-align:center;border:1px solid black">
+                                        <b>Montant</b>
+                                    </td>
+                                    <td style="text-align:center;border:1px solid black">
+                                        <b>Visa DIRECTEUR</b>
+                                    </td>
+                                </tr>
+                                <tr style="height:20px;">
+                                    <td style="text-align:center;border:1px solid black"></td>
+                                    <td style="text-align:center;border:1px solid black"></td>
+                                    <td style="text-align:center;border:1px solid black"></td>
+                                    <td style="text-align:center;border:1px solid black"></td>
+                                    <td style="text-align:center;border:1px solid black"></td>
+                                    <td style="text-align:center;border:1px solid black"></td>
+                                    <td style="text-align:center;border:1px solid black"></td>
+                                    <td style="text-align:center;border:1px solid black"></td>
+                                    <td style="text-align:center;border:1px solid black"></td>
+                                    <td style="text-align:center;border:1px solid black"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--					 </div>-->
+            </t>
+        </t>
+        <!--	</t>-->
+    </template>
+</odoo>

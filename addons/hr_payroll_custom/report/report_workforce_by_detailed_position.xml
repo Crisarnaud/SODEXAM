@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="workforce_by_detailed_position_pdf">
+            <t t-call="web.html_container">
+                <t t-call="hr_payroll_custom.internal_layout">
+                    <div class="page">
+                        <div style="padding-top:5px;text-align:center;">
+                            <p style="padding-top:5px;">
+                                <h4 style="font-family:DejaVu Serif;">
+                                    <b>EFFECTIF PAR POSITION DETAILLEE</b>
+                                </h4>
+                            </p>
+                        </div>
+                        <br/>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td rowspan="2" style="font-family:DejaVu Serif;text-align:center;font-size:19px;">
+                                        <strong>N°</strong>
+                                    </td>
+                                    <td rowspan="2" style="font-family:DejaVu Serif;text-align:center;font-size:19px;">
+                                        <strong>Postes</strong>
+                                    </td>
+                                    <td colspan="3" style="font-family:DejaVu Serif;text-align:center;font-size:19px;">
+                                        <strong>Effectif</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-family:DejaVu Serif;text-align:center;font-size:19px;">F</td>
+                                    <td style="font-family:DejaVu Serif;text-align:center;font-size:19px;">H</td>
+                                    <td style="font-family:DejaVu Serif;text-align:center;font-size:19px;">TOTAL</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="cpt" t-value="0"/>
+                                <t t-set="cumul_female" t-value="0"/>
+                                <t t-set="cumul_male" t-value="0"/>
+                                <t t-foreach="lines" t-as="o">
+                                    <t t-set="cpt" t-value="cpt+1"/>
+                                    <t t-set="cumul_row" t-value="0"/>
+                                    <tr>
+                                        <td style="font-family:DejaVu Serif;font-size:19px;">
+                                            <t t-esc="cpt"/>
+                                        </td>
+                                        <td style="font-family:DejaVu Serif;font-size:19px;">
+                                            <t t-esc="o['job']"/>
+                                        </td>
+                                        <td style="font-family:DejaVu Serif;font-size:19px;text-align:center;">
+                                            <t t-esc="o['female']"/>
+                                            <t t-set="cumul_female" t-value="cumul_female+o['female']"/>
+                                        </td>
+                                        <td style="font-family:DejaVu Serif;text-align:center;font-size:19px;">
+                                            <t t-esc="o['male']"/>
+                                            <t t-set="cumul_male" t-value="cumul_male+o['male']"/>
+                                        </td>
+                                        <t t-set="cumul_row" t-value="cumul_row+o['female']+o['male']"/>
+                                        <td style="font-family:DejaVu Serif;text-align:center;font-size:19px;">
+                                            <t t-esc="cumul_row"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td colspan="2" style="font-family:DejaVu Serif;text-align:center;font-size:23px;">
+                                        <span>TOTAL</span>
+                                    </td>
+                                    <td style="font-family:DejaVu Serif;text-align:center;font-size:19px;">
+                                        <t t-esc="cumul_female"/>
+                                    </td>
+                                    <td style="font-family:DejaVu Serif;text-align:center;font-size:19px;">
+                                        <t t-esc="cumul_male"/>
+                                    </td>
+                                    <td style="font-family:DejaVu Serif;text-align:center;font-size:19px;">
+                                        <t t-esc="cumul_female + cumul_male"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

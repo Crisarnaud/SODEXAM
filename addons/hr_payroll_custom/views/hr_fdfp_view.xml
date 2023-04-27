@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="hr_fdfp_from_view" model="ir.ui.view">
+            <field name="name">hr.fdfp.form</field>
+            <field name="model">hr.fdfp</field>
+            <field name="arch" type="xml">
+                <form string="Déclaration FDFP">
+                    <header>
+                        <button string="Calculer" name="compute" type="object" class="btn-primary"/>
+                        <!--                    <button string="Exporter en Excel" name="export_xls" type="object" class="btn-primary"-->
+                        <!--                        context="{'xls_export':1}" icon="fa-download"/>-->
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </header>
+                    <sheet>
+                        <group col="4">
+                            <field name="name"/>
+                            <field name="type_employe" widget="radio"/>
+                        </group>
+                        <group col="4">
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="company_id" invisible="1"/>
+                        </group>
+                        <notebook>
+                            <page string="Lignes">
+                                <field name="line_ids">
+                                    <tree>
+                                        <field name="rule_id"/>
+                                        <field name="brut_total"/>
+                                        <field name="taux"/>
+                                        <field name="amount_contributed"/>
+                                    </tree>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right">
+                                    <field name="salaries_number"/>
+                                    <field name="amount_total_contributed"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="hr_fdfp_tree_view" model="ir.ui.view">
+            <field name="name">hr.fdfp.tree</field>
+            <field name="model">hr.fdfp</field>
+            <field name="arch" type="xml">
+                <tree string="Déclaration FDFP">
+                    <field name="name"/>
+                    <field name="type_employe"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="salaries_number"/>
+                    <field name="amount_total_contributed"/>
+                    <field name="company_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_hr_fdfp_wizard" model="ir.actions.act_window">
+            <field name="name">Déclaration FDFP</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.fdfp</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="hr_fdfp_menu"
+                  name="Déclaration FDFP" sequence="50"
+                  parent="hr_payroll_custom.menu_hr_payroll_fiscal"
+                  action="action_hr_fdfp_wizard"/>
+
+    </data>
+</odoo>

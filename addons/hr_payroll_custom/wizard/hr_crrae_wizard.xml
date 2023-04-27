@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="hr_crrae_form_view">
+            <field name="name">hr.crrae.form_view</field>
+            <field name="model">hr.crrae</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <field name="name" />
+                        <group col="4">
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="periode" />
+                            <field name="motif_changement" />
+                            <field name="periode_regul" />
+                            <field name="assiette" />
+                            <field name="company_id"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="compute_data" string="Générer le rapport" type="object" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hr_crrae_tree_view" model="ir.actions.act_window">
+            <field name="name">Rapport CRRAE</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.crrae</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="hr_crrae_menu" name="Rapports CRRAE"
+                  parent="hr_payroll_custom.menu_hr_payroll_social"
+                action="action_hr_crrae_tree_view"/>
+    </data>
+</odoo>

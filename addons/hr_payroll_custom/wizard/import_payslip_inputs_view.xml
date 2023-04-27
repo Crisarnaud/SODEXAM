@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<!--
+##############################################################################
+#
+# Copyright (c) 2012 Veone - support.veone.net
+# Author: Veone
+#
+# Fichier du module hr_emprunt_old
+# ##############################################################################  -->
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="import_input_element_view_form">
+            <field name="name">hr.payslip.import_input view_form</field>
+            <field name="model">hr.payslip.import_input</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group col="4">
+                            <field name="type"/>
+                            <field name="rule_id"/>
+                            <field name="data_file"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="compute_data" string="Importer" type="object" class="btn-primary"/>
+                        or
+                        <button special="cancel" string="Annuler" type="object"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_import_input_salary_form_view">
+            <field name="name">Importer les éléments de salaire</field>
+            <field name="res_model">hr.payslip.import_input</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

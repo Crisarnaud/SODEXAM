@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_advance_salary_manager,hr.advance.salary manager,model_hr_advance_salary,hr.group_hr_manager,1,1,1,1
+access_hr_loaning_request_manager,hr.loaning.request manager,model_hr_loaning_request,hr.group_hr_manager,1,1,1,1
+access_hr_loaning_request_wizard_manager,hr.loaning.request.wizard manager,model_hr_loaning_request_wizard,hr.group_hr_manager,1,1,1,1
+access_hr_loaning_line_manager,hr.loaning.line manager,model_hr_loaning_line,hr.group_hr_manager,1,1,1,1
+access_hr_deadline_line_manager,hr.deadline.line manager,model_hr_deadline_line,hr.group_hr_manager,1,1,1,1
+access_hr_doc_box_manager,hr.doc.box manager,model_hr_doc_box,hr.group_hr_manager,1,1,1,1
+access_hr_advance_salary_manager,hr.advance.salary manager,model_hr_advance_salary,hr_payroll.group_hr_payroll_manager,1,1,1,1
+access_hr_advance_salary_user,hr.advance.salary user,model_hr_advance_salary,hr_payroll.group_hr_payroll_user,1,1,0,0
+access_hr_loaning_request_manager,hr.loaning.request manager,model_hr_loaning_request,hr_payroll.group_hr_payroll_manager,1,1,1,1
+access_hr_loaning_request_wizard_manager,hr.loaning.request.wizard manager,model_hr_loaning_request_wizard,hr_payroll.group_hr_payroll_manager,1,1,1,1
+access_hr_loaning_line_manager,hr.loaning.line manager,model_hr_loaning_line,hr_payroll.group_hr_payroll_manager,1,1,1,1
+access_hr_deadline_line_manager,hr.deadline.line manager,model_hr_deadline_line,hr_payroll.group_hr_payroll_manager,1,1,1,1
+access_hr_doc_box_manager,hr.doc.box manager,model_hr_doc_box,hr_payroll.group_hr_payroll_manager,1,1,1,1
+
+

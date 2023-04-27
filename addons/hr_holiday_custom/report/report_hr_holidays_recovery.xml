@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_hr_holidays_recovery">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.html_container">
+                    <!--                    <t t-call="hr_cnce.doc_layout">-->
+                    <div class="page" style="font-family: sans-serif; padding:110px 0px 100px 0px;">
+                        <table style="border-collapse:collapse;bordercolor=#111111; align:center;">
+                            <tbody>
+                                <tr>
+                                    <td style="border:none; width:10%;"></td>
+                                    <td style="border:3px solid black; width:50%; align:center; text-decoration: underline black; text-align:center;">
+                                        <h4 style="text-decoration: underline black;padding-top:10px; padding-bottom:5px;font-family:DejaVu Serif;">
+                                            <b>ATTESTATION DE REPRISE DE SERVICE</b>
+                                        </h4>
+                                    </td>
+                                    <td style="border:none; width:10%;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <br/>
+                        <p style="font-size: 19px;font-family:DejaVu Serif;">
+                            Je <t t-if="o.validator_id.gender == 'male'">soussigné </t><t t-else="">soussignée</t> <t
+                                t-if="o.validator_id.gender == 'male'"> M. </t><t t-else=""> Mme </t>
+                            <strong><span t-field="o.validator_id.name" style="font-family:DejaVu Serif;"/> <span
+                                    t-field="o.validator_id.first_name" style="font-family:DejaVu Serif;"/></strong>
+                            , <br/> <br/>
+                            Fonction : <strong><span t-field="o.validator_id.job_id.name"
+                                                     style="font-family:DejaVu Serif;"/>, </strong><br/> <br/>
+                            Direction/Service : <strong><span t-field="o.validator_id.direction_id.description"
+                                                              style="font-family:DejaVu Serif;"/> / <span
+                                t-field="o.validator_id.service_id.description"
+                                style="font-family:DejaVu Serif;"/></strong>, <br/><br/>
+                            Atteste que <t t-if="o.employee_id.gender == 'male'"> M. </t><t t-else=""><t
+                                t-if="o.employee_id.marital == 'single'"> Mlle </t><t t-else=""> Mme </t>
+                        </t> <strong><span t-field="o.employee_id.name" style="font-family:DejaVu Serif;"/> <span
+                                t-field="o.employee_id.first_name" style="font-family:DejaVu Serif;"/></strong>
+                            Matricule : <strong><span t-field="o.employee_id.identification_id"
+                                                      style="font-family:DejaVu Serif;"/>, </strong> <br/><br/>
+                            Bénéficiaire d'un <t t-if="'Congé' in o.holidays_id.holiday_status_id.name"></t>
+                            <t t-else="">congé</t>
+                            <strong><span t-field="o.holidays_id.holiday_status_id"
+                                          style="font-family:DejaVu Serif;"/></strong> de <strong><span
+                                t-field="o.holidays_id.number_of_days_display"
+                                style="font-family:DejaVu Serif;"/></strong> jour(s), <br/> <br/>
+                            A repris le service le <strong><span t-esc="o.recovery_date.strftime('%d %B %Y')"
+                                                                 style="font-family:DejaVu Serif;"/></strong>
+                            à <strong><span t-field="o.recovery_hour" style="font-family:DejaVu Serif;"/> mns</strong>
+                            . <br/>
+                        </p>
+                        <br/>
+                        <table style="font-size: 19px; text-align:center;">
+                            <tr>
+                                <td style="font-size: 19px;font-family:DejaVu Serif;"> Date et Signature <br/> N+1</td>
+                                <td style="font-size: 19px;font-family:DejaVu Serif;"> Date et Signature <br/> N+2</td>
+                                <td style="font-size: 19px;font-family:DejaVu Serif;"> Date et Signature du DRH</td>
+                            </tr>
+                            <tr style="height: 100px;">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <table>
+                            <td style="width:30%;border:none"></td>
+                            <td style="width:30%;border:none"></td>
+                            <td style="width:40%;border:none">
+                                <div style="margin-bottom: 11px;padding-top:10px;">
+                                    <br/>
+                                    <h6 style="font-family:DejaVu Serif;">
+                                        Fait à Abidjan, le <span
+                                            t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"
+                                            style="font-family:DejaVu Serif;"/>
+                                    </h6>
+                                </div>
+                            </td>
+                        </table>
+                    </div>
+                    <!--                    </t>-->
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

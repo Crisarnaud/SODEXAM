@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="paper_format_landscape" model="report.paperformat">
+            <field name="name">A4 - Landscape</field>
+            <field name="format">A4</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">15</field>
+            <field name="margin_bottom">30</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+    	<report 
+            string="Livre de paie" 
+            id="report_hr_payroll" 
+            model="hr.payroll.payroll"
+            report_type="qweb-pdf"
+            name="hr_payroll_custom.report_payroll"
+            file="Livre de paie"
+        />
+
+        <report
+            id="action_payroll_report_xlsx"
+            model="hr.payroll.payroll"
+            string="Livre de paie"
+            report_type="xlsx"
+            name="hr_payroll_custom.hr_payroll_xlsx"
+            file="Livre de paie"
+            attachment_use="False"
+        />
+
+        <report
+            string="Etat des rubriques de paie par poste"
+            id="action_report_payroll_by_post_xls"
+            model="hr.payslip"
+            menu= "False"
+            report_type="xlsx"
+            name="hr_payroll_custom.payroll_by_post"
+            file="Rubrique de paie par poste"
+            attachment_use="False"
+        />
+
+        <report
+            string="Etat des rubriques de paie par poste"
+            id="action_report_payroll_by_post_pdf"
+            model="hr.payslip"
+            menu= "False"
+            report_type="qweb-pdf"
+            name="hr_payroll_custom.report_payroll_by_post"
+            file="Rubrique de paie par poste"
+        />
+
+
+        <report
+            string="Cumul des rubriques de paie par période XLS"
+            id="action_report_payroll_by_period"
+            model="hr.payslip.line"
+            menu= "False"
+            report_type="xlsx"
+            name="hr_payroll_custom.payroll_by_period"
+            file="Cumul des rubrique de paie par période"
+            attachment_use="False"
+        />
+
+
+        <report
+            string="Cotisation par organisme"
+            id="action_report_contribution_by_organization"
+            model="hr.payslip.line"
+            menu= "False"
+            report_type="xlsx"
+            name="hr_payroll_custom.contribution_by_organization"
+            file="Cotisation par organisme"
+            attachment_use="False"
+        />
+
+        <report
+            string="Rapport des paiements/agent"
+            id="action_report_agent_payments_xls"
+            model="hr.payslip.line"
+            menu= "False"
+            report_type="xlsx"
+            name="hr_payroll_custom.agent_payments_xls"
+            file="Rapport des paiements par agent"
+            attachment_use="False"
+        />
+
+        <report
+            string="Masse salariale"
+            id="action_salary_mass_xls"
+            model="hr.employee"
+            menu= "False"
+            report_type="xlsx"
+            name="hr_payroll_custom.salary_mass_xls"
+            file="Masse salariale"
+            attachment_use="False"
+        />
+
+        <report
+            string="Effectif par position détaillé (XLS)"
+            id="action_report_workforce_by_detailed_position_xls"
+            model="hr.employee"
+            menu= "False"
+            report_type="xlsx"
+            name="hr_payroll_custom.workforce_by_detailed_position_xls"
+            file="Effectif par position détaillé"
+            attachment_use="False"
+        />
+
+         <report
+            string="Effectif par position détaillé (PDF)"
+            id="action_report_workforce_by_detailed_position_pdf"
+            model="hr.employee"
+            menu= "False"
+            report_type="qweb-pdf"
+            name="hr_payroll_custom.workforce_by_detailed_position_pdf"
+            file="Effectif par position détaillé"
+            attachment_use="False"
+        />
+
+         <report
+            id="action_report_workforce_personnal_charge_pdf"
+            string="Charges du personnel (PDF)"
+            model="hr.payroll.budget"
+            menu= "True"
+            report_type="qweb-pdf"
+            name="hr_payroll_custom.budget_personnal_charge_pdf"
+        />
+
+    </data>
+</odoo>

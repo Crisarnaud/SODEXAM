@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- les primes -->
+    <record model="ir.ui.view" id="hr_payroll_prime_tree_view">
+        <field name="name">hr.payroll.prime.tree</field>
+        <field name="model">hr.payroll.prime</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Primes">
+                <field name="name"/>
+                <field name="code"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_payroll_prime_form_view">
+        <field name="name">hr.payroll.prime.form</field>
+        <field name="model">hr.payroll.prime</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Primes">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" select="1"/>
+                            <field name="code"
+                            />
+                        </group>
+                        <field name="description" placeholder="Description de la prime"/>
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_hr_payroll_prime_tree_view">
+        <field name="name">Primes</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.payroll.prime</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="hr_payroll_prime_tree_view"/>
+    </record>
+
+    <!-- les contrats  -->
+    <record model="ir.ui.view" id="hr_contract_inh_extension_form">
+        <field name="name">hr.contract.form</field>
+        <field name="model">hr.contract</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="replace">
+                <field name="state" widget="statusbar"
+                       statusbar_visible="draft,open,availability,pending,close,cancel"
+                       options="{'clickable': '1'}"/>
+            </xpath>
+
+            <header position="inside">
+                <button name="validate_contract" states="draft" string="Confirmer" type="object"/>
+                <button name="closing_contract" states="in_progress" string="Clôturer contrats" type="object"/>
+                <button name="define_date_return_availability" type="object" string="Retour de disponibilité"  attrs="{'invisible': [('state', '!=', 'availability')]}"/>
+            </header>
+
+
+            <xpath expr="//field[@name='employee_id']" position="replace">
+                <field name="employee_id"/>
+            </xpath>
+
+            <xpath expr="//field[@name='employee_id']" position="before">
+                <field name="model_contract_id"/>
+            </xpath>
+
+
+            <xpath expr="//field[@name='date_end']" position="after">
+                <field name="trial_date_end"/>
+            </xpath>
+
+
+            <field name="structure_type_id" position="after">
+                <field name="expatried"/>
+                <label for="an_report" string="Report anciennété"/>
+                <div>
+                    <field name="an_report" class="oe_inline"/>
+                    ans -
+                    <field name="mois_report" class="oe_inline"/>
+                    mois
+                </div>
+                <label for="date_start" string="Durée"/>
+                <div>
+                    <field name="an_anciennete" class="oe_inline"/>
+                    ans -
+                    <field name="mois_anciennete" class="oe_inline"/>
+                    mois
+                </div>
+            </field>
+
+            <!--                <group name="main_info" position="replace">-->
+            <group name="main_info">
+                <group name="salary_and_advantages" string="Monthly Advantages in Cash">
+                    <field name="hr_convention_id"/>
+                    <field name="hr_secteur_id"/>
+                    <field name="categorie_salariale_id"/>
+                    <label for="wage"/>
+                    <div class="o_row" name="wage">
+                        <field name="wage" nolabel="1"/>
+                        <span>/ month</span>
+                    </div>
+                    <field name="sursalaire"/>
+                    <!--                            <field name="advantages" nolabel="1" placeholder="Advantages..." colspan="2" invisible="1"/>-->
+                    <!--                            <field name="notify_model_id" invisible="True"/>-->
+                </group>
+            </group>
+            <!--                </group>-->
+            <notebook position="inside">
+                <!--                    <page string="Notifications" invisible="True">-->
+                <!--                        <field name="notif_ids">-->
+                <!--                            <tree editable="top">-->
+                <!--                                <field name="res_model"/>-->
+                <!--                                <field name="res_id"/>-->
+                <!--                                <field name="date_notifcation"/>-->
+                <!--                                <field name="active"/>-->
+                <!--                            </tree>-->
+                <!--                        </field>-->
+                <!--                    </page>-->
+                <page string="Mise en disponibilité">
+                    <field name="contract_availability_ids">
+                        <tree>
+                            <field name="name"/>
+                            <field name="start_date_availability"/>
+                            <field name="previsional_end_date_availability"/>
+                            <field name="return_date_availability" readonly="1"/>
+                        </tree>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+
+
+    <!-- gestion des primes sur les contrats -->
+    <record model="ir.ui.view" id="hr_payroll_prime_montant_tree_view">
+        <field name="name">hr.payroll.prime.montant.tree</field>
+        <field name="model">hr.payroll.prime.montant</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Primes" create="1">
+                <field name="prime_id"/>
+                <field name="contract_id"/>
+                <field name="montant_prime"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_hr_payroll_prime_montant_tree_view">
+        <field name="name">Primes sur contrat</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.payroll.prime.montant</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="hr_payroll_prime_montant_tree_view"/>
+    </record>
+
+    <record model="ir.ui.view" id="hr_contract_custom_form">
+        <field name="name">hr.contract.form</field>
+        <field name="model">hr.contract</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <field name="structure_type_id" position="before">
+                <field name="contract_type_id"/>
+                <field name="category_id"/>
+            </field>
+        </field>
+    </record>
+
+
+</odoo>

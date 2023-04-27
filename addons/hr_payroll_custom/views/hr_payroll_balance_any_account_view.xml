@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="balance_any_account_form_view" model="ir.ui.view">
+            <field name="name">hr_payroll_ci.balance_any_account.form</field>
+            <field name="model">hr_payroll_ci.balance_any_account</field>
+            <field name="arch" type="xml">
+                <form string="Balance any account form">
+                    <header>
+                        <button name="generate_data" string="Calculer" type="object" states="draft"/>
+                        <button name="action_done" string="Valider" type="object" states="draft"
+                                groups="hr.group_hr_manager"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name" attrs="{'readonly':[('state','=','validate')]}"/>
+                        </group>
+                        <group col="4">
+                            <field name="employee_id" attrs="{'readonly':[('state','=','validate')]}"/>
+                            <field name="contract_id" readonly="0" force_save="1"/>
+                            <field name="deposit_date" required="1" attrs="{'readonly':[('state','=','validate')]}"/>
+                            <field name="estimated_departure_date" readonly="1"/>
+                            <field name="hiring_date" readonly="0"/>
+                            <field name="seniority" readonly="1"/>
+                            <field name="end_date" required="1" attrs="{'readonly':[('state','=','validate')]}"/>
+                            <field name="motif_fin_contract_id" required="1"
+                                   attrs="{'readonly':[('state','=','validate')]}"/>
+                            <field name="other_indemnity" attrs="{'readonly':[('state','=','validate')]}"/>
+                            <field name="medal_leave" attrs="{'readonly':[('state','=','validate')]}"/>
+                            <field name="date_return_last_holidays" readonly="1"/>
+                            <field name="gross_salary_leave" readonly="1"/>
+
+                        </group>
+                        <group col="4" string="Calcul des éléments">
+                            <field name="total_gross" readonly="True"/>
+                            <field name="average_gross" readonly="True"/>
+                            <field name="notice_given"/>
+                            <field name="notice_not_given"/>
+                        </group>
+                        <group>
+                            <field name="total_indemnity"/>
+                        </group>
+                        <group col="4">
+                            <field name="taxable_indemnity"/>
+                            <field name="not_taxable_indemnity"/>
+                        </group>
+                        <group>
+                            <field name="spreading_period" readonly="1"/>
+                        </group>
+                        <notebook>
+                            <page string="Derniers bulletins">
+                                <field name="last_salary_line_ids" readonly="1">
+                                    <tree>
+                                        <field name="order"/>
+                                        <field name="period"/>
+                                        <field name="gross_amount" sum="Total brut"/>
+                                        <field name="payslip_id"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="order"/>
+                                            <field name="name"/>
+                                            <field name="period"/>
+                                            <field name="gross_amount"/>
+                                            <field name="payslip_id"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Indemnités">
+                                <field name="allowances_ids" readonly="1">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="amount" sum="Total indemnité"/>
+                                    </tree>
+                                    <form>
+                                        <group col="4">
+                                            <field name="name"/>
+                                            <field name="amount"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Elements du salaire">
+                                <field name="salary_elements_ids" readonly="0">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="amount" sum="Total"/>
+                                    </tree>
+                                    <form>
+                                        <group col="4">
+                                            <field name="name"/>
+                                            <field name="amount"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Recapitulatif">
+                                <field name="balance_any_account_line_ids" readonly="1">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="amount" sum="Total"/>
+                                    </tree>
+                                    <form>
+                                        <group col="4">
+                                            <field name="name"/>
+                                            <field name="amount"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="balance_any_account_tree_view" model="ir.ui.view">
+            <field name="name">hr_payroll_ci.balance_any_account.tree</field>
+            <field name="model">hr_payroll_ci.balance_any_account</field>
+            <field name="arch" type="xml">
+                <tree string="Balance any account tree">
+                    <field name="name"/>
+                    <field name="motif_fin_contract_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="balance_any_account_search_view" model="ir.ui.view">
+            <field name="name">hr_payroll_ci.balance_any_account.search</field>
+            <field name="model">hr_payroll_ci.balance_any_account</field>
+            <field name="arch" type="xml">
+                <search string="Balance any account search">
+                    <field name="employee_id"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Employé" name="employee_id" domain="[]"
+                                context="{'group_by':'employee_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="balance_any_account_act_window" model="ir.actions.act_window">
+            <field name="name">Solde de tout compte</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr_payroll_ci.balance_any_account</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="balance_any_account_search_view"/>
+            <field name="domain">[('employee_id','=',active_id)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no examples click here to add new ModelTitle.
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

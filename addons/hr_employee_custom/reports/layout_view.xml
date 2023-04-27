@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="hr_employee_custom.doc_layout">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+        <div class="header">
+            <div class="row">
+                <div class="col-3 mb4" style="margin-bottom:20px;">
+                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 45px;"
+                         alt="Logo"/>
+                </div>
+            </div>
+            <div class="row">
+                <table style="width: 100%; border-style: none;font-family:DejaVu Serif;">
+                    <tr>
+                        <td style="width: 60%; border-style: none; font-size: 16px;font-family:DejaVu Serif;">
+                            <strong style="color: #FF9633;">« Partout, proche de vous »</strong>
+                            <br/>
+                            <br/>
+                            <b>DIRECTION GENERALE</b>
+                            <br/>-------
+                            <t t-if="o.id != o.company_id.hr_manager_id.id">
+                                <br/>
+                                DIRECTION DES RESSOURCES
+                                <br/>
+                                HUMAINES
+                                <br/>
+                                -------
+                                <br/>
+                            </t>
+                        </td>
+                        <td style="width: 40%; text-align: center; border-style: none; font-size: 14px;font-family:DejaVu Serif;">
+                            <strong>REPUBLIQUE DE CÔTE D’IVOIRE</strong>
+                            <br/>
+                            <strong>Union-Discipline-Travail</strong>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="article">
+            <t t-raw="0"/>
+        </div>
+
+        <div class="footer">
+            <t t-if="not 'category_contract_id' in o and not 'holiday_status_id' in o and not 'recovery_date' in o and not 'groupby_bank' in o and not 'user_id' in o">
+                <div class="pagination" style="margin-left: auto;margin-right: auto;width: 6em">
+                    <span class="page"/>/
+                    <span class="topage"/>
+                </div>
+            </t>
+
+            <div class="text-center"
+                 style="font-size: 9px; border-top: 1px dashed #FF9633; margin-bottom: 10px;font-family:DejaVu Serif;">
+            </div>
+        </div>
+    </template>
+
+</odoo>

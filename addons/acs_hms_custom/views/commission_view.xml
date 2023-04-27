@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="iew_acs_commission_graph" model="ir.ui.view">
+            <field name="name">acs.commission.graph</field>
+            <field name="model">acs.commission</field>
+            <field name="arch" type="xml">
+                <graph string="Commission">
+                    <field name="partner_id"/>
+                    <field name="invoice_id"/>
+                    <field name="commission_amount"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_acs_commission_pivot" model="ir.ui.view">
+            <field name="name">acs.commission.pivot</field>
+            <field name="model">acs.commission</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <pivot string="Assurance/statut">
+                    <field name="partner_id" type="col"/>
+                    <field name="invoice_id" type="col"/>
+                    <field name="commission_amount" type="row"/>
+                </pivot>
+            </field>
+        </record>
+        <record id="acs_commission.acs_commission_action" model="ir.actions.act_window">
+        <field name="name">Business Commission</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">acs.commission</field>
+        <field name="view_mode">tree,form,graph,pivot</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Record Found
+            </p>
+            <p>
+                Click to add new Business Commission.
+            </p>
+        </field>
+    </record>
+
+    </data>
+</odoo>

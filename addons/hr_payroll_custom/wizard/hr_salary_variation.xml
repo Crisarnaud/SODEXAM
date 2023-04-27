@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+            <record model="ir.ui.view" id="hr_salary_variation_form_view">
+                <field name="name">hr.salary.variation.form</field>
+                <field name="model">hr.salary.variation</field>
+                <field name="type">form</field>
+                <field name="arch" type="xml">
+                    <form string="Récapitulatif des salaires" >
+                        <group col="4">
+                            <field name="date_from" />
+                            <field name="date_to" />
+                            <field name="company_id" invisible="1"/>
+                            <field name="rule_ids" string="Rubrique(s)" widget="many2many_tags"/>
+                        </group>
+                        <footer>
+                            <button string="Exporter le recap par employé" name="export_to_excel" type="object" class="btn-primary"
+                                context="{'xls_export':1}" icon="fa-download"/>
+                            <button string="Exporter le recap par règle salariale" name="export_recap_to_excel" type="object" class="btn-primary"
+                                context="{'xls_export':1}" icon="fa-download"/>
+                            <button string="Cancel" class="btn-default" special="cancel"/>
+                        </footer>
+                    </form>
+                </field>
+            </record>
+
+           <record model="ir.actions.act_window" id="action_hr_salary_variation_form_view">
+                <field name="name">Récapitulatif des salaires</field>
+                <field name="res_model">hr.salary.variation</field>
+                <field name="view_mode">form</field>
+                <field name="target">new</field>
+            </record>
+
+        <menuitem id="hr_salary_recap_menu_id"
+                  name="Récapitulatif des salaires" sequence="51"
+                  parent="hr_payroll_custom.menu_hr_payroll_rapport"
+            action="action_hr_salary_variation_form_view"/>
+
+    </data>
+</odoo>

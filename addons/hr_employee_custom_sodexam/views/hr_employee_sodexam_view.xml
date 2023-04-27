@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- gestion des sites -->
+    <record model="ir.ui.view" id="hr_site_tree_view">
+        <field name="name">hr.site.tree</field>
+        <field name="model">hr.site</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name" required="1"/>
+                <field name="code"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_hr_site_view">
+        <field name="name">Gestion des sites</field>
+        <field name="res_model">hr.site</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <!--  gestion des plateformes-->
+    <record model="ir.ui.view" id="hr_plateforme_tree_view">
+        <field name="name">hr.plateforme.tree</field>
+        <field name="model">hr.plateforme</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name" required="1"/>
+                <field name="code"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_hr_plateforme_view">
+        <field name="name">Gestion des plateformes</field>
+        <field name="res_model">hr.plateforme</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+
+    <record model="ir.ui.view" id="hr_employee_custom_sodexam_form_view">
+        <field name="name">hr.employee.form</field>
+        <field name="model">hr.employee</field>
+        <field name="type">form</field>
+        <field name="priority">15</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='service_id']" position="after">
+                <field name="bureau_id" string="Bureau/Unité" context="{'default_type':'bureau'}"
+                       domain="[('parent_id','in',(service_id,False)),('type','=','bureau')]"/>
+            </xpath>
+            <xpath expr="//field[@name='bureau_id']" position="after">
+                <field name="plateforme_id" string="Plateforme"/>
+            </xpath>
+            <xpath expr="//field[@name='plateforme_id']" position="after">
+                <field name="site_id" string="Site"/>
+            </xpath>
+
+            <xpath expr="//field[@name='coach_id']" position="attributes">
+                <attribute name="string">Responsable fonctionnel</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='parent_id']" position="attributes">
+                <attribute name="string">Responsable administratif</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='gender']" position="attributes">
+                <attribute name="string">Sexe</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='job_id']" position="after">
+                <field name="profession_id"/>
+            </xpath>
+
+<!--            <xpath expr="//button[@name='124']" position="attributes">-->
+<!--                <attribute name="invisible">1</attribute>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="hr_profession_tree_view">
+        <field name="name">hr.profession.tree</field>
+        <field name="model">hr.profession</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name" required="1"/>
+                <field name="code"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_hr_profession_view">
+        <field name="name">Professions</field>
+        <field name="res_model">hr.profession</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem id="hr_employee_custom_emplacement" name="Emplacement" parent="hr.menu_human_resources_configuration"
+              sequence="99"/>
+
+
+    <menuitem id="hr_site_menu" name="Sites" parent="hr_employee_custom_emplacement"
+              action="action_hr_site_view" groups="hr.group_hr_manager" sequence="99"/>
+
+    <menuitem id="hr_plateforme_menu" name="Plateformes" parent="hr_employee_custom_emplacement"
+              action="action_hr_plateforme_view" groups="hr.group_hr_manager" sequence="100"/>
+
+    <menuitem id="hr_profession_menu" name="Professions" parent="hr.menu_human_resources_configuration"
+              action="action_hr_profession_view" sequence="1"/>
+
+</odoo>

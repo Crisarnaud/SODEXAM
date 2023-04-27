@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+<!--        data pour les entreprises nas et sodexam-->
+
+        <record id="res_partner_nas" model="res.partner">
+            <field name="name">Nas</field>
+            <field name="code_company">nas</field>
+            <field name="company_type">company</field>
+            <field name="is_company">True</field>
+            <field name="customer_rank">1</field>
+        </record>
+
+        <record id="res_partner_sdx" model="res.partner">
+            <field name="name">Sodexam</field>
+            <field name="code_company">sdx</field>
+            <field name="company_type">company</field>
+            <field name="is_company">True</field>
+            <field name="customer_rank">1</field>
+        </record>
+
+
+<!--            data pour la spécialité du medecin -->
+        <record id="hms_consultation_generaliste" model="physician.specialty">
+            <field name="name">Généraliste</field>
+            <field name="code_speciality">GEN</field>
+        </record>
+
+<!--        data pour les relations familiales-->
+        <record id="Family_relation_child" model="acs.family.relation">
+            <field name="name">Enfant</field>
+        </record>
+
+        <record id="Family_relation_spouse" model="acs.family.relation">
+            <field name="name">Epouse</field>
+        </record>
+
+        <record id="Family_relation_father" model="acs.family.relation">
+            <field name="name">Père</field>
+        </record>
+
+         <record id="Family_relation_mother" model="acs.family.relation">
+            <field name="name">Mère</field>
+        </record>
+    </data>
+</odoo>

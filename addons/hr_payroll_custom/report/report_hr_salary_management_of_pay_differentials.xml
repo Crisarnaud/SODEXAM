@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_hr_salary_management_of_pay_differentials">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                                        <t t-call="hr_payroll_custom.doc_layout">
+                    <div class="page" style="font-family: sans-serif; padding:10px 0px 10px 0px;">
+                        <table style="border-collapse:collapse;bordercolor=#111111; align:center;width:100%;">
+                            <tbody>
+                                <tr>
+                                    <td style="border:none; width:5%;"></td>
+                                    <td style="border:none; width:90%; align:center; text-decoration: underline black; text-align:center;">
+                                        <h3 style="text-decoration: underline black;padding-bottom:13px;text-align:center;font-family:DejaVu Serif">
+                                            <b> <u>ANALYSE DES VARIATIONS DE L'EFFECTIF PAYE / <span t-esc="datetime.datetime.now().strftime('%B %Y')" style="font-family:DejaVu Serif;text-transform: uppercase"/></u> </b>
+                                        </h3>
+                                    </td>
+                                    <td style="border:none; width:5%;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <table style="border-collapse:collapse;bordercolor=#111111; align:center;width:100%">
+                            <tr>
+                                <td colspan="2" style="border:1px solid;border:none;"></td>
+                                <td style="border:1px solid;text-align:center;font-family:DejaVu Serif"> <b> OBSERVATIONS </b></td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid;text-align:center;font-family:DejaVu Serif"><b>EFFECTIF PAYE MOIS PRECEDENT </b></td>
+                                <td style="border:1px solid;text-align:center"> <span t-esc="o.total_previous_salary" style="font-family:DejaVu Serif"/> </td>
+                                <td style="border:1px solid;text-align:center"></td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid;text-align:center;font-family:DejaVu Serif"><b>SORTIES</b></td>
+                                <td style="border:1px solid;text-align:center"> <span t-esc="o.salaries_out" style="font-family:DejaVu Serif"/> </td>
+                                <td style="border:1px solid;text-align:center"></td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid;text-align:center;font-family:DejaVu Serif"><b> ENTREES </b></td>
+                                <td style="border:1px solid;text-align:center"> <span t-esc="o.salaries_in" style="font-family:DejaVu Serif"/></td>
+                                <td style="border:1px solid;text-align:center"></td>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid;text-align:center;font-family:DejaVu Serif"><b> EFFECTIF PAYE MOIS EN COURS </b></td>
+                                <td style="border:1px solid;text-align:center"> <span t-esc="o.total_salary" style="font-family:DejaVu Serif"/> </td>
+                                <td style="border:1px solid;text-align:center"></td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <p style="text-align:center;font-family:DejaVu Serif">
+                            <b>
+                                <u> LISTE DES SORTIES DU FICHIER PAIE </u>
+                            </b>
+                        </p>
+                        <br/>
+                        <t t-set="num" t-value="1"/>
+
+                        <table style="border-collapse:collapse;bordercolor=#111111; align:center;width:100%">
+                            <tr>
+                                <td style="text-align:center;width:5px;"></td>
+                                <td style="border:1px solid;text-align:center;font-family:DejaVu Serif;width:65%"><b>NOMS ET PRENOMS</b></td>
+                                <td style="border:1px solid;text-align:center;font-family:DejaVu Serif"><b>MATR</b></td>
+                                <td style="border:1px solid;text-align:center;font-family:DejaVu Serif"><b>MOTIF</b></td>
+                            </tr>
+                            <tr t-foreach='o.employee_ids' t-as='line'>
+                                <t t-if="line.type == 'out'">
+                                    <td>
+                                        <span t-esc="num" style="font-family:DejaVu Serif;font-size:10px;"/>
+                                        <t t-set="num" t-value="num+1"/>
+                                    </td>
+                                    <td style="border:1px solid"><span t-esc="line.name" style="text-align:center;font-family:DejaVu Serif"/>  <span t-esc="line.employee_id.first_name" style="font-family:DejaVu Serif"/> </td>
+                                    <td style="border:1px solid;text-align:center;"><span t-esc="line.identification_id" style="text-align:center;align:center;font-family:DejaVu Serif"/></td>
+                                    <td style="border:1px solid"><span t-esc="line.observation" style="text-align:center;font-family:DejaVu Serif"/></td>
+                                </t>
+                            </tr>
+                        </table>
+                        <br/>
+
+                        <p style="text-align:center;font-family:DejaVu Serif">
+                            <b><u>LISTE DES ENTRÉES DU FICHIER DE PAIE</u></b>
+                        </p>
+                        <br/>
+                        <t t-set="num" t-value="1"/>
+                        <table style="border-collapse:collapse;bordercolor=#111111; align:center;width:100%">
+                            <tr>
+                                <td style="text-align:center;width:5px;"></td>
+                                <td style="border:1px solid;text-align:center;font-family:DejaVu Serif;width:65%"><b>NOMS ET PRENOMS</b></td>
+                                <td style="border:1px solid;text-align:center;font-family:DejaVu Serif"><b>MATR</b></td>
+                                <td style="border:1px solid;text-align:center;font-family:DejaVu Serif"><b>MOTIF</b></td>
+                            </tr>
+                            <tr t-foreach='o.employee_ids' t-as='line'>
+                                <t t-if="line.type == 'in'">
+                                    <td style="width:5px;">
+                                        <span t-esc="num" style="font-family:DejaVu Serif;font-size:10px"/>
+                                        <t t-set="num" t-value="num+1"/>
+                                    </td>
+                                    <td style="border:1px solid;">
+                                        <span t-esc="line.name" style="text-align:center;font-family:DejaVu Serif"/>  <span t-esc="line.employee_id.first_name" style="font-family:DejaVu Serif"/>
+                                    </td>
+                                    <td style="border:1px solid;text-align:center;">
+                                        <span t-esc="line.identification_id" style="text-align:center;font-family:DejaVu Serif;align:center;"/>
+                                    </td>
+                                    <td style="border:1px solid;">
+                                        <span t-esc="line.observation" style="text-align:center;font-family:DejaVu Serif"/>
+                                    </td>
+                                </t>
+                            </tr>
+                        </table>
+
+                        <br/>
+                        <p style="margin-left:600px;font-family:DejaVu Serif">
+                            Fait à Abidjan, le <span t-esc="datetime.datetime.now().strftime('%d/%m/%Y')" style="font-family:DejaVu Serif"/>
+                        </p>
+                    </div>
+                                        </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,252 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* acs_invoice_split
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-13 17:50+0000\n"
+"PO-Revision-Date: 2022-04-13 17:55+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: fr\n"
+"X-Generator: Poedit 2.3\n"
+
+#. module: acs_invoice_split
+#: model_terms:ir.ui.view,arch_db:acs_invoice_split.view_split_invoice_wizard
+msgid ""
+"**Only Draft Record can be splitted. <br/>**Splited quantity will be decreased from main order.<br/>\n"
+"                    ** Avoid Spliting system generated records.<br/>"
+msgstr ""
+"**Seul l'enregistrement de brouillon peut être divisé. <br/>**La quantité fractionnée sera diminuée de la commande principale.<br/>\n"
+"                    ** Évitez de fractionner les enregistrements générés par le système.<br/>"
+
+#. module: acs_invoice_split
+#: model_terms:ir.ui.view,arch_db:acs_invoice_split.view_split_invoice_wizard
+msgid "Add a line"
+msgstr "Ajouter une ligne"
+
+#. module: acs_invoice_split
+#: model_terms:ir.ui.view,arch_db:acs_invoice_split.view_split_invoice_wizard
+msgid "Add a section"
+msgstr "Ajouter une section"
+
+#. module: acs_invoice_split
+#: model_terms:ir.ui.view,arch_db:acs_invoice_split.view_split_invoice_wizard
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_account_move_line__copied_line_id
+msgid "Copied Invoice Line"
+msgstr "Ligne de facture copiée"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_line__create_uid
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_wizard__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_line__create_date
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_wizard__create_date
+msgid "Created on"
+msgstr " Créé le"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_wizard__partner_id
+msgid "Customer/Supplier"
+msgstr "Fournisseur client"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_line__name
+msgid "Description"
+msgstr ""
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_line__display_name
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_wizard__display_name
+msgid "Display Name"
+msgstr "Afficher un nom"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_line__display_type
+msgid "Display Type"
+msgstr "Type d'affichage"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields.selection,name:acs_invoice_split.selection__split_invoice_wizard__split_selection__invoice
+msgid "Full Invoice"
+msgstr "Facture complète"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_line__id
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_wizard__id
+msgid "ID"
+msgstr "IDENTIFIANT"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_wizard__line_ids
+#: model:ir.model.fields.selection,name:acs_invoice_split.selection__split_invoice_wizard__split_selection__lines
+msgid "Invoice Lines"
+msgstr "Lignes de facture"
+
+#. module: acs_invoice_split
+#: code:addons/acs_invoice_split/wizard/split_wizard.py:0
+#, python-format
+msgid "Invoice must be in draft state."
+msgstr "La facture doit être à l'état de brouillon."
+
+#. module: acs_invoice_split
+#: model:ir.model,name:acs_invoice_split.model_account_move_line
+msgid "Journal Item"
+msgstr "Écriture comptable"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_line____last_update
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_wizard____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_line__write_uid
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_line__write_date
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_wizard__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_line__line_id
+msgid "Line"
+msgstr "Ligne"
+
+#. module: acs_invoice_split
+#: model_terms:ir.ui.view,arch_db:acs_invoice_split.view_split_invoice_wizard
+msgid "Lines"
+msgstr "Lignes"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields.selection,name:acs_invoice_split.selection__split_invoice_line__display_type__line_note
+msgid "Note"
+msgstr ""
+
+#. module: acs_invoice_split
+#: model:ir.model.fields.selection,name:acs_invoice_split.selection__split_invoice_wizard__line_split_selection__percentage
+msgid "Percentage"
+msgstr "Pourcentage"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_wizard__percentage
+msgid "Percentage to Split"
+msgstr "Pourcentage à diviser"
+
+#. module: acs_invoice_split
+#: code:addons/acs_invoice_split/wizard/split_wizard.py:0
+#, python-format
+msgid "Please Enter Percentage To Split."
+msgstr "Veuillez saisir le pourcentage à répartir."
+
+#. module: acs_invoice_split
+#: code:addons/acs_invoice_split/wizard/split_wizard.py:0
+#, python-format
+msgid "Please Enter Proper Amount/Quantity/Percentage To Split."
+msgstr "Veuillez entrer le montant/quantité/pourcentage approprié à répartir."
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_line__product_id
+msgid "Product"
+msgstr "Produit"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_line__quantity
+#: model:ir.model.fields.selection,name:acs_invoice_split.selection__split_invoice_wizard__line_split_selection__qty
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields.selection,name:acs_invoice_split.selection__split_invoice_line__display_type__line_section
+msgid "Section"
+msgstr "Section"
+
+#. module: acs_invoice_split
+#: model_terms:ir.ui.view,arch_db:acs_invoice_split.view_split_invoice_wizard
+msgid "Split"
+msgstr "Divisé"
+
+#. module: acs_invoice_split
+#: model:ir.actions.act_window,name:acs_invoice_split.action_select_split_invoice_wizard
+msgid "Split Invoice"
+msgstr "Facture fractionnée"
+
+#. module: acs_invoice_split
+#: model:ir.model,name:acs_invoice_split.model_split_invoice_wizard
+msgid "Split Invoice Record"
+msgstr "Enregistrement de facture fractionné"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_wizard__line_split_selection
+msgid "Split Line by"
+msgstr "Fractionner la ligne par"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_line__percentage_to_split
+msgid "Split Percentage"
+msgstr "Pourcentage partagé"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_account_move_line__price_to_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_line__price_to_split
+msgid "Split Price"
+msgstr "Prix ​​partagé"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_account_move_line__qty_to_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_line__qty_to_split
+msgid "Split Qty"
+msgstr "Qté fractionnée"
+
+#. module: acs_invoice_split
+#: model_terms:ir.ui.view,arch_db:acs_invoice_split.view_split_invoice_wizard
+msgid "Split Record"
+msgstr "Fractionner l'enregistrement"
+
+#. module: acs_invoice_split
+#: model:ir.model,name:acs_invoice_split.model_split_invoice_line
+msgid "Split Record Line"
+msgstr "Fractionner la ligne d'enregistrement"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_wizard__split_selection
+msgid "Split Type"
+msgstr "Type de fractionnement"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,help:acs_invoice_split.field_split_invoice_line__display_type
+msgid "Technical field for UX purpose."
+msgstr "Domaine technique à des fins UX."
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_line__price
+#: model:ir.model.fields.selection,name:acs_invoice_split.selection__split_invoice_wizard__line_split_selection__price
+msgid "Unit Price"
+msgstr "Prix ​​unitaire"
+
+#. module: acs_invoice_split
+#: model:ir.model.fields,field_description:acs_invoice_split.field_split_invoice_line__wizard_id
+msgid "Wizard"
+msgstr "Assistant"
+
+#. module: acs_invoice_split
+#: model_terms:ir.ui.view,arch_db:acs_invoice_split.view_split_invoice_wizard
+msgid "or"
+msgstr "ou"

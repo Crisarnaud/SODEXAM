@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="email_template_previsional_leave" model="mail.template">
+            <field name="name">Previsional Leave Template</field>
+            <field name="email_from">${(object.company_id.email or'')|safe }</field>
+            <field name="email_to">${(object.employee_email or '')|safe}</field>
+            <field name="subject">Rappel de congé previsionnel:  ${object.employee_id}</field>
+            <field name="model_id" ref="model_hr_previsional_leave"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">${object.employee_id.user_id.lang}</field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>Bonjour ,</p>
+                    <p>M/Mme ${object.employee_id} Votre période de congé previsionnel est prévue du
+                    ${object.previsional_departure_date} au ${object.return_date}. </p>
+                    <p>Cordialement !!!</p>
+                    <p></p>
+                ]]>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

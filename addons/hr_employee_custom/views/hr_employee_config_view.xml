@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="hr_department_inh_form_view">
+        <field name="name">hr.department.form</field>
+        <field name="model">hr.department</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="arch" type="xml">
+            <field name="manager_id" position="before">
+                <field name="description"/>
+            </field>
+            <field name="manager_id" position="after">
+                <field name="type" required="1"/>
+            </field>
+
+            <xpath expr="//field[@name='parent_id']" position="attributes">
+                <attribute name="string">Entité parent</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="string">Libellé</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr.hr_department_kanban_action" model="ir.actions.act_window">
+        <field name="name">Departments</field>
+        <field name="res_model">hr.department</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id" ref="hr.view_department_filter"/>
+        <field name="context">{'group_by': ['type']}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new department
+            </p>
+        </field>
+    </record>
+
+
+    <!-- gestion des diplomes -->
+    <record model="ir.ui.view" id="hr_diplome_employee_form_view">
+        <field name="name">hr.diplomes.employee.form</field>
+        <field name="model">hr.diplomes.employee</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Diplômes">
+                <sheet>
+                    <group>
+                        <field name="name" required="1"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="diplome_id" required="1"/>
+                            <field name="domaine_id" required="1"/>
+                            <field name="type" required="1"/>
+                        </group>
+                        <group>
+                            <field name="reference" required="1"/>
+                            <field name="date_obtention" required="1"/>
+                            <label for="date_start" string="Duration"/>
+                            <div>
+                                <field name="date_start" class="oe_inline"/>
+                                -
+                                <field name="date_end" class="oe_inline"/>
+                            </div>
+                        </group>
+                    </group>
+                    <field name="image" widget="image"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- gestion des motifs de clotures contrat -->
+    <record model="ir.ui.view" id="hr_employee_motif_cloture_form_view">
+        <field name="name">hr.employee.motif.cloture.form</field>
+        <field name="model">hr.employee.motif.cloture</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_employee_motif_cloture_tree_view">
+        <field name="name">hr.employee.motif.cloture.tree</field>
+        <field name="model">hr.employee.motif.cloture</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_hr_employee_motif_cloture_view">
+        <field name="name">Gestion des motifs de clôture</field>
+        <field name="res_model">hr.employee.motif.cloture</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- gestion des sanctions -->
+    <record model="ir.ui.view" id="hr_cnce_type_sanction_form_view">
+        <field name="name">hr.type_sanctions.form</field>
+        <field name="model">hr.type_sanctions</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_cnce_type_sanction_tree_view">
+        <field name="name">hr.type_sanctions.tree</field>
+        <field name="model">hr.type_sanctions</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_type_sanction_view">
+        <field name="name">Sanction</field>
+        <field name="res_model">hr.type_sanctions</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!--	Documents -->
+    <record model="ir.ui.view" id="hr_employee_document_form_view">
+        <field name="name">hr.employee.document.form</field>
+        <field name="model">hr.employee.document</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <div>
+                            <group>
+                                <field name="name"/>
+                                <field name="reference"/>
+                            </group>
+                        </div>
+                        <div>
+                            <group>
+                                <label for="date_start" string="Validité:"/>
+                                <div style="display: inline-flex;">
+                                    Du
+                                    <field name="date_start" class="oe_inline"/>
+                                    Au
+                                    <field name="date_end" class="oe_inline"/>
+                                </div>
+
+                                <field name="type_paper" required="1">
+                                    <form>
+                                        <group>
+                                            <field name="name"/>
+                                            <field name="code"/>
+                                        </group>
+                                    </form>
+                                </field>
+                                <field name="employee_id" invisible="1"/>
+                            </group>
+                        </div>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="hr_employee_document_tree_view">
+        <field name="name">hr.employee.document.tree</field>
+        <field name="model">hr.employee.document</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="reference"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="type_paper"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_hr_employee_document_view">
+        <field name="name">Documents</field>
+        <field name="res_model">hr.employee.document</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('employee_id','=',active_id)]</field>
+    </record>
+
+
+    <!--	gestion de la famille-->
+
+    <record model="ir.ui.view" id="hr_parent_form_view">
+        <field name="name">hr.parent.form</field>
+        <field name="model">hr.parent</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <div>
+                            <group>
+                                <field name="name"/>
+                                <field name="first_name"/>
+                                <field name="date_naissance"/>
+                                <field name="age" readonly="1"/>
+                                <field name="num_cmu"/>
+                            </group>
+                        </div>
+                        <div>
+                            <group>
+                                <field name="employee_id" invisible="1"/>
+                                <field name="Lien"/>
+                                <field name="type_parent"/>
+                               <!-- <field name="person_contacted"/>
+                                <field name="num_contacted" attrs="{'invisible': [('person_contacted', '=',False)] }"/>
+-->
+                                <field name="certification_frequentation" invisible="1"/>
+                            </group>
+                        </div>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_parent_tree_view">
+        <field name="name">hr.parent.tree</field>
+        <field name="model">hr.parent</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="first_name"/>
+                <field name="date_naissance"/>
+                <field name="num_cmu"/>
+                <field name="employee_id" invisible="1"/>
+                <field name="Lien"/>
+                <field name="type_parent"/>
+<!--                <field name="person_contacted"/>-->
+
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_hr_parent_view">
+        <field name="name">Parents</field>
+        <field name="res_model">hr.parent</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('employee_id','=',active_id)]</field>
+    </record>
+
+
+    <record model="ir.ui.view" id="hr_type_document_form_view">
+        <field name="name">hr.employee.type.document.form</field>
+        <field name="model">hr.employee.type.document</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="hr_type_document_tree_view">
+        <field name="name">hr.employee.type.document.tree</field>
+        <field name="model">hr.employee.type.document</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name"/>
+                <field name="code"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_hr_type_document_view">
+        <field name="name">Type document</field>
+        <field name="res_model">hr.employee.type.document</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+
+    <record model="ir.ui.view" id="hr_school_tree_view">
+        <field name="name">hr.school.tree</field>
+        <field name="model">hr.school</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name"/>
+                <field name="code"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_hr_school_view">
+        <field name="name">Ecoles</field>
+        <field name="res_model">hr.school</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+
+    <record model="ir.ui.view" id="hr_school_field_tree_view">
+        <field name="name">hr.school.field.tree</field>
+        <field name="model">hr.school.field</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="code"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_hr_school_field_tree_view">
+        <field name="name">Niveau d'étude</field>
+        <field name="res_model">hr.school.field</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <!-- gestion des banques -->
+    <record model="ir.ui.view" id="res_bank_form_view">
+        <field name="name">res.bank.form</field>
+        <field name="model">res.bank</field>
+        <field name="inherit_id" ref="base.view_res_bank_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='active']" position="before">
+                <!--                <field name="account_id"/>-->
+                <field name="is_main"/>
+            </xpath>
+            <xpath expr="//field[@name='bic']" position="after">
+                <field name="acronym"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="res_bank_tree_view">
+        <field name="name">res.bank.tree</field>
+        <field name="model">res.bank</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="street"/>
+                <field name="street2"/>
+                <field name="zip"/>
+                <field name="city"/>
+                <field name="state"/>
+                <field name="country"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="active"/>
+                <field name="bic"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_res_bank_view">
+        <field name="name">Banques</field>
+        <field name="res_model">res.bank</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="hr_its_form_view" model="ir.ui.view">
+            <field name="name">hr.its.form_view</field>
+            <field name="model">hr.its</field>
+            <field name="arch" type="xml">
+                <form string="ITS">
+                    <header>
+                        <button string="Calculer" name="compute" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group col="4">
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="company_id" invisible="1"/>
+
+                        </group>
+                        <group col="4" string="TRAITEMENTS, SALAIRES, CONTRIBUTION EMPLOYEUR">
+                            <field name="total_brut"/>
+                            <field name="total_avantage_nature"/>
+                            <field name="total_autres"/>
+                            <field name="revenu_net_imposable"/>
+                            <field name="total_net_imposable"/>
+
+                        </group>
+                        <group col="4" string="IMPOTS RETENUS AUX SALARIES">
+                            <field name="total_cn"/>
+                            <field name="total_igr_employee"/>
+                            <field name="total_cnps_employee"/>
+                            <field name="total_regime_agricole"/>
+                            <field name="total_its_employee"/>
+                            <field name="total_retenu_employee"/>
+
+
+                        </group>
+
+                        <group string="CONTRIBUTIONS A LA CHARGE DE L’EMPLOYEUR">
+                            <group>
+                                <field name="total_number_local"/>
+                                <field name="total_brut_imposable_local"/>
+                            </group>
+                            <group>
+                                <field name="total_number_expat"/>
+                                <field name="total_brut_imposable_expat"/>
+                            </group>
+                            <group string="Contribution Employeur (CE)">
+                                <field name="total_ce_expat"/>
+                                <field name="total_ce_local"/>
+                                <field name="total_ce_agricole"/>
+                            </group>
+                            <group string="CN">
+                                <field name="total_cn_expat_employer"/>
+                                <field name="total_cn_locala_employer"/>
+                            </group>
+                            <field name="total_contribution_employer" label="Total contribution employeur"/>
+                        </group>
+                        <group col="4">
+                            <field name="amount_total"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="hr_its_tree_view" model="ir.ui.view">
+            <field name="name">hr.its.tree_view</field>
+            <field name="model">hr.its</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="company_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="action_hr_its" model="ir.actions.act_window">
+            <field name="name">Rapports ITS</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.its</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="hr_its_menu" name="ITS"
+                  sequence="50" parent="hr_payroll_custom.menu_hr_payroll_fiscal"
+                  action="action_hr_its"/>
+    </data>
+</odoo>

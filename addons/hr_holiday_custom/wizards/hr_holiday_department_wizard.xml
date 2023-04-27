@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="holiday_department_wizard_from_view" model="ir.ui.view">
+            <field name="name">holiday.department.wizard.form.view</field>
+            <field name="model">holiday.department.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="date_from" required="1"/>
+                            <field name="date_to" required="1"/>
+                        </group>
+                        <group>
+                            <field name="department_ids" widget="many2many_tags"/>
+                            <field name="all_depts"/>
+                        </group>
+                        <group>
+                            <field name="department_ids" string="Direction" domain="[('type', '=', 'direction')]" widget="many2many_tags"/>
+                            <field name="all_dirs"/>
+                        </group>
+                        <group>
+                            <field name="gender" style="width:20%"/>
+                            <field name="all_gender"/>
+                            <field name="holiday_type_ids" widget="many2many_tags" style="width:85%"/>
+                            <field name="all_type_holiday"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="print_report_holiday_pdf" string="Imprimer en pdf" type="object"
+                                class="btn-primary"/>
+                        <button name="print_report_holiday_xls" string="Imprimer en xls" type="object"
+                                class="btn-primary"/>
+                        <button string="Annuler" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_all_hr_holidays_department_test" model="ir.actions.act_window">
+            <field name="name">Rapport des congés</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">holiday.department.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+        <menuitem name="Rapport des congés détaillé" id="menu_hr_test_report"
+                  parent="hr_holidays.menu_hr_holidays_report"
+                  action="action_all_hr_holidays_department_test"/>
+
+    </data>
+</odoo>

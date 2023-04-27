@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="paperformat_portrait" model="report.paperformat">
+        <field name="name">A1 - Portrait</field>
+        <field name="default" eval="False"/>
+        <field name="format">custom</field>
+        <field name="page_width">215</field>
+        <field name="page_height">280</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">5</field>
+        <field name="margin_bottom">5</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">5</field>
+        <field name="dpi">90</field>
+    </record>
+
+        <record id="paper_format_landscape" model="report.paperformat">
+            <field name="name">A4 - Landscape</field>
+            <field name="format">A4</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">15</field>
+            <field name="margin_bottom">30</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="action_hr_salaryy_recap_print" model="ir.actions.report">
+            <field name="name">État récapitulatif de salaire</field>
+            <field name="model">hr.salary.variation</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">hr_payroll_custom.report_hr_salary_variation</field>
+            <field name="report_file">hr_payroll_custom.report_hr_salary_variation</field>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_salary_variation"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_hr_salary_recap_by_rule_print" model="ir.actions.report">
+            <field name="name">État récapitulatif de salaire par règle salariale</field>
+            <field name="model">hr.salary.variation</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">hr_payroll_custom.report_hr_salary_variation_by_rule</field>
+            <field name="report_file">hr_payroll_custom.report_hr_salary_variation_by_rule</field>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_salary_variation"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_hr_salary_missing_to_previous_pay" model="ir.actions.report">
+            <field name="name">Salariés absents de la précédente paie</field>
+            <field name="model">hr.salary.employee.variation</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_payroll_custom.report_missing_previous_pay</field>
+            <field name="report_file">hr_payroll_custom.report_missing_previous_pay</field>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_salary_employee_variation"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_hr_salary_management_of_pay_differentials" model="ir.actions.report">
+            <field name="name">Gestion des différentiels de paye</field>
+            <field name="model">hr.salary.employee.variation</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_payroll_custom.report_hr_salary_management_of_pay_differentials</field>
+            <field name="report_file">hr_payroll_custom.report_hr_salary_management_of_pay_differentials</field>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_salary_employee_variation"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="hr_cnps_report" model="ir.actions.report">
+            <field name="name">CNPS Mensuel nouveau</field>
+            <field name="model">hr.cnps.monthly</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_payroll_custom.cnps_mensuel_report</field>
+            <field name="report_file">CNPS Mensuel</field>
+            <field name="paperformat_id" ref="paper_format_landscape"/>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_cnps_monthly"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="hr_cnps__report_xlsx" model="ir.actions.report">
+            <field name="name">Liste des contributeurs (excel)</field>
+            <field name="model">hr.cnps.monthly</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">hr_payroll_custom.cnps_mensuel_report_xlsx</field>
+            <field name="report_file">Liste des contributeurs (excel)</field>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_cnps_monthly"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="hr_cnps_report_pdf" model="ir.actions.report">
+            <field name="name">Liste des contributeurs (pdf)</field>
+            <field name="model">hr.cnps.monthly</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_payroll_custom.cnps_mensuel_report_pdf</field>
+            <field name="report_file">Liste des contributeurs (pdf)</field>
+            <field name="paperformat_id" ref="paper_format_landscape"/>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_cnps_monthly"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_report_contribution_by_organization" model="ir.actions.report">
+            <field name="name">Cotisation par organisme</field>
+            <field name="model">hr.payslip.line</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">hr_payroll_custom.contribution_by_organization</field>
+            <field name="report_file">Cotisation par organisme</field>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_payslip_line"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_report_agent_payments_xls" model="ir.actions.report">
+            <field name="name">Rapport des paiements/agent</field>
+            <field name="model">hr.payslip.line</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">hr_payroll_custom.agent_payments_xls</field>
+            <field name="report_file">Rapport des paiements par agent</field>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_payslip_line"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_hr_transfer_order_report" model="ir.actions.report">
+            <field name="name">Ordre de virement</field>
+            <field name="model">hr.tansfer.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_payroll_custom.report_transfer_order</field>
+            <field name="report_file">Ordre de virement</field>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_tansfer_order"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_summary_slips_report" model="ir.actions.report">
+            <field name="name">Bordereaux récapitulatif de virement</field>
+            <field name="model">hr.tansfer.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_payroll_custom.report_summary_slips_report</field>
+            <field name="report_file">Bordereau récapitulatif de virement</field>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_tansfer_order"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_transfer_mail_report" model="ir.actions.report">
+            <field name="name">Courrier de la paie</field>
+            <field name="model">hr.tansfer.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_payroll_custom.report_transfer_mail</field>
+            <field name="report_file">Courrier de virement</field>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_tansfer_order"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="hr_cgrae" model="ir.actions.report">
+            <field name="name">Déclaration CGRAE</field>
+            <field name="model">hr.cgrae</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_payroll_custom.hr_cgrae_report</field>
+            <field name="report_file">object.name</field>
+            <field name="paperformat_id" ref="paper_format_landscape"/>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_cgrae"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="hr_cgrae_list" model="ir.actions.report">
+            <field name="name">Liste des contributeurs en pdf</field>
+            <field name="model">hr.cgrae</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_payroll_custom.hr_cgrae_list_report</field>
+            <field name="report_file">hr_payroll_custom.hr_cgrae_list_report</field>
+            <field name="paperformat_id" ref="paper_format_landscape"/>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_cgrae"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="hr_cgrae_list_xls" model="ir.actions.report">
+            <field name="name">Liste des contributeurs en excel</field>
+            <field name="model">hr.cgrae</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">hr_payroll_custom.hr_cgrae_list_report_xls_1</field>
+            <field name="report_file">hr_payroll_custom.hr_cgrae_list_report_xls_1</field>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_cgrae"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="report_hr_cmu" model="ir.actions.report">
+            <field name="name">Rapports CMU</field>
+            <field name="model">hr.cmu_rapport</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">hr_payroll_custom.cmu_rapport.xlsx</field>
+            <field name="report_file">hr_payroll_custom.cmu_rapport</field>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_cmu_rapport"/>
+            <field name="binding_type">report</field>
+        </record>
+        <record id="payroll_report_xlsx" model="ir.actions.report">
+            <field name="name">Livre de paie</field>
+            <field name="model">hr.payroll.payroll</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">hr_payroll_custom.hr_payroll_xlsx</field>
+            <field name="report_file">Livre de paie</field>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_payroll_payroll"/>
+            <field name="binding_type">report</field>
+        </record>
+        <record id="report_hr_payroll" model="ir.actions.report">
+            <field name="name">Livre de paie</field>
+            <field name="model">hr.payroll.payroll</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">hr_payroll_custom.hr_payroll_xlsx</field>
+            <field name="report_file">Livre de paie</field>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_payroll_payroll"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="report_hr_payroll" model="ir.actions.report">
+            <field name="name">Livre de paie</field>
+            <field name="model">hr.payroll.payroll</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_payroll_custom.report_payroll</field>
+            <field name="report_file">Livre de paie</field>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_payslip_line"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_report_payroll_by_period" model="ir.actions.report">
+            <field name="name">Cumul des rubriques de paie par période XLS</field>
+            <field name="model">hr.payslip.line</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">hr_payroll_custom.payroll_by_period</field>
+            <field name="report_file">Cumul des rubriques de paie par période</field>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_payslip_line"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_report_cumul_payroll_by_period_pdf" model="ir.actions.report">
+            <field name="name">Cumul des rubriques de paie par période PDF</field>
+            <field name="model">hr.payslip.line</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_payroll_custom.payroll_by_period_pdf</field>
+            <field name="report_file">Cumul des rubrique de paie par période</field>
+            <field name="paperformat_id" ref="paper_format_landscape"/>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_payslip_line"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="report_hr_crrae" model="ir.actions.report">
+            <field name="name">Rapports CRRAE</field>
+            <field name="model">hr_crrae.payroll_crrae</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">hr_payroll_custom.hr_crrae_raport_xlsx</field>
+            <field name="report_file">CRRAE</field>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_crrae_payroll_crrae"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_raport_hr_disa" model="ir.actions.report">
+            <field name="name">DISA</field>
+            <field name="model">hr_disa.payroll_disa</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">hr_payroll_custom.report_hr_disa</field>
+            <field name="report_file">hr_payroll_custom.report_hr_disa</field>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_disa_payroll_disa"/>
+            <field name="binding_type">report</field>
+        </record>
+        <record id="disa_id" model="ir.actions.report">
+            <field name="name">DISA en pdf</field>
+            <field name="model">hr_disa.payroll_disa</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_payroll_custom.report_hr_disa_pdf</field>
+            <field name="report_file">DISA_pdf</field>
+            <field name="paperformat_id" ref="paper_format_landscape"/>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_disa_payroll_disa"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="hr_disa_report_disa_complement" model="ir.actions.report">
+            <field name="name">Déclaration annuelle de salaires et de cotisations</field>
+            <field name="model">hr_disa.payroll_disa</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_payroll_custom.disa_complement_pdf</field>
+            <field name="report_file">Compelement DISA</field>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_disa_payroll_disa"/>
+            <field name="paperformat_id" ref="paper_format_landscape"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="action_report_hr_its" model="ir.actions.report">
+            <field name="name">Déclaration ITS</field>
+            <field name="model">hr.its</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_payroll_custom.report_its</field>
+            <field name="report_file">hr_payroll_custom.report_its</field>
+            <field name="binding_model_id" ref="hr_payroll_custom.model_hr_its"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <report
+                id="action_salary_mass_xls"
+                model="hr.employee"
+                string="Masse salariale"
+                menu="False"
+                report_type="xlsx"
+                name="hr_payroll_custom.salary_mass_xls"
+                file="Masse salariale"/>
+
+        <report
+                id="action_payroll_report_xlsx"
+                model="hr.payroll.payroll"
+                string="Livre de paie"
+                report_type="xlsx"
+                name="hr_payroll_custom.hr_payroll_xlsx"
+                file="Livre de paie"
+                attachment_use="False"
+        />
+
+        <report
+                string="Etat des rubriques de paie par poste"
+                id="action_report_payroll_by_post_xls"
+                model="hr.payslip"
+                menu="False"
+                report_type="xlsx"
+                name="hr_payroll_custom.payroll_by_post"
+                file="Rubrique de paie par poste"
+                attachment_use="False"
+        />
+
+        <report
+            string="Etat des salaires"
+            id="hr_301_list_report_id"
+            model="hr.301"
+            report_type="qweb-pdf"
+            name="hr_payroll_custom.hr_301_list_report"
+            file="hr_payroll_custom.hr_301_list_report"
+            paperformat="paper_format_landscape"
+        />
+        <report
+            string="Etat récapitulatif des salaires en pdf"
+            id="hr_301_list_report_recap_id"
+            model="hr.301"
+            report_type="qweb-pdf"
+            name="hr_payroll_custom.hr_301_list_report_recap_pdf"
+            file="hr_payroll_custom.hr_301_list_report_recap_pdf"
+            paperformat="paper_format_landscape"
+        />
+        <report
+            string="Etat récapitulatif des salaires en excel"
+            id="hr_301_list_report_recap"
+            model="hr.301"
+            report_type="xlsx"
+            name="hr_payroll_custom.hr_301_list_report_recap_xls"
+            file="hr_payroll_custom.hr_301_list_report_recap_xls"
+            paperformat="paper_format_landscape"
+        />
+        <report
+            id="hr_payroll.action_report_payslip"
+            model="hr.payslip"
+            string="Feuille de paye avec en-tête"
+            menu= "True"
+            report_type="qweb-pdf"
+            name="hr_payroll.report_payslip"
+            file="hr_payroll.report_payslip"
+            paperformat="paperformat_portrait"
+        />
+
+        <record id="action_report_payslip" model="ir.actions.report">
+            <field name="name">Feuille de paye sans en-tête</field>
+            <field name="model">hr.payslip</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hr_payroll_custom.report_payslip_without_header</field>
+            <field name="report_file">hr_payroll_custom.report_payslip_without_header</field>
+            <field name="print_report_name">'Payslip - %s' % (object.employee_id.name)</field>
+            <field name="binding_model_id" ref="model_hr_payslip"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="hr_payroll_custom.paperformat_portrait"/>
+        </record>
+
+
+<!--        <report-->
+<!--            id="hr_payroll.action_report_payslip"-->
+<!--            model="hr.payslip"-->
+<!--            string="Feuille de paye sans en-tête"-->
+<!--            menu= "True"-->
+<!--            report_type="qweb-pdf"-->
+<!--            name="hr_payroll.report_payslip_lang"-->
+<!--            file="hr_payroll.report_payslip_lang"-->
+<!--            paperformat="paperformat_portrait"-->
+<!--        />-->
+
+<!--        <record id="hr_payroll.action_report_payslip" model="ir.actions.report">-->
+<!--            <field name="name">Payslip</field>-->
+<!--            <field name="model">hr.payslip</field>-->
+<!--            <field name="report_type">qweb-pdf</field>-->
+<!--            <field name="report_name">hr_payroll.report_payslip_lang</field>-->
+<!--            <field name="report_file">hr_payroll.report_payslip_lang</field>-->
+<!--            <field name="print_report_name">'Payslip - %s' % (object.employee_id.name)</field>-->
+<!--            <field name="binding_model_id" ref="model_hr_payslip"/>-->
+<!--            <field name="binding_type">report</field>-->
+<!--        </record>-->
+
+
+    </data>
+</odoo>

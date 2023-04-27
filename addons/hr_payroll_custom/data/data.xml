@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+         <!-- Les types d'absences -->
+        <record id="holiday_status_70" model="hr.leave.type">
+            <field name="name">Mariage du travailleur</field>
+            <field name="code">MarTra</field>
+            <field name="nbre_jr_max">4</field>
+            <field name="time_type">other</field>
+            <field name="allocation_type">legal</field>
+        </record>
+
+        <record id="holiday_status_71" model="hr.leave.type">
+            <field name="name">Mariage d’un de ses enfants, d’un frère, d’une sœur</field>
+            <field name="code">MarEnf</field>
+            <field name="nbre_jr_max">2</field>
+            <field name="time_type">other</field>
+            <field name="allocation_type">legal</field>
+        </record>
+
+        <record id="holiday_status_72" model="hr.leave.type">
+            <field name="name">Décès du conjoint</field>
+            <field name="code">DecConj</field>
+            <field name="nbre_jr_max">5</field>
+            <field name="time_type">other</field>
+            <field name="allocation_type">legal</field>
+        </record>
+
+        <record id="holiday_status_73" model="hr.leave.type">
+            <field name="name">Décès d’un enfant, du père, de la mère du travailleur</field>
+            <field name="code">DecEnf</field>
+            <field name="nbre_jr_max">5</field>
+            <field name="time_type">other</field>
+            <field name="allocation_type">legal</field>
+        </record>
+
+
+         <record id="holiday_status_74" model="hr.leave.type">
+            <field name="name">Décès d’un frère, d’une sœur</field>
+            <field name="code">DecFrSr</field>
+            <field name="nbre_jr_max">2</field>
+            <field name="time_type">other</field>
+             <field name="allocation_type">legal</field>
+         </record>
+
+        <record id="holiday_status_75" model="hr.leave.type">
+            <field name="name">Décès d’un beau père ou d’une belle mère</field>
+            <field name="code">DecBePrMr</field>
+            <field name="nbre_jr_max">2</field>
+            <field name="time_type">other</field>
+            <field name="allocation_type">legal</field>
+        </record>
+
+         <record id="holiday_status_76" model="hr.leave.type">
+            <field name="name">Naissance d’un enfant</field>
+            <field name="code">NaissEnf</field>
+            <field name="nbre_jr_max">2</field>
+            <field name="time_type">other</field>
+             <field name="allocation_type">legal</field>
+         </record>
+
+         <record id="holiday_status_77" model="hr.leave.type">
+            <field name="name">Baptême d’un enfant</field>
+            <field name="code">BapEnf</field>
+            <field name="nbre_jr_max">1</field>
+            <field name="time_type">other</field>
+             <field name="allocation_type">legal</field>
+         </record>
+
+         <record id="holiday_status_78" model="hr.leave.type">
+            <field name="name">1ère Communion</field>
+            <field name="code">1Comm</field>
+            <field name="nbre_jr_max">1</field>
+            <field name="time_type">other</field>
+             <field name="allocation_type">legal</field>
+         </record>
+
+        <record id="holiday_status_79" model="hr.leave.type">
+            <field name="name">Déménagement</field>
+            <field name="code">Dem</field>
+            <field name="nbre_jr_max">1</field>
+            <field name="time_type">other</field>
+            <field name="allocation_type">legal</field>
+        </record>
+
+        <record id="holiday_status_80" model="hr.leave.type">
+            <field name="name">Congé anticipé</field>
+            <field name="code">C_AN</field>
+            <field name="time_type">leave</field>
+            <field name="allocation_type">no</field>
+            <field name="color_name">brown</field>
+            <field name="validity_start" eval="time.strftime('%Y-01-01')"/>
+            <field name="validity_stop" eval="time.strftime('%Y-12-31')"/>
+        </record>
+
+    </data>
+</odoo>

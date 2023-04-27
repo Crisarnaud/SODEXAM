@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+            <record model="ir.ui.view" id="hr_disa_form_view">
+                <field name="name">hr.disa.form</field>
+                <field name="model">hr.disa</field>
+                <field name="type">form</field>
+                <field name="arch" type="xml">
+                    <form string="DISA" >
+                        <group col="4">
+                            <field name="date_from" />
+                            <field name="date_to" />
+                            <field name="company_id" />
+                        </group>
+                        <footer>
+                            <button string="Exporter en Excel" name="export_to_excel" type="object" class="btn-primary"
+                                context="{'xls_export':1}" icon="fa-download"/>
+                            <button string="Cancel" class="btn-default" special="cancel"/>
+                        </footer>
+                    </form>
+                </field>
+            </record>
+
+           <record model="ir.actions.act_window" id="action_hr_disa_view">
+                <field name="name">DISA</field>
+                <field name="res_model">hr.disa</field>
+                <field name="view_mode">form</field>
+                <field name="target">new</field>
+            </record>
+
+        <menuitem id="hr_disa_menu_id" name="DISA"
+                  sequence="50"
+                  parent="hr_payroll_custom.menu_hr_payroll_social"
+            action="action_hr_disa_view"/>
+
+    </data>
+</odoo>

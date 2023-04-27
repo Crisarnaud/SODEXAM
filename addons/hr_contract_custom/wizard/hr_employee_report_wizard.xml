@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_report_wizard_from_view" model="ir.ui.view">
+            <field name="name">hr_employee_custom_report_wizard_from_view</field>
+            <field name="model">hr.employee.report.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                    <group>
+
+                        <field name="department_ids" widget="many2many_tags" />
+                        <field name="all_depts"/>
+                    </group>
+
+
+
+
+                    </group>
+                    <group col="2">
+                        <group>
+                            <field name="gender" style="width:45%"/>
+                            <field name="all_gender"/>
+                        </group>
+                        <group>
+                            <field name="category_contract_ids" widget="many2many_tags" style="width:85%"/>
+                            <field name="all_category_contract"/>
+                        </group>
+                    </group>
+
+                    <footer>
+                        <button name="print_report_pdf" string="Imprimer en pdf" type="object" class="btn-primary"/>
+                        <button name="print_report_xls" string="Imprimer en xls" type="object" class="btn-primary"/>
+                        <button string="Annuler" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hr_report_wizard" model="ir.actions.act_window">
+            <field name="name">Liste du personnel</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.employee.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_wizard"
+                  name="Liste du personnel"
+                  parent="hr_employee_custom.menu_rapport_xls"
+                  action="action_hr_report_wizard"
+                  sequence="1000"/>
+
+    </data>
+</odoo>

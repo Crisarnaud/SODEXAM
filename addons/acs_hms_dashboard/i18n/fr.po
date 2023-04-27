@@ -1,0 +1,496 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* acs_hms_dashboard
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-11 12:00+0000\n"
+"PO-Revision-Date: 2022-04-11 12:17+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: fr\n"
+"X-Generator: Poedit 2.3\n"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "<i class=\"fa fa-area-chart\" aria-label=\"Info\" title=\"Info\"/> New Patients"
+msgstr ""
+"<i class=\"fa fa-area-chart\" aria-label=\"Info\" title=\"Info\"/> Nouveaux patients"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid ""
+"<i class=\"fa fa-area-chart\" aria-label=\"Info\" title=\"Info\"/> Patient "
+"Appointments"
+msgstr ""
+"<i class=\"fa fa-area-chart\" aria-label=\"Info\" title=\"Info\"/> Rendez-vous "
+"patients"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid ""
+"<span class=\"pull-left\">View Details</span>\n"
+"                                    <span class=\"pull-right\">\n"
+"                                        <i class=\"fa fa-arrow-circle-right\" aria-"
+"label=\"Info\" title=\"Info\"/>\n"
+"                                    </span>"
+msgstr ""
+"<span class=\"pull-left\">Afficher les détails</span>\n"
+"                                    <span class=\"pull-right\">\n"
+"                                        <i class=\"fa fa-arrow-circle-right\" aria-"
+"label=\"Info\" title=\"Info\"/>\n"
+"                                    </span>"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields.selection,name:acs_hms_dashboard.selection__res_users__dashboard_data_filter__all
+msgid "All"
+msgstr "Tous"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Amount"
+msgstr "Montant"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Appointment"
+msgstr "Rendez-vous"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__appointment_bar_graph
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__appointment_bar_graph
+msgid "Appointment Bar Graph"
+msgstr "Graphique à barres des rendez-vous"
+
+#. module: acs_hms_dashboard
+#: code:addons/acs_hms_dashboard/model/user_dashboard.py:0
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+#, python-format
+msgid "Appointments"
+msgstr "Rendez-vous"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Average Time"
+msgstr "Temps moyen"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__avg_cons_time
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__avg_cons_time
+msgid "Avg Cons Time"
+msgstr "Durée moyenne des inconvénients"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__avg_time_color
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__avg_time_color
+msgid "Avg Time Color"
+msgstr "Temps de couleur moyen"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__avg_wait_time
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__avg_wait_time
+msgid "Avg Wait Time"
+msgstr "Temps d'attente moyen"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__birthday_color
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__birthday_color
+msgid "Birthday Color"
+msgstr "Couleur d'anniversaire"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__birthday_employee
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__birthday_employee
+msgid "Birthday Employee"
+msgstr "Anniversaire Employé"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__birthday_patients
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__birthday_patients
+msgid "Birthday Patients"
+msgstr "Anniversaire des patients"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Cons. Time"
+msgstr "Les inconvénients. Temps"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Consultaion Time"
+msgstr "Temps de consultation"
+
+#. module: acs_hms_dashboard
+#: model:ir.ui.menu,name:acs_hms_dashboard.dashboard_menu
+msgid "Dashboard"
+msgstr "Tableau de bord"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.view_users_form
+msgid "Dashboard Configurations"
+msgstr "Configurations du tableau de bord"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__dashboard_data_filter
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__dashboard_data_filter
+msgid "Dashboard Filter Type"
+msgstr "Type de filtre du tableau de bord"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Date"
+msgstr ""
+
+#. module: acs_hms_dashboard
+#: model:res.groups,name:acs_hms_dashboard.group_hms_dashboard
+msgid "Display Dashboard"
+msgstr "Afficher le tableau de bord"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Employee"
+msgstr "Employé"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Filters"
+msgstr "Filtres"
+
+#. module: acs_hms_dashboard
+#: code:addons/acs_hms_dashboard/model/user_dashboard.py:0
+#, python-format
+msgid "Future"
+msgstr "Futur"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Info"
+msgstr "Informaitons"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__is_manager
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__is_manager
+msgid "Is Manager"
+msgstr "Est le gestionnaire"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__is_physician
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__is_physician
+msgid "Is Physician"
+msgstr "Est-ce le médecin"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "My Appointments"
+msgstr "Mes rendez-vous"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "My Average Time"
+msgstr "Mon temps moyen"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__my_avg_cons_time
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__my_avg_cons_time
+msgid "My Avg Cons Time"
+msgstr "Mon temps moyen contre"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__my_avg_time_color
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__my_avg_time_color
+msgid "My Avg Time Color"
+msgstr "Ma couleur de temps moyen"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__my_avg_wait_time
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__my_avg_wait_time
+msgid "My Avg Wait Time"
+msgstr "Mon temps d'attente moyen"
+
+#. module: acs_hms_dashboard
+#: model:ir.actions.act_window,name:acs_hms_dashboard.action_my_dashboard
+#: model:ir.ui.menu,name:acs_hms_dashboard.main_dashboard
+msgid "My Dashboard"
+msgstr "Mon tableau de bord"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__my_total_appointments
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__my_total_appointments
+msgid "My Total Appointments"
+msgstr "Couleur de mes rendez-vous totaux"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__my_total_appointments_color
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__my_total_appointments_color
+msgid "My Total Appointments Color"
+msgstr "Couleur de mes rendez-vous totaux"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__my_total_patients_color
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__my_total_patients_color
+msgid "My Total Patient Color"
+msgstr "Ma couleur totale de patient"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__my_total_patients
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__my_total_patients
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "My Total Patients"
+msgstr "Mes patients totaux"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__my_total_running_treatments
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__my_total_running_treatments
+msgid "My Total Running Treatments"
+msgstr "Mon total de traitements en cours"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__my_total_treatments
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__my_total_treatments
+msgid "My Total Treatments"
+msgstr "Mes traitements totaux"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__my_total_treatments_color
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__my_total_treatments_color
+msgid "My Total Treatments Color"
+msgstr "Mon total de traitements couleur"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "My Treatments"
+msgstr "Mes traitements"
+
+#. module: acs_hms_dashboard
+#: code:addons/acs_hms_dashboard/model/user_dashboard.py:0
+#, python-format
+msgid "New Patients"
+msgstr "Nouveaux patients"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__total_open_invoice_color
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__total_open_invoice_color
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Open Invoices"
+msgstr "Factures ouvertes"
+
+#. module: acs_hms_dashboard
+#: code:addons/acs_hms_dashboard/model/user_dashboard.py:0
+#, python-format
+msgid "Past"
+msgstr "Passé"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Patient"
+msgstr "Patient"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__appointment_data
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__appointment_data
+msgid "Patient Appointments"
+msgstr "Rendez-vous patients"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__appointment_bar_graph_color
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__appointment_bar_graph_color
+msgid "Patient Barchart Color"
+msgstr "Couleur du graphique linéaire du patient"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__patient_line_graph
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__patient_line_graph
+msgid "Patient Line Graph"
+msgstr "Couleur du graphique linéaire du patient"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__patient_line_graph_color
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__patient_line_graph_color
+msgid "Patient Linechart Color"
+msgstr "Couleur du graphique linéaire du patient"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Patients"
+msgstr "Les patients"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Physician"
+msgstr "Médecin"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Physicians"
+msgstr "Docteurs"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Ref. Phy."
+msgstr "Phy. ref."
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Running"
+msgstr "Traitement"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "State"
+msgstr "État"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields.selection,name:acs_hms_dashboard.selection__res_users__dashboard_data_filter__month
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "This Month"
+msgstr "Ce mois-ci"
+
+#. module: acs_hms_dashboard
+#: code:addons/acs_hms_dashboard/model/user_dashboard.py:0
+#: model:ir.model.fields.selection,name:acs_hms_dashboard.selection__res_users__dashboard_data_filter__week
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+#, python-format
+msgid "This Week"
+msgstr "Cette semaine"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields.selection,name:acs_hms_dashboard.selection__res_users__dashboard_data_filter__year
+msgid "This Year"
+msgstr "Cette année"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "This will show max 20 records only"
+msgstr "Cela n'affichera que 20 enregistrements maximum"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Till Now"
+msgstr "Jusqu'à maintenant"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields.selection,name:acs_hms_dashboard.selection__res_users__dashboard_data_filter__today
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Today"
+msgstr "Aujourd'hui"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Todays Birthday"
+msgstr "Anniversaire d'aujourd'hui"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Total"
+msgstr "Totale"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__total_appointments
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__total_appointments
+msgid "Total Appointments"
+msgstr "Total des rendez-vous"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__total_appointments_color
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__total_appointments_color
+msgid "Total Appointments Color"
+msgstr "Total des rendez-vous Couleur"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__total_open_invoice
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__total_open_invoice
+msgid "Total Open Invoice"
+msgstr "Facture ouverte totale"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__total_open_invoice_amount
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__total_open_invoice_amount
+msgid "Total Open Invoice Amount"
+msgstr "Montant total de la facture impayée"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__total_patients_color
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__total_patients_color
+msgid "Total Patient Color"
+msgstr "Couleur totale du patient"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__total_patients
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__total_patients
+msgid "Total Patients"
+msgstr "Nombre total de patients"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Total Phy."
+msgstr "Phy. totale."
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__total_physicians
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__total_physicians
+msgid "Total Physicians"
+msgstr "Total des médecins"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__physicians_color
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__physicians_color
+msgid "Total Physicians Color"
+msgstr "Total des médecins Couleur"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__total_referring_physicians
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__total_referring_physicians
+msgid "Total Referring Physicians"
+msgstr "Total des médecins référents"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__total_running_treatments
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__total_running_treatments
+msgid "Total Running Treatments"
+msgstr "Total des traitements de course à pied"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__total_shedules
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__total_shedules
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Total Shedules"
+msgstr "Horaires totaux"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__total_shedules_color
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__total_shedules_color
+msgid "Total Shedules Color"
+msgstr "Couleur totale des horaires"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__total_treatments
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__total_treatments
+msgid "Total Treatments"
+msgstr "Total Traitements"
+
+#. module: acs_hms_dashboard
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_hms_physician__total_treatments_color
+#: model:ir.model.fields,field_description:acs_hms_dashboard.field_res_users__total_treatments_color
+msgid "Total Treatments Color"
+msgstr "Total Traitements Couleur"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Treatments"
+msgstr "Traitements"
+
+#. module: acs_hms_dashboard
+#: model:ir.model,name:acs_hms_dashboard.model_res_users
+msgid "Users"
+msgstr "Utilisateurs"
+
+#. module: acs_hms_dashboard
+#: model_terms:ir.ui.view,arch_db:acs_hms_dashboard.user_dashboard_kanban_view
+msgid "Wait Time"
+msgstr "Temps d'attente"

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hr_transfer_order_form" model="ir.ui.view">
+            <field name="name">hr.tansfer.order.form_view</field>
+            <field name="model">hr.tansfer.order</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Ordre de virement">
+                    <header>
+                        <button name="compute" string="Générer l'ordre de virement" type="object" class="btn-primary"/>
+                    </header>
+                    <sheet>
+                        <group col="4">
+                            <field name="name"/>
+                            <field name="company_id" invisible="1"/>
+                        </group>
+                        <group col="4">
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="groupby_bank"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Lignes de l'ordre de virement">
+                                <field name="order_line_ids">
+                                    <tree>
+                                        <field name="employee_id"/>
+                                        <field name="acc_bank_id"/>
+                                        <field name="bank_id"/>
+                                        <field name="amount"/>
+                                    </tree>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right" colspan="2">
+                                    <field name="total"/>
+                                </group>
+                            </page>
+                            <page string="Commentaires">
+                                <field name="order_comment_ids">
+                                    <tree>
+                                        <field name="employee_id"/>
+                                        <field name="comment"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="hr_transfer_order_tree" model="ir.ui.view">
+            <field name="name">hr.tansfer.order.tree_view</field>
+            <field name="model">hr.tansfer.order</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="dhr_transfer_order_wizard_action" model="ir.actions.act_window">
+            <field name="name">Ordre de virement</field>
+            <field name="res_model">hr.tansfer.order</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+
+        </record>
+        <menuitem id="menu_dasc" name="Ordres de virement"
+                  action="dhr_transfer_order_wizard_action" sequence="100"
+                  parent="hr_payroll_custom.menu_hr_payroll_rapport"/>
+    </data>
+</odoo>

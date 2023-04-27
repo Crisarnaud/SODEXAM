@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="hr_holiday_custom.doc_report_employee_layout">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+        <div class="header">
+            <div class="row">
+                <div class="col-3 mb4" style="margin-bottom:20px;">
+                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 45px;"
+                         alt="Logo"/>
+                </div>
+            </div>
+        </div>
+        <div class="article">
+            <t t-raw="0"/>
+        </div>
+
+        <div class="footer">
+            <div class="pagination" style="text-align:justify; margin-left: 580px;">
+                <center>
+                     <span class="page" style="text-align:center;"/>/<span class="topage" style="text-align:center;"/>
+                </center>
+            </div>
+<!--            <div class="text-center"-->
+<!--                 style="font-size: 11px; border-top: 1px dashed #FF9633; margin-bottom: 10px;font-family:DejaVu Serif;">-->
+<!--                <strong>BANQUE POPULAIRE DE COTE D’IVOIRE-->
+<!--                    <br/>-->
+<!--                    Siège social : Abidjan Plateau 11, Avenue Joseph ANOMA, Imm. SMGL14ème étage - 01 BP 6889 Abidjan 01 RCCM : CI-ABJ-1998-B-233922, CB : CI 155-->
+<!--                    <br/>-->
+<!--                 CC : 9909042Q, Société d’Etat avec Conseil d’Administration créée par décret n° 98-378 du 30 juin 1998, modifié par les décrets n° 2004-564 du 14 octobre-->
+<!--                    <br/>-->
+<!--                  2004 et n° 2020-906 du 18 novembre 2020- Tél: (225) 27 20 25 43 43 / 53 01 - Fax. : (225) 27 20 25 53 03 – www.banquepopulaire.ci-->
+<!--                    <br/>-->
+<!--                </strong>-->
+<!--            </div>-->
+        </div>
+    </template>
+
+</odoo>

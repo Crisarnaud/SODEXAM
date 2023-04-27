@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="hr_contract_custom.doc_report_employee_layout">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+        <div class="header">
+            <div class="row">
+                <div class="col-3 mb4" style="margin-bottom:20px;">
+                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 45px;"
+                         alt="Logo"/>
+                </div>
+            </div>
+        </div>
+        <div class="article">
+            <t t-raw="0"/>
+        </div>
+
+        <div class="footer">
+            <div class="pagination" style="text-align:justify; margin-left: 580px;">
+                <center>
+                     <span class="page" style="text-align:center;"/>/<span class="topage" style="text-align:center;"/>
+                </center>
+            </div>
+            <div class="text-center"
+                 style="font-size: 11px; border-top: 1px dashed #FF9633; margin-bottom: 10px;font-family:DejaVu Serif;">
+
+            </div>
+        </div>
+    </template>
+
+</odoo>

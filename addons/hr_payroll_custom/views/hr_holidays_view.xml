@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="hr_leave_type_extension" model="ir.ui.view">
+        <field name="name">hr.leave.type.form</field>
+        <field name="model">hr.leave.type</field>
+        <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form"/>
+        <field name="arch" type="xml">
+            <field name="create_calendar_meeting" position="after">
+                <field name="is_calendar" invisible="1"/>
+            </field>
+            <field name="allocation_type" position="after">
+                <field name="nbre_jr_max" attrs="{'invisible': [('allocation_type', '!=', 'legal')],
+                            'required': [('allocation_type', '=', 'legal')]}"/>
+            </field>
+            <field name="request_unit" position="before">
+                <field name="code" />
+
+            </field>
+            <field name="validity_stop" position="after">
+                <field name="no_validation"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="hr_leave_extension" model="ir.ui.view">
+        <field name="name">hr.leave.form</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_form_manager"/>
+        <field name="arch" type="xml">
+            <field name="payslip_status" position="after">
+                <field name="code" invisible="1" />
+                <field name="date_payment" attrs="{'required': [('payslip_status', '=', True)],
+                'invisible':[('payslip_status', '!=', True)]}" groups="hr_holidays.group_hr_holidays_manager"/>
+                <field name="subtract_worked_days" attrs="{'invisible':[('payslip_status', '!=', True)]}"
+                       groups="hr_holidays.group_hr_holidays_manager"/>
+
+            </field>
+        </field>
+    </record>
+
+
+</odoo>

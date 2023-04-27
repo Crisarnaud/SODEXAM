@@ -1,0 +1,26 @@
+<odoo>
+   <data>
+     <record id="template_alert_late_return_leave" model="mail.template">
+       <field name="name">Alerte retard retour congés</field>
+       <field name="model_id" ref="hr_holiday_custom.model_hr_leave" />
+       <field name="auto_delete" eval ="False" />
+       <field name="email_from"> ${(object.company_id.email or'')|safe }</field>
+       <field name="email_to"> ${(object.company_id.hr_manager_id.work_email or '')|safe}</field>
+       <field name="email_cc"> ${(object.company_id.alert_receiver_one.work_email or '')|safe};${(object.company_id.alert_receiver_two.work_email or '')|safe}</field>
+       <field name="subject"> Alerte retard retour congés (Mat. ${object.employee_id.identification_id})</field>
+       <!--<field name="lang">${object.user_id.lang}</field>-->
+       <field name="body_html">
+       <![CDATA[
+            <p>Bonjour Monsieur/ Madame,</p>
+
+            <p>Nous vous informons que l'agent <b>${object.employee_id.name} ${object.employee_id.first_name}</b> Matricule:
+            <b>${object.employee_id.identification_id}</b> n'a pas repris le service des suites de son ${object.holiday_status_id.name}
+             du ${format_tz(object.request_date_from, tz = 'UTC', format='%d-%m-%Y')} au ${format_tz(object.request_date_to, tz = 'UTC', format='%d-%m-%Y')}.
+            </p>
+            <br/>
+            <p>Cordialement!</p>
+            ]]>
+       </field>
+     </record>
+   </data>
+</odoo>

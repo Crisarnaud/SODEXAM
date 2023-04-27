@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!--        CATEGORIE DATA-->
+
+        <record id="cadre_dir" model="hr.category.contract">
+            <field name="name">CADRE DE DIRECTION</field>
+            <field name="code">CD</field>
+            <field name="sequence">0</field>
+        </record>
+
+        <record id="Cadre_moy" model="hr.category.contract">
+            <field name="name">CADRE MOYEN</field>
+            <field name="code">CM</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record id="cadre_sup" model="hr.category.contract">
+            <field name="name">CADRE SUPERIEUR</field>
+            <field name="code">CS</field>
+            <field name="sequence">2</field>
+        </record>
+
+        <record id="emp" model="hr.category.contract">
+            <field name="name">EMPLOYE</field>
+            <field name="code">EMP</field>
+            <field name="sequence">3</field>
+        </record>
+        <record id="tech_sup" model="hr.category.contract">
+            <field name="name">TECHNICIEN SUPERIEUR</field>
+            <field name="code">TS</field>
+            <field name="sequence">4</field>
+        </record>
+
+        <!--        SALAIRE DATA-->
+
+        <record id="journalier_1" model="hr.categorie.salaire">
+            <field name="name">Horaires, journaliers et occasionnels inférieurs ou égaux à
+                3231 F par jour
+            </field>
+            <field name="code">J1</field>
+            <field name="sequence">0</field>
+        </record>
+
+        <record id="journalier_2" model="hr.categorie.salaire">
+            <field name="name">Horaires, journaliers et occasionnels supérieurs ou égaux à
+                3231 F par jour
+            </field>
+            <field name="code">J2</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record id="agent" model="hr.categorie.salaire">
+            <field name="name">Mensuels inférieurs ou égaux à 70.000 F par mois</field>
+            <field name="code">M1</field>
+            <field name="sequence">2</field>
+        </record>
+
+        <record id="ingenieur" model="hr.categorie.salaire">
+            <field name="name">Mensuels supérieurs à 70.000 F par mois et inférieurs ou
+                égaux à 2.700.000 F par mois
+            </field>
+            <field name="code">M2</field>
+            <field name="sequence">3</field>
+        </record>
+        <record id="cadre" model="hr.categorie.salaire">
+            <field name="name">Mensuels supérieurs à 2.700.0005 F par mois</field>
+            <field name="code">M3</field>
+            <field name="sequence">4</field>
+        </record>
+
+        <!--        convention data-->
+        <record id="hr_convention_cci" model="hr.convention">
+            <field name="name">Convention collective interprofessionnelle</field>
+            <field name="code">cci</field>
+        </record>
+
+        <record id="hr_convention_cti" model="hr.convention">
+            <field name="name">Code du travail ivoirien</field>
+            <field name="code">cti</field>
+        </record>
+
+        <record id="hr_type_contract_cdi" model="hr.type.contract">
+            <field name="name">CDI</field>
+            <field name="code">cdi</field>
+        </record>
+
+         <record id="hr_type_contract_cdd" model="hr.type.contract">
+            <field name="name">CDD</field>
+            <field name="code">cdd</field>
+        </record>
+
+
+          <record id="hr_type_contract_stage" model="hr.type.contract">
+            <field name="name">STAGE</field>
+            <field name="code">stage</field>
+        </record>
+
+    </data>
+</odoo>

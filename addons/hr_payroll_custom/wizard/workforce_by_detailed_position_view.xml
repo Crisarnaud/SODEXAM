@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="workforce_by_detailed_position_view" model="ir.ui.view">
+            <field name="name">workforce_by_detailed_position.form</field>
+            <field name="model">hr_payroll_custom.workforce_by_detailed_position</field>
+            <field name="arch" type="xml">
+                <form string="Effectif par position detaillé">
+                    <group>
+                        <field name="job_ids" widget="many2many_tags"/>
+                        <field name="company_id"/>
+                    </group>
+                    <footer>
+                        <button string="Imprimer en pdf" name="print_report_pdf" type="object" class="btn-primary"
+                                icon="fa-download"/>
+                        <button string="Imprimer en Excel" name="print_report_xls" type="object" class="btn-primary"
+                                icon="fa-download"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_workforce_by_detailed_position" model="ir.actions.act_window">
+            <field name="name">Effectif par position detaillé</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr_payroll_custom.workforce_by_detailed_position</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+        <menuitem id="workforce_by_detailed_position_menu" name="Effectif par position detaillé"
+                  parent="menu_hr_payroll_rapport" action="action_workforce_by_detailed_position"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Catégories salariales -->
+        <record model="ir.ui.view" id="hr_categorie_salariale_tree_view">
+            <field name="name">hr.categorie.salariale.tree</field>
+            <field name="model">hr.categorie.salariale</field>
+            <field name="inherit_id" ref="hr_contract_custom.hr_categorie_salariale_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="salaire_base" position="after">
+                    <field name="brut_indiciaire"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_categorie_salariale_form_view">
+            <field name="name">hr.categorie.salariale.form</field>
+            <field name="model">hr.categorie.salariale</field>
+            <field name="inherit_id" ref="hr_contract_custom.hr_categorie_salariale_form_view"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <field name="salaire_base" position="after">
+                    <field name="brut_indiciaire"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

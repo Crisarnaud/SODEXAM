@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="paper_format_landscape" model="report.paperformat">
+            <field name="name">A4 - Landscape</field>
+            <field name="format">A4</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">15</field>
+            <field name="margin_bottom">30</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <template id="report_new_employee_pdf">
+            <t t-call="hr_contract_custom.doc_report_employee_layout">
+                <t t-call="web.html_container">
+                    <div class="page" style="text-align: center; padding:30px 0px 100px 0px;">
+                        <div class="info_header" style="margin-left: 2px;">
+                            <div class="row" style="margin-left: 2px;">
+                                <table style="width: 100%; border-style: none;">
+                                    <tr>
+                                        <td style="width: 50%; border-style: none; font-size: 16px; text-align:left;">
+                                            <div style="text-align:left;margin-left:2px;font-family:DejaVu Serif;">
+                                                <strong style="color: #FF9633;">« Partout, proche de vous »</strong>
+                                                <br/>
+                                                --------------------
+                                                <br/>
+                                                DIRECTION GENERALE
+                                                <br/>
+                                                -------------------------
+                                                <br/>
+                                                DIRECTION DES RESSOURCES
+                                                <br/>
+                                                HUMAINES
+                                                <br/>
+                                                -------------------------
+                                                <br/>
+                                            </div>
+                                        </td>
+                                        <td style="width: 10%;border-style: none;"></td>
+                                        <td style="width: 40%; text-align: center; border-style: none; font-size: 14px;font-family:DejaVu Serif;">
+                                            <strong>REPUBLIQUE DE CÔTE D’IVOIRE</strong>
+                                            <br/>
+                                            <strong>Union-Discipline-Travail</strong>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <br/>
+                        <center>
+                            <table style="border-collapse:collapse;bordercolor=#111111; align:center;">
+                                <tr>
+                                    <td style="border:none; width:20%;"></td>
+                                    <td style="border:3px solid black; width:60%; align:center; text-align:center;padding-top:10px;padding-bottom:5px;">
+                                        <h3 style="font-family:DejaVu Serif;">
+                                            <b>LISTE DES NOUVELLES RECRUES</b>
+                                        </h3>
+                                    </td>
+                                    <td style="border:none; width:20%;"></td>
+                                </tr>
+                            </table>
+                        </center>
+                        <br/>
+                        <br/>
+                        <t t-set="num" t-value="1"/>
+                        <table style="text-align:center; padding-top:20px;">
+                            <tr>
+                                <td style="font-family:DejaVu Serif;">
+                                    N°
+                                </td>
+                                <td style="font-family:DejaVu Serif;">
+                                    MTLE
+                                </td>
+                                <td style="font-family:DejaVu Serif;">
+                                    CATEGORIE SALARIALE
+                                </td>
+                                <td style="font-family:DejaVu Serif;">
+                                    CATEGORIE
+                                </td>
+                                <td style="font-family:DejaVu Serif;">
+                                    NOM ET PRENOMS
+                                </td>
+                                <td style="font-family:DejaVu Serif;">
+                                    FONCTION
+                                </td>
+                               <!-- <td style="font-family:DejaVu Serif;">
+                                    BUREAU/UNITÉ
+                                </td>-->
+                                <td style="font-family:DejaVu Serif;">
+                                    SERVICE
+                                </td>
+                                <td style="font-family:DejaVu Serif;">
+                                    DIRECTION
+                                </td>
+                                <td style="font-family:DejaVu Serif;">
+                                    DEPARTEMENT
+                                </td>
+                                <!-- <td style="font-family:DejaVu Serif;">
+                                     PLATEFORME
+                                 </td>-->
+                                <td style="font-family:DejaVu Serif;">
+                                    SEXE
+                                </td>
+                                <td style="font-family:DejaVu Serif;">
+                                    EMBAUCHE
+                                </td>
+                                <td style="font-family:DejaVu Serif;">
+                                    ANCIENNETÉ
+                                </td>
+                                <td style="font-family:DejaVu Serif;">
+                                    NAISSANCE
+                                </td>
+                                <td style="font-family:DejaVu Serif;">
+                                    AGE
+                                </td>
+                                <td style="font-family:DejaVu Serif;">
+                                    NATURE DU CONTRAT
+                                </td>
+                            </tr>
+                            <t t-foreach="new_employee" t-as="o">
+                                <tr>
+                                    <td>
+                                        <span t-esc="num"/>
+                                        <t t-set="num" t-value="num+1"/>
+                                    </td>
+
+                                    <td>
+                                        <t t-esc="o['identification_id']" style="font-family:DejaVu Serif;"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="o['cat']" style="font-family:DejaVu Serif;"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="o['college']" style="font-family:DejaVu Serif;"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="o['name']" style="font-family:DejaVu Serif;"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="o['job_id']" style="font-family:DejaVu Serif;"/>
+                                    </td>
+                                   <!-- <td>
+                                        <span t-esc="o['bureau_id']" style="font-family:DejaVu Serif;"/>
+                                    </td>-->
+                                    <td>
+                                        <span t-esc="o['service_id']" style="font-family:DejaVu Serif;"/>
+                                    </td>
+
+                                     <td>
+                                        <span t-esc="o['direction_id']" style="font-family:DejaVu Serif;"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="o['department_id']" style="font-family:DejaVu Serif;"/>
+                                    </td>
+<!--                                    <td>-->
+<!--                                        <span t-esc="o['plateforme_id']" style="font-family:DejaVu Serif;"/>-->
+<!--                                    </td>-->
+                                    <td>
+                                        <span t-esc="o['gender']" style="font-family:DejaVu Serif;"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="o['date_anciennete']" style="font-family:DejaVu Serif;"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="o['start_date']" style="font-family:DejaVu Serif;"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="o['birthday']" style="font-family:DejaVu Serif;"/>
+
+                                    </td>
+                                    <td>
+                                        <span t-esc="o['age']" style="font-family:DejaVu Serif;"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="o['type_contrat']" style="font-family:DejaVu Serif;"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                        <div class="pull-right" style="padding-top:30px;text-justify: auto">
+                            <div>
+                                <h6 style="font-family:DejaVu Serif;">Fait à Abidjan, le
+                                    <span t-esc="datetime.datetime.now().strftime('%d %B %Y')" style="font-family:DejaVu Serif;"/>.
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

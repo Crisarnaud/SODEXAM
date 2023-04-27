@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <!--            ABATEMENTS DATA-->
+
+        <record id="abat_normal" model="res.abatement">
+            <field name="name">Abatement normal</field>
+            <field name="code">NORM</field>
+            <field name="taux">20</field>
+        </record>
+        <record id="abat_pension" model="res.abatement">
+            <field name="name">Abatement pension</field>
+            <field name="code">PEN</field>
+            <field name="taux">25</field>
+        </record>
+        <record id="abat_rente_1" model="res.abatement">
+            <field name="name">Abatement Rentes viagères 1</field>
+            <field name="code">RENT1</field>
+            <field name="taux">40</field>
+            <field name="description">Montant compris entre 100 000 et 300 000 F CFA par mois</field>
+        </record>
+        <record id="abat_rente_2" model="res.abatement">
+            <field name="name">Abatement Rentes viagères 2</field>
+            <field name="code">RENT2</field>
+            <field name="taux">25</field>
+            <field name="description">Montant égal ou supérieur à 300 000 F CFA par mois</field>
+        </record>
+
+
+        <!--        Niveau d'etude-->
+
+        <record id="hr_school_field_bac" model="hr.school.field">
+            <field name="name">BAC</field>
+            <field name="code">bac</field>
+        </record>
+
+        <record id="hr_school_field_bts" model="hr.school.field">
+            <field name="name">BAC+2</field>
+            <field name="code">bts</field>
+        </record>
+
+        <record id="hr_school_field_licence" model="hr.school.field">
+            <field name="name">LICENCE</field>
+            <field name="code">lic</field>
+        </record>
+
+        <record id="hr_school_field_mast1" model="hr.school.field">
+            <field name="name">MASTER1</field>
+            <field name="code">mast1</field>
+        </record>
+
+        <record id="hr_school_field_mast2" model="hr.school.field">
+            <field name="name">MASTER2</field>
+            <field name="code">mast2</field>
+        </record>
+
+        <!--        motif de cloture-->
+        <record id="hr_employee_lic" model="hr.employee.motif.cloture">
+            <field name="name">LICENCIEMENT</field>
+            <field name="code">lic</field>
+        </record>
+
+        <record id="hr_employee_dem" model="hr.employee.motif.cloture">
+            <field name="name">DEMISSION</field>
+            <field name="code">dem</field>
+        </record>
+
+        <record id="hr_employee_dec" model="hr.employee.motif.cloture">
+            <field name="name">DECES</field>
+            <field name="code">dec</field>
+        </record>
+
+        <record id="hr_employee_ret" model="hr.employee.motif.cloture">
+            <field name="name">RETRAITE</field>
+            <field name="code">ret</field>
+        </record>
+
+
+        <!--        type document-->
+
+        <record id="hr_employee_type_cni" model="hr.employee.type.document">
+            <field name="name">CNI</field>
+            <field name="code">cni</field>
+        </record>
+
+        <record id="hr_employee_type_pass" model="hr.employee.type.document">
+            <field name="name">PASSEPORT</field>
+            <field name="code">pass</field>
+        </record>
+
+        <record id="hr_employee_type_attest" model="hr.employee.type.document">
+            <field name="name">ATTESTATION</field>
+            <field name="code">attest</field>
+        </record>
+
+        <record id="hr_employee_type_sejour" model="hr.employee.type.document">
+            <field name="name">CARTE DE SEJOUR</field>
+            <field name="code">sejour</field>
+        </record>
+
+        <record id="hr_employee_type_cons" model="hr.employee.type.document">
+            <field name="name">CARTE CONSULAIRE</field>
+            <field name="code">consul</field>
+        </record>
+
+    </data>
+</odoo>

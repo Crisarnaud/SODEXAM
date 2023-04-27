@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="ir_rule_account_journal_group_admin" model="ir.rule">
+            <field name="name">Accounting Admin manage</field>
+            <field name="model_id" ref="account.model_account_journal"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('account.group_account_manager'))]"/>
+        </record>
+
+        <record id="ir_rule_account_journal_group_user" model="ir.rule">
+            <field name="name">Accounting user manage</field>
+            <field name="model_id" ref="account.model_account_journal"/>
+            <field name="domain_force">[('user_access_ids', 'in', user.id)]</field>
+            <field name="groups" eval="[(4, ref('account.group_account_user')),(4, ref('account.group_account_readonly'))]"/>
+        </record>
+
+        <record id="group_validate_payslip" model="res.groups">
+            <field name="name">Validateur de la paie</field>
+            <field name="category_id" ref="base.module_category_accounting_accounting"/>
+        </record>
+
+
+    </data>
+</odoo>

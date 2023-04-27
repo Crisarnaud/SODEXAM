@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_tax_hr_fdfp">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="page" style="font-family: sans-serif; padding:10px 0px 0px 0px;">
+                    <style>
+                        table{
+                        font-family: sans-serif;
+                        font-size: 16px;
+                        }
+                    </style>
+                    <p style="text-align:center; padding-top:10px">
+                        <h3 style="text-align:center;">TAXE À LA CHARGE DE L'EMPLOYEUR À VERSER AU FDFP</h3>
+                    </p>
+                    <div>
+                        <div class="act_as_table data_table" >
+                            <div class="act_as_row labels">
+                                Reportez ci-dessous les informations suivantes:
+                            </div>
+                        </div>
+                        <table style="width:100%;border:1px solid black;border-collapse:collapse">
+                            <tr style="height:20px;">
+                                <td style="border:none;border-bottom:1px solid black">PERIODE D'IMPOSITION</td>
+                                <td style="border:none"> </td>
+                            </tr>
+                            <tr style="height:40px;">
+                                <td style="width:70%;font-size: 15px;">
+                                    <p style="margin-left:10px">
+                                        - Nom et Prénoms <b> <span t-esc="o.company_id.name"/> </b><br/>
+                                        - Activité principale <br/>
+                                        - Forme juridique <br/>
+                                        - Adresse: BP <b> <span t-esc="o.company_id.street     "/> </b> Tél: <b> <span t-esc="o.company_id.phone"/> </b><br/>
+                                        - Centre des impôts d <br/>
+                                    </p>
+                                </td>
+                                <td style="widht:30%;border:1px solid black;font-size: 15px;">
+                                    <p style="text-align:center;font-size: 15px;">EFFECTIF</p>
+                                    <p style="margin-left:10px">
+                                        Cadres: <br/>
+                                        Maîtrises: <br/>
+                                        Employés: <br/>
+                                        Ouvriers:
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table style="width:100%;border:1px solid;border-collapse:collapse;font-size: 15px;">
+                            <tr style="height:15px">
+                                <td colspan="4" style="width:100%;text-align:center;border:1px solid black;font-size: 15px;">VERSEMENTS OBLIGATOIRES</td>
+                            </tr>
+                            <tr style="height:30px">
+                                <td style="border:none"></td>
+                                <td style="text-align:center;border:1px solid black"><p style="font-size: 15px;">TOTAL SALAIRES BRUTS</p></td>
+                                <td style="text-align:center;border:1px solid black"><p style="font-size: 15px;">TAUX (%)</p></td>
+                                <td style="text-align:center;border:1px solid black"><p style="font-size: 15px;">MONTANTS À PAYER</p></td>
+                            </tr>
+                            <tr>
+                                <td style="border-top:None;border:1px solid black">
+                                    <p style="font-size: 15px;">
+                                        14- TAXE D'APPRENTISSAGE <br/>
+                                        15- TAXE A LA FORMATION PROFESSIONNELLE CONTINUE
+                                    </p>
+                                </td>
+                                <td style="border:1px solid black">
+                                    <b> </b>
+                                </td>
+                                <td style="border:1px solid black">
+                                    <b>  </b>
+                                </td>
+                                <td style="border:1px solid black">
+                                   <b>  </b>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <p style="font-size: 15px;">Règlement joint à l'ordre de "FDFP Taxe d'Apprentissage" <br/>
+                        Chèque bancaire barré n°  <br/>
+                        Numéro </p>
+                    <p style="font-size: 15px;"> Règlement joint à l'ordre de "FDFP Taxe à la FPC" <br/>
+                        Chèque bancaire barré n° </p>
+                    <p style="border-bottom: 1px solid black;font-size: 15px;">Numéraires:</p>
+                </div>
+
+
+                <table style="width:100%;border:1px solid black;border-collapse:collapse;height:60px;font-size: 15px;">
+                    <tr style="height:15px">
+                        <td colspan="2" style="text-align:center;border:1px solid black;font-size: 15px;">RÉGULARISATION À EFFECTUER EN FIN D'ANNÉE</td>
+                    </tr>
+                    <tr style="height:10px;">
+                        <td style="border:none"></td>
+                        <td style="text-align:center;border:1px solid black;font-size: 15px;">MONTANT</td>
+                    </tr>
+                    <tr  style="height:40px;">
+                        <td style="border-top:none;border:1px solid black">
+                            <p style="font-size: 15px;">
+                                16 - Masse salariale totale de l'exercice <br/>
+                                17 - Contribution 1.2% sur l'exercice <br/> (|16| * 1.2%) <br/>
+                                18 - Versements déjà effectués au titre de FPC <br/> (|15| des 12 mois) <br/>
+                                19 - Engagements sur plans agréés par le FDFP (utilisation directe) <br/>
+                                20 - Versements à effectuer si |17| est supérieur à |18| + |19| <br/>
+                                20 = |17| - (|18| + |19|) <br/>
+                            </p>
+                        </td>
+                        <td style="border:1px solid black"></td>
+                    </tr>
+                </table>
+
+                <table style="width:100%;border:none">
+                    <tr>
+                        <td style="border:none">
+                            <p style="font-size: 15px;"> Règlement joint à l'ordre de "FDFP Taxe à la FPC" <br/>
+                                Chèque bancaire barré n° <br/>
+                                Numéra </p>
+                            <p style="font-size: 15px;">Joindre les pièces justificatives d'agrément par le Sécretariat Général du FDFP </p>
+                        </td>
+                        <td style="border:none"></td>
+                        <td style="border:none;width:40%">
+                            <p style="text-align:center;margin-left:60px;font-size:15px;padding-top:20px">
+                                <br/>
+                                À ABIDJAN, le  <br/>
+                                Signature et cachet
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+
+                <br/>
+                <br/>
+                <table style="height:30px;border:1px solid black;border-collapse:collapse;width:100%;font-size:15px;">
+                    <tr>
+                        <td style="text-align:center;border:1px solid black;font-size: 15px;width:32%">REGULARISATION</td>
+                        <td style="text-align:center;border:1px solid black;font-size: 15px;width:33%">INDEMNITÉ DE RETARD</td>
+                        <td style="text-align:center;border:1px solid black;font-size: 15px;width:35%">VISA</td>
+                    </tr>
+                    <tr>
+                        <td style="border:1px solid black">
+                            <p style=";font-size: 15px;margin-left:10px">
+                                R.R. de <br/>
+                                Article <br/>
+                                Montant</p>
+                        </td>
+                        <td style="border:1px solid black">
+                            <p style=";font-size: 15px;margin-left:10px">
+                                N° <br/>
+                                Montant
+                            </p>
+                        </td>
+                        <td style="border:1px solid black"></td>
+                    </tr>
+                </table>
+            </t>
+        </t>
+    </template>
+</odoo>

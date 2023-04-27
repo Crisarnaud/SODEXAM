@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="payroll_disa_form_view" model="ir.ui.view">
+            <field name="name">hr_disa.payroll_disa.form</field>
+            <field name="model">hr_disa.payroll_disa</field>
+            <field name="arch" type="xml">
+                <form string="payroll_disa_form">
+                    <header>
+                        <button name="computeDisa" string="Calculer" type="object"/>
+                        <button name="%(action_import_advantages)s" type="action"
+                                string="Importer les avantages en Nature"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name" placeholder="Title"/>
+                        </group>
+                        <group col="4">
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                        <group col="4">
+                            <field name="total_general_brut"/>
+                            <separator/>
+                            <field name="total_general_retraite"/>
+                            <field name="total_cotisation_pf_am"/>
+                        </group>
+                        <notebook>
+                            <page string="Employés">
+                                <field name="disa_line_ids">
+                                    <tree>
+                                        <field name="identification_id"/>
+                                        <field name="employee_id"/>
+                                        <field name="birthday"/>
+                                        <field name="hiring_date"/>
+                                        <field name="date_of_departure"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+                            <page string="Cumul des cotisations">
+                                <field name="cumul_contribution_line_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="amount_submitted"/>
+                                        <field name="rate"/>
+                                        <field name="amount"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="name"/>
+                                            <field name="amount_submitted"/>
+                                            <field name="rate"/>
+                                            <field name="amount"/>
+                                        </group>
+                                    </form>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right">
+                                    <field name="contribution_scheme"/>
+                                </group>
+                            </page>
+                            <page string="CNPS Mensuels">
+                                <field name="cnps_monthly_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="date_from"/>
+                                        <field name="date_to"/>
+                                        <field name="total_cotisation_contributed"/>
+                                    </tree>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right">
+                                    <field name="total_cnps_monthly"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="payroll_disa_tree_view" model="ir.ui.view">
+            <field name="name">hr_disa.payroll_disa.tree</field>
+            <field name="model">hr_disa.payroll_disa</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+                    <field name="name"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="payroll_disa_search_view" model="ir.ui.view">
+            <field name="name">hr_disa.payroll_disa.search</field>
+            <field name="model">hr_disa.payroll_disa</field>
+            <field name="arch" type="xml">
+                <search string="ModelTitle">
+                    <group expand="1" string="Group By">
+                        <filter string="Example Field" name="name" domain="[]"
+                                context="{'group_by':'name'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_payroll_disa" model="ir.actions.act_window">
+            <field name="name">DISA</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr_disa.payroll_disa</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Veuillez créer votre premier enregistrement
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="DISA" id="payroll_disa_menu" sequence="51"
+                  parent="hr_payroll_custom.menu_hr_payroll_social"
+                  action="action_payroll_disa" groups="hr_payroll.group_hr_payroll_user,hr_payroll.group_hr_payroll_manager"/>
+
+    </data>
+</odoo>

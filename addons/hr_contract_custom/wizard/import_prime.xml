@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="import_prime_view_form" model="ir.ui.view">
+            <field name="name">import_prime_view_form</field>
+            <field name="model">import.prime</field>
+            <field name="arch" type="xml">
+                <form string="import_prime_form">
+                    <sheet>
+                        <group>
+                            <field name="file_name"/>
+
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="compute_data" string="Import primes" type="object" class="btn-primary"/>
+                        <button string="Annuler" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_import_prime" model="ir.actions.act_window">
+            <field name="name">Importer les primes</field>
+            <field name="res_model">import.prime</field>
+             <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    
+    </data>
+</odoo>

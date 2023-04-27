@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <report
+                id="action_employee_attestation_travail"
+                model="hr.employee"
+                string="Attestation de travail"
+                menu="True"
+                report_type="qweb-pdf"
+                name="hr_employee_custom.report_attestation"
+                file="Attestation de travail"/>
+
+        <report
+                id="action_employee_resignation_pdf"
+                model="hr.employee"
+                string="Liste des départs des employés en pdf"
+                menu="False"
+                report_type="qweb-pdf"
+                name="hr_employee_custom.report_employee_resignation_pdf"
+                file="Liste des départs des employés"
+        />
+
+        <report
+                id="action_employee_resignation"
+                model="hr.employee"
+                string="Liste des départs des employés"
+                menu="False"
+                report_type="xlsx"
+                name="hr_employee_custom.report_employee_resignation"
+                file="Liste des départs des employés"/>
+
+        <report
+                id="action_new_employee_xls"
+                model="hr.employee"
+                string="Liste des nouvelles recrues"
+                menu="False"
+                report_type="xlsx"
+                name="hr_employee_custom.report_new_employee"
+                file="Liste des nouvelles recrues"/>
+
+        <report
+                id="action_new_employee_pdf"
+                model="hr.employee"
+                string="Liste des nouvelles recrues"
+                menu="False"
+                report_type="qweb-pdf"
+                name="hr_employee_custom.report_new_employee_pdf"
+                file="Liste des nouvelles recrues"
+                paperformat="paper_format_landscape"/>
+
+
+    </data>
+</odoo>

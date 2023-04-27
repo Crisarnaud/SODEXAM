@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="hr_holidays_planning_form">
+            <field name="name">hr.holiday.planning.form</field>
+            <field name="model">hr.holiday.planning</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+<!--                        <button name="action_submit" string="Soumettre pour validation"  states="draft" type="object"/>-->
+<!--                        <button name="action_chief_department" string="Soumettre au chef de departement"  states="service"-->
+<!--                                type="object" class="oe_highlight" groups="hr_holidays.group_hr_holidays_user"/>-->
+<!--                        <button name="action_director" string="Soumettre au directeur"  states="department"-->
+<!--                                type="object" class="oe_highlight" groups="hr_holidays.group_hr_holidays_user"/>-->
+<!--                        <button name="action_administrative_department" string="Soumettre au service admin."  states="direction"-->
+<!--								type="object" class="oe_highlight" groups="hr_holiday_custom.group_hr_holidays_director"/>-->
+<!--                        <button name="action_rejected" string="Rejeter"  states="service,department,direction,service_admin"-->
+<!--                                type="object" class="oe_highlight"-->
+<!--                                groups="hr_holidays.group_hr_holidays_user,hr_holiday_custom.group_hr_holidays_director,hr_holidays.group_hr_holidays_manager"/>-->
+                        <button name="action_validate" string="Valider"  type="object"
+                            class="oe_highlight" groups="hr_holidays.group_hr_holidays_manager"/>
+                        <button name="action_cancel" string="Annuler"  states="service,department,direction,service_admin"
+                                type="object" class="oe_highlight" groups="hr_holidays.group_hr_holidays_user"/>
+                        <field name="state" widget="statusbar" />
+                    </header>
+                    <sheet>
+                        <group col="4">
+                            <field name="name" attrs="{'readonly':[('state','=', 'done')]}"/>
+                            <field name="employee_id" attrs="{'readonly':[('state','=', 'done')]}"/>
+                            <field name="date_from" attrs="{'readonly':[('state','=', 'done')]}"/>
+                            <field name="holiday_type" readonly="1"/>
+                            <field name="date_end" attrs="{'readonly':[('state','=', 'done')]}"/>
+                            <field name="number_of_days" attrs="{'readonly':[('state','=', 'done')]}"/>
+                            <field name="service_id" attrs="{'readonly':[('state','=', 'done')]}"/>
+                            <field name="department_id" attrs="{'readonly':[('state','=', 'done')]}"/>
+                            <field name="direction_id" attrs="{'readonly':[('state','=', 'done')]}"/>
+                            <field name="company_id" attrs="{'readonly':[('state','=', 'done')]}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_holidays_planning_tree">
+            <field name="name">hr.holiday.planning.tree</field>
+            <field name="model">hr.holiday.planning</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="employee_id" />
+                    <field name="date_from" />
+                    <field name="date_end" />
+                    <field name="number_of_days" />
+                    <field name="service_id" />
+                    <field name="department_id" />
+                    <field name="direction_id" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_hr_holiday_planning" model="ir.actions.act_window">
+            <field name="name">Planning de congés</field>
+            <field name="res_model">hr.holiday.planning</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Créer un nouveau planning de congés
+              </p>
+            </field>
+        </record>
+
+        <menuitem name="Planning de congés" parent="hr_holidays.menu_hr_holidays_approvals" id="holidays_planning_menu" />
+
+<!--        <menuitem name="Congés plannifiés"  id="menu_hr_holidays_planning_manager"  parent="holidays_planning_menu"-->
+<!--                  action="action_hr_holiday_planning" />-->
+
+        <menuitem name="Mes projections de congés"  id="menu_my_hr_holidays_planning"  parent="hr_holidays.menu_hr_holidays_my_leaves"
+                  action="action_hr_holiday_planning" groups="hr.group_hr_user"/>
+    </data>
+</odoo>

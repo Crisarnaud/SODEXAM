@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="payroll_ci_raport_cumulative_by_period_form">
+            <field name="name">payroll_ci_raport_cumulative_by_period</field>
+            <field name="model">payroll_ci_raport.cumulative_payroll_by_period</field>
+            <field name="arch" type="xml">
+                <form string="Cumulative_Payroll_by_period">
+                    <group col="4">
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="rules_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="company_id" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button string="Imprimer en PDF" name="print_report_pdf" type="object" class="btn-primary"/>
+                        <button string="Imprimer en XLS" name="print_report_xls" type="object" class="btn-primary"/>
+                        <button string="Annuler" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+         <record id="action_cumulative_raport_by_period" model="ir.actions.act_window">
+            <field name="name">Cumul des rubriques de paie par période</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">payroll_ci_raport.cumulative_payroll_by_period</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="payroll_ci_raport_cumul_by_period_menu"
+                  name="Cumul des rubriques de paie/période" sequence="61"
+                  parent="hr_payroll_custom.menu_hr_payroll_rapport"
+                  action="action_cumulative_raport_by_period"/>
+    </data>
+</odoo>

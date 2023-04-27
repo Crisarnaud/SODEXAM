@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_site,hr.site ,model_hr_site,hr.group_hr_manager,1,1,1,1
+access_hr_plateforme,hr.plateforme ,model_hr_plateforme,hr.group_hr_manager,1,1,1,1
+access_hr_profession,hr.profession,model_hr_profession,hr.group_hr_manager,1,1,1,1

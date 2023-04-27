@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <template id="payroll_by_period_pdf">
+            <t t-call="web.html_container">
+                <t t-call="hr_payroll_custom.internal_layout_payroll_raport_ci">
+                    <div class="page">
+                         <style>
+                            table, td, th {
+                            border: none;
+                            font-family: sans-serif, "Gill Sans";
+                            font-size: 16px;
+                            border-collapse : separate;
+                            border-spacing : 10px;
+                            text-align:center;
+                            }
+
+                            .tab {
+                            margin-left: 50px;
+                            width: 100%;
+                            border-collapse : separate;
+                            border-spacing : 10px;
+                            text-align:center;
+                            }
+
+                            td {
+                            border: none;
+                            text-align: justify;
+                            }
+
+                            .p {
+                            border-collapse: collapse;
+                            border: 1px solid black;
+                            width: 70%;
+
+                            }
+
+                            .footer{
+                            display: flex;
+                            justify-content: center;
+                            padding: 5px;
+                            }
+
+                        </style>
+                        <div class="row">
+                            <t t-foreach="form" t-as="o">
+                                <div class="col-4">
+                                    <span>CUMUL DES RUBRIQUES</span>
+                                </div>
+                                <div class="col-2">
+                                    <span>Période :</span>
+                                </div>
+                                <div class="col-2">
+                                    <span t-esc="date_from"
+                                          style="font-family:DejaVu Serif;text-transform:uppercase;"/>
+                                </div>
+                                <div class="col-1">
+                                    -
+                                </div>
+                                <div class="col-2">
+                                    <span t-esc="date_to"
+                                          style="font-family:DejaVu Serif;text-transform:uppercase;"/>
+                                </div>
+                                <div class="col-1"></div>
+                            </t>
+                        </div>
+                        <table style="margin-top:40px;border:1px solid black;border-collapse:collapse;border-spacing : 10px;">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" style="width:5%;text-align:center;border:1px solid black;vertical-align: baseline;">
+                                        Rubrique
+                                    </th>
+                                    <th rowspan="2" style="width:18%;text-align:center;border:1px solid black;vertical-align: baseline;">
+                                        Libellé rubrique
+                                    </th>
+                                    <th colspan="3" style="width:33%;text-align:center;vertical-align: baseline;border:1px solid black;">
+                                        SALARIALES
+                                    </th>
+                                    <th colspan="3" style="width:33%;text-align:center;vertical-align: baseline;border:1px solid black;">
+                                        PATRONALES
+                                    </th>
+                                    <th rowspan="2" style="width:11%;text-align:center;vertical-align: baseline;border:1px solid black;">
+                                        SALARIALES + PATRONALES
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="width:11%;text-align:center;border:1px solid black;">Base</th>
+                                    <th style="width:11%;text-align:center;border:1px solid black;">Gain</th>
+                                    <th style="width:11%;text-align:center;border:1px solid black;">Retenue</th>
+                                    <th style="width:11%;text-align:center;border:1px solid black;">Base</th>
+                                    <th style="width:11%;text-align:center;border:1px solid black;">Gain</th>
+                                    <th style="width:11%;text-align:center;border:1px solid black;">Retenue</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <t t-set="total_base_employee" t-value="0"/>
+                                <t t-set="total_earnings_employee" t-value="0"/>
+                                <t t-set="total_deductions_employee" t-value="0"/>
+                                <t t-set="total_base_employer" t-value="0"/>
+                                <t t-set="total_earnings_employer" t-value="0"/>
+                                <t t-set="total_deductions_employer" t-value="0"/>
+                                <t t-set="all_total" t-value="0"/>
+                                <t t-foreach="lines" t-as="line">
+                                    <t t-set="total_row" t-value="0"/>
+                                    <tr>
+                                        <td style="border:1px solid black;">
+                                            <span t-esc="line['sequence']"/>
+                                        </td>
+                                        <td style="border:1px solid black;">
+                                            <span t-esc="line['rule_name']"/>
+                                        </td>
+                                        <td style="text-align:right;border:1px solid black;">
+                                            <t t-if="line['type'] == 'employee'">
+                                                <span t-esc="'{0:,.0f}'.format(line['base']).replace(',', ' ')"/>
+                                                <t t-set="total_base_employee" t-value="total_base_employee + line['base']"/>
+                                            </t>
+                                        </td>
+                                        <td style="text-align:right;border:1px solid black;">
+                                            <t t-if="line['type'] == 'employee' and line['imputation_type'] == 'earnings'">
+                                                <span t-esc="'{0:,.0f}'.format(line['amount']).replace(',', ' ')"/>
+                                                <t t-set="total_row" t-value="total_row + line['amount']"/>
+                                                <t t-set="total_earnings_employee" t-value="total_earnings_employee + line['amount']"/>
+                                            </t>
+                                        </td>
+                                        <td style="text-align:right;border:1px solid black;">
+                                            <t t-if="line['type'] == 'employee' and line['imputation_type'] == 'deductions'">
+                                                <span t-esc="'{0:,.0f}'.format(line['amount']).replace(',', ' ')"/>
+                                                <t t-set="total_row" t-value="total_row + line['amount']"/>
+                                                <t t-set="total_deductions_employee" t-value="total_deductions_employee + line['amount']"/>
+                                            </t>
+                                        </td>
+                                        <td style="text-align:right;border:1px solid black;">
+                                            <t t-if="line['type'] == 'employer'">
+                                                <span t-esc="'{0:,.0f}'.format(line['base']).replace(',', ' ')"/>
+                                                <t t-set="total_base_employer" t-value="total_base_employer + line['base']"/>
+                                            </t>
+                                        </td>
+                                        <td style="text-align:right;border:1px solid black;">
+                                            <t t-if="line['type'] == 'employer' and line['imputation_type'] == 'earnings'">
+                                                <span t-esc="'{0:,.0f}'.format(line['amount']).replace(',', ' ')"/>
+                                                <t t-set="total_row" t-value="total_row + line['amount']"/>
+                                                <t t-set="total_earnings_employer" t-value="total_earnings_employer + line['amount']"/>
+                                            </t>
+                                        </td>
+                                        <td style="text-align:right;border:1px solid black;">
+                                            <t t-if="line['type'] == 'employer' and line['imputation_type'] == 'deductions'">
+                                                <span t-esc="'{0:,.0f}'.format(line['amount']).replace(',', ' ')"/>
+                                                <t t-set="total_row" t-value="total_row + line['amount']"/>
+                                                <t t-set="total_deductions_employer" t-value="total_deductions_employer + line['amount']"/>
+                                            </t>
+                                        </td>
+                                        <td style="text-align:right;border:1px solid black;">
+                                            <span t-esc="'{0:,.0f}'.format(total_row).replace(',', ' ')"/>
+                                            <t t-set="all_total" t-value="all_total + total_row"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td colspan="2" style="border:1px solid black;">
+                                        <span>TOTAL GENERAL</span>
+                                    </td>
+                                    <td style="text-align:right;border:1px solid black;">
+                                        <span t-esc="'{0:,.0f}'.format(total_base_employee).replace(',', ' ')"/>
+                                    </td>
+                                    <td style="text-align:right;border:1px solid black;">
+                                        <span t-esc="'{0:,.0f}'.format(total_earnings_employee).replace(',', ' ')"/>
+                                    </td>
+                                    <td style="text-align:right;border:1px solid black;">
+                                        <span t-esc="'{0:,.0f}'.format(total_deductions_employee).replace(',', ' ')"/>
+                                    </td>
+                                    <td style="text-align:right;border:1px solid black;">
+                                        <span t-esc="'{0:,.0f}'.format(total_base_employer).replace(',', ' ')"/>
+                                    </td>
+                                    <td style="text-align:right;border:1px solid black;">
+                                        <span t-esc="'{0:,.0f}'.format(total_earnings_employer).replace(',', ' ')"/>
+                                    </td>
+                                    <td style="text-align:right;border:1px solid black;">
+                                        <span t-esc="'{0:,.0f}'.format(total_deductions_employer).replace(',', ' ')"/>
+                                    </td>
+                                    <td style="text-align:right;border:1px solid black;">
+                                        <span t-esc="'{0:,.0f}'.format(all_total).replace(',', ' ')"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

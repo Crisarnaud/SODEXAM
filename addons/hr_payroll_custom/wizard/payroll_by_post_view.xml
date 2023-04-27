@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="payroll_ci_raport_by_period_form">
+            <field name="name">payroll_ci_raport_by_period</field>
+            <field name="model">payroll_ci_raport.payroll_by_post</field>
+            <field name="arch" type="xml">
+                <form string="Payroll_by_post_period">
+                    <group col="4">
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="rule_id" string="Rubrique"/>
+                        <field name="company_id" invisible="1"/>
+                    </group>
+                    <footer>
+<!--                        <button string="Imprimer en PDF" name="print_report_pdf" type="object" class="btn-primary"/>-->
+                        <button string="Imprimer en XLS" name="print_report_xls" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+         <record id="action_payroll_ci_raport_by_period" model="ir.actions.act_window">
+            <field name="name">Etat des rubriques de paie par poste</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">payroll_ci_raport.payroll_by_post</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="payroll_ci_raport_by_period_menu" name="Rubrique de paie/poste" sequence="60"
+                  parent="hr_payroll_custom.menu_hr_payroll_rapport" action="action_payroll_ci_raport_by_period"/>
+    </data>
+</odoo>

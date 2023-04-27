@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_statement_payroll_ci_raport">
+            <t t-call="web.html_container">
+                <t t-call="hr_payroll_custom.internal_layout">
+                    <div class="page" style="padding-top:5px;">
+                        <div style="padding-top:5px;text-align:center;">
+                            <p style="padding-top:5px;">
+                                <h4 style="font-family:DejaVu Serif;"> <b> ETAT DES RUBRIQUES </b></h4>
+                            </p>
+                        </div>
+                        <br/>
+                        <div>
+                            <t t-foreach="details_report" t-as="i">
+                                <p style="font-size:15px;font-family:DejaVu Serif;">
+                                    <strong> Période <t t-esc="i['date_from']" style="margin-left:170px;font-family:DejaVu Serif;"/> - <t t-esc="i['date_to']" style="font-family:DejaVu Serif;"/></strong>
+                                </p>
+                                <p style="font-size:15px;font-family:DejaVu Serif;">
+                                    <strong> Rubrique Code </strong> <t t-esc="i['rubrique']" style="margin-left:60px;font-family:DejaVu Serif;"/>
+                                    <span style="margin-left:150px;font-family:DejaVu Serif;"> <strong> Rubrique </strong> <span t-esc="i['rule_id']" style="font-family:DejaVu Serif;"/>  </span>
+                                </p>
+                            </t>
+                            <p>
+                                <t t-set="total_deduction" t-value="0"/>
+                                <t t-set="total_earning" t-value="0"/>
+                                <table>
+                                    <tr>
+                                        <td style="font-family:DejaVu Serif;">
+                                            <strong>Matricule</strong>
+                                        </td>
+                                        <td style="font-family:DejaVu Serif;">
+                                            <strong>Nom et Prenoms</strong>
+                                        </td>
+                                        <td style="text-align: center; font-family:DejaVu Serif;">
+                                            <strong>Base</strong>
+                                        </td>
+                                        <td style="text-align: center; font-family:DejaVu Serif;">
+                                            <strong>Quantité</strong>
+                                        </td>
+                                        <td style="text-align: center; font-family:DejaVu Serif;">
+                                            <strong>Taux (%)</strong>
+                                        </td>
+                                        <td style="text-align: center; font-family:DejaVu Serif;">
+                                            <strong>Retenues</strong>
+                                        </td>
+                                        <td style="text-align: center; font-family:DejaVu Serif;">
+                                            <strong>Gains</strong>
+                                        </td>
+                                    </tr>
+                                    <t t-foreach="res" t-as="o">
+                                        <tr>
+                                            <td style="font-family:DejaVu Serif;">
+                                                <t t-esc="o['matricule']" style="font-family:DejaVu Serif;"/>
+                                            </td>
+                                            <td style="font-family:DejaVu Serif;">
+                                                <t t-esc="o['full_name']" style="font-family:DejaVu Serif;"/>
+                                            </td>
+                                            <td style="font-family:DejaVu Serif;text-align:right;align:right;">
+                                                <t t-esc="'{0:,.0f}'.format(int(o['base'])).replace(',', ' ')" style="float:right;font-family:DejaVu Serif;"/>
+                                            </td>
+                                            <td style="font-family:DejaVu Serif;text-align:right;align:right;">
+                                                <t t-esc="o['quantity']" style="float:right;font-family:DejaVu Serif;"/>
+                                            </td>
+                                            <td style="font-family:DejaVu Serif;text-align:center;">
+                                                <t t-esc="o['taux']" style="text-align:center;align:center;font-family:DejaVu Serif;"/>
+                                            </td>
+                                            <td style="font-family:DejaVu Serif;text-align:right;">
+                                                <t t-if="o['deductions'] == True and o['earnings'] == False">
+                                                    <t t-esc="'{0:,.0f}'.format(int(o['amount'])).replace(',', ' ')" style="float:right;font-family:DejaVu Serif;"/>
+                                                    <t t-set="total_deduction" t-value="total_deduction+o['amount']"/>
+                                                </t>
+                                            </td>
+                                            <td style="font-family:DejaVu Serif;text-align:right;">
+                                                <t t-if="o['earnings'] == True and o['deductions'] == False">
+                                                    <t t-esc="'{0:,.0f}'.format(int(o['amount'])).replace(',', ' ')" style="float:right;font-family:DejaVu Serif;"/>
+                                                    <t t-set="total_earning" t-value="total_earning+o['amount']"/>
+                                                </t>
+                                            </td>
+
+                                        </tr>
+                                    </t>
+                                    <tr style="border:none;">
+                                        <td colspan="3" style="border:none; margin-left:500px;"></td>
+                                        <td colspan="2" style="border:none; margin-left:500px;">
+                                            <strong style="text-align:right;font-size:15px;"> Total Général: </strong>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:right;align:right">
+                                            <b>
+                                                <t t-esc="'{0:,.0f}'.format(int(total_deduction)).replace(',', ' ')" style="text-align:right;font-family:DejaVu Serif;font-size:15px;"/>
+                                            </b>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:right;align:right">
+                                            <b>
+                                                <t t-esc="'{0:,.0f}'.format(int(total_earning)).replace(',', ' ')" style="text-align:right;font-family:DejaVu Serif;font-size:15px;"/>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </p>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

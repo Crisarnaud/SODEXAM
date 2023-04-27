@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="structure_cdd" model="hr.payroll.structure">
+            <field name="name">Contrat à durée determinée</field>
+            <field name="type_id">1</field>
+        </record>
+
+        <record id="structure_fonctionnaire" model="hr.payroll.structure">
+            <field name="name">Fonctionnaire</field>
+            <field name="type_id">1</field>
+        </record>
+
+        <record id="structure_base_new_struct" model="hr.payroll.structure">
+            <field name="name">Base for new structures</field>
+            <field name="type_id">1</field>
+        </record>
+
+        <record id="structure_cdd_dg" model="hr.payroll.structure">
+            <field name="name">Contrat à durée déterminée-DG</field>
+            <field name="type_id">1</field>
+        </record>
+    </data>
+</openerp>

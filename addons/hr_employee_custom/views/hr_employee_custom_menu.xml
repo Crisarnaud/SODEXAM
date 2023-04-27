@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+    <menuitem id="menu_rapport_xls" name="Rapports" parent="hr.menu_hr_root" sequence="99" groups="hr.group_hr_user"/>
+
+    <menuitem id="res_bank_menu_id" name="Banques" parent="hr.menu_human_resources_configuration"
+              groups="hr.group_hr_manager" action="action_res_bank_view"
+              sequence="199"/>
+
+    <menuitem id="hr_type_sanction_menu" name="Types sanction" parent="hr.menu_human_resources_configuration"
+              action="action_type_sanction_view" sequence="205"/>
+
+    <menuitem id="hr_type_doc_menu" name="Types document" parent="hr.menu_human_resources_configuration"
+              action="action_hr_type_document_view" sequence="207"/>
+
+    <menuitem id="hr_employee_custom_education" name="Education" parent="hr.menu_human_resources_configuration"
+              sequence="99"/>
+
+    <menuitem id="hr_school_menu" name="Ecoles" parent="hr_employee_custom_education"
+              action="action_hr_school_view" sequence="208"/>
+
+    <menuitem id="hr_school_field_menu" name="Niveaux d'étude" parent="hr_employee_custom_education"
+              action="action_hr_school_field_tree_view" sequence="209"/>
+
+    <menuitem id="hr_employee_motif_cloture_menu" name="Motifs de clôture"
+              parent="hr.menu_human_resources_configuration" action="action_hr_employee_motif_cloture_view"
+              sequence="101"/>
+
+    <menuitem
+            id="hr.menu_hr_department_kanban"
+            action="hr.hr_department_kanban_action"
+            parent="hr.menu_hr_root"
+            groups="hr.group_hr_user,hr_employee_custom.group_hr_employee_consultant"/>
+
+    <record id="hr.menu_human_resources_configuration" model="ir.ui.menu">
+        <field name="groups_id" eval="[(3,ref('hr.group_hr_user'))]"/>
+        <field name="sequence">100</field>
+    </record>
+
+
+    <menuitem
+            id="hr.menu_human_resources_configuration"
+            name="Configuration"
+            parent="hr.menu_hr_root"
+            groups="hr.group_hr_manager"
+            sequence="100"/>
+
+
+
+
+</odoo>

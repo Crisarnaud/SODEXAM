@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<odoo>
+    <menuitem name="client aéronautique" id="menu_acs_aero" sequence="65"  web_icon="acs_aeronautics_custom,static/description/icon.png"/>
+    <menuitem name="Client" id="menu_acs_aero_patient" parent="menu_acs_aero" action="hms_action_aero_patient" sequence="10"/>
+    <menuitem name="Rendez-vous" id="menu_acs_appointment" parent="menu_acs_aero" action="action_appointment_aero" sequence="20"/>
+
+</odoo>

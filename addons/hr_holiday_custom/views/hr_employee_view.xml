@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="hr_eployee_holidays_inherit_view" model="ir.ui.view">
+        <field name="name">hr.employee.holidays_extension.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='job_id']" position="after">
+                <field name="payment_date_last_holiday"/>
+                <field name="brut_holiday"/>
+            </xpath>
+            <xpath expr="//field[@name='type']" position="after">
+                <field name="indice" attrs="{'invisible': [('type', '!=', 'p')]}"/>
+            </xpath>
+            <field name="user_id" position="after">
+                <field name="date_return_last_holidays"/>
+                <field name="date_depart_holidays"/>
+                <field name="holiday_decoration"/>
+                <field name="stock_holiday" groups="hr.group_hr_user"/>
+            </field>
+            <notebook position="inside">
+                <page string="Gestion des Congés antérieurs">
+                    <field name="planning_save">
+                        <tree editable="top">
+                            <field name="date_return_last_holidays"/>
+                            <field name="estimed_date_leave"/>
+                            <field name="estimated_date_return_leave"/>
+                            <field name="number_days_estimed_holidays"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string="Gestion des Stocks Congés">
+                    <field name="save_stock_holiday_ids" readonly="1">
+                        <tree>
+                            <field name="name"/>
+                            <field name="number_days"/>
+                        </tree>
+                        <form>
+                            <group col="4">
+                                <field name="name"/>
+                                <field name="number_days"/>
+                            </group>
+                        </form>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <record id="view_employee_leaves_forecast_form" model="ir.ui.view">
+        <field name="name">hr.employee.form</field>
+        <field name="model">hr.employee</field>
+        <field name="arch" type="xml">
+            <form string="Prévisions Congés Annuels"> <!-- Employee -->
+                <sheet>
+                    <!--                    <field name="image" widget='image' class="oe_avatar" options='{"preview_image":"image_medium"}'/>-->
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" placeholder="Employee's Name" required="True"/>
+                        </h1>
+                    </div>
+                    <group col="4">
+                        <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="direction_id"/>
+                        <field name="department_id"/>
+                        <field name="service_id"/>
+                        <field name="date_return_last_holidays"/>
+                        <field name="estimed_date_leave"/>
+                        <field name="number_days_estimed_holidays"/>
+                        <field name="estimated_date_return_leave"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_employee_leaves_forecast_tree" model="ir.ui.view">
+        <field name="name">hr.employee.tree</field>
+        <field name="model">hr.employee</field>
+        <field name="arch" type="xml">
+            <tree string="Prévisions Congés Annuels" create="false"> <!-- Employees -->
+                <field name="name"/>
+                <field name="first_name"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="direction_id"/>
+                <field name="department_id"/>
+                <field name="service_id"/>
+                <field name="date_return_last_holidays"/>
+                <field name="estimed_date_leave"/>
+                <field name="estimated_date_return_leave"/>
+                <field name="number_days_estimed_holidays"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_employee_leaves_forecast_filter" model="ir.ui.view">
+        <field name="name">hr.employee.search</field>
+        <field name="model">hr.employee</field>
+        <field name="arch" type="xml">
+            <!-- Employees -->
+            <search string="Prévisions Congés Annuels">
+                <field name="name" string="Employés"
+                       filter_domain="['|',('work_email','ilike',self),('name','ilike',self)]"/>
+                <field name="direction_id"/>
+                <field name="department_id"/>
+                <field name="service_id"/>
+                <field name="job_id"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter name="direction_id" string="Direction" domain="[]" context="{'group_by':'direction_id'}"/>
+                    <filter name="department_id" string="Departément" domain="[]"
+                            context="{'group_by':'department_id'}"/>
+                    <filter name="service_id" string="Service" domain="[]" context="{'group_by':'service_id'}"/>
+                    <filter name="group_job" string="Job" domain="[]" context="{'group_by':'job_id'}"/>
+                    <filter name="group_company" string="Company" domain="[]" context="{'group_by':'company_id'}"
+                            groups="base.group_multi_company"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="hr_leave_forecast_view_calendar" model="ir.ui.view">
+        <field name="name">hr.employee.view.calendar</field>
+        <field name="model">hr.employee</field>
+        <field name="arch" type="xml">
+            <calendar string="Planning congés" date_start="estimed_date_leave" date_stop="estimated_date_return_leave"
+                      mode="month" quick_add="False" color="name">
+                <field name="name"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="action_view_employee_list_forecast_leaves" model="ir.actions.act_window">
+        <field name="name">Prévisions Congés Annuels</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">tree,calendar</field>
+        <field name="view_id" eval="False"/>
+        <field name="search_view_id" ref="view_employee_leaves_forecast_filter"/>
+    </record>
+
+    <record id="action_view_employee_list_forecast_leaves_tree" model="ir.actions.act_window.view">
+        <field eval="5" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_employee_leaves_forecast_tree"/>
+        <field name="act_window_id" ref="action_view_employee_list_forecast_leaves"/>
+    </record>
+
+    <!--    <record id="action_view_employee_list_forecast_leaves_gantt" model="ir.actions.act_window.view">-->
+    <!--        <field eval="1" name="sequence"/>-->
+    <!--        <field name="view_mode">gantt</field>-->
+    <!--        <field name="view_id" ref="hr_leave_forecast_gantt_view"/>-->
+    <!--        <field name="act_window_id" ref="action_view_employee_list_forecast_leaves"/>-->
+    <!--    </record>-->
+
+    <record id="action_view_employee_list_forecast_leaves_calendar" model="ir.actions.act_window.view">
+        <field eval="2" name="sequence"/>
+        <field name="view_mode">calendar</field>
+        <field name="view_id" ref="hr_leave_forecast_view_calendar"/>
+        <field name="act_window_id" ref="action_view_employee_list_forecast_leaves"/>
+    </record>
+
+    <menuitem name="Prévisions Congés" id="menu_hr_holidays_root" parent="hr_holidays.menu_hr_holidays_root"
+              action="action_view_employee_list_forecast_leaves" sequence="95"
+              groups="hr_holidays.group_hr_holidays_manager"/>
+
+
+</odoo>

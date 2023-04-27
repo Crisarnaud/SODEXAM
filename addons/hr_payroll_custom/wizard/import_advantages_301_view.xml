@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="import_advantages_form">
+            <field name="name">hr_301.import_advantages view_form</field>
+            <field name="model">hr_301.import_advantages</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="data_file"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="compute_data" string="Importer" type="object"/>
+                        or
+                        <button name="cancel" string="Annuler" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_import_advantages">
+            <field name="name">Importer les avantages Nature et espèces</field>
+            <field name="res_model">hr_301.import_advantages</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+    </data>
+</odoo>

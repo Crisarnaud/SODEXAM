@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="view_account_journal_extension" model="ir.ui.view">
+        <field name="name">account.journal.extension</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//notebook" position="inside">
+                <page name="user_access" string="Utilisateurs">
+                    <field name="user_access_ids">
+                        <tree string="Utilisateurs" editable="bottom">
+                            <field name="id" invisible="1"/>
+                            <field name="name" readonly="1"/>
+                            <field name="lang" readonly="1"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+    <menuitem name="Comptabilité"
+              id="account_accountant.menu_accounting"
+              groups="account.group_account_readonly,account.group_account_invoice,account.group_account_user,account.group_account_manager"
+              web_icon="account_accountant,static/description/icon.png"
+              sequence="40"/>
+
+
+</odoo>

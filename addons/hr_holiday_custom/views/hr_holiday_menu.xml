@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <menuitem id="menu_rapport"
+                  name="Rapports"
+                  parent="hr_holidays.menu_hr_holidays_root"
+                  sequence="1000"/>
+
+        <menuitem id="hr_holidays.menu_hr_holidays_my_leaves" name="My Time Off" groups="make_invisible"/>
+
+        <record model="ir.ui.menu" id="hr_holidays.hr_holidays_menu_manager_approve_allocations">
+            <field name="name">Allocations</field>
+        </record>
+
+        <record id="hr_holidays.menu_hr_holidays_configuration" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4,ref('hr_holidays.group_hr_holidays_manager'))]"/>
+            <field name="sequence">100</field>
+        </record>
+
+    </data>
+</odoo>

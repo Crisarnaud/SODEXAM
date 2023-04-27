@@ -1,0 +1,27 @@
+<odoo>
+   <data>
+     <record id="template_return_delay_alert_on_availability" model="mail.template">
+       <field name="name">Alerte retard retour mise en disponibilité</field>
+       <field name="model_id" ref="hr_contract_custom.model_hr_contract_contract_availability" />
+       <field name="auto_delete" eval ="False" />
+       <field name="email_from"> ${(object.contract_id.company_id.email or'')|safe } </field>
+       <field name="email_to"> ${(object.contract_id.company_id.hr_manager_id.work_email or '')|safe} </field>
+       <field name="email_cc"> ${(object.contract_id.company_id.alert_receiver_one.work_email or '')|safe};
+           ${(object.contract_id.company_id.alert_receiver_two.work_email or '')|safe}</field>
+       <field name="subject"> Alerte retard retour mise en disponibilité (Mat. ${object.contract_id.employee_id.identification_id})</field>
+       <field name="body_html">
+       <![CDATA[
+            <p>Bonjour Monsieur/ Madame,</p>
+
+            <p>Nous vous informons que l'agent <b>${object.contract_id.employee_id.name} ${object.contract_id.employee_id.first_name}</b>
+            Matricule: <b>${object.contract_id.employee_id.identification_id}</b> n'a pas repris le service des suites de sa mise
+            en disponibilité du ${format_tz(object.start_date_availability, tz = 'UTC', format='%d-%m-%Y')} au
+            ${format_tz(object.previsional_end_date_availability, tz = 'UTC', format='%d-%m-%Y')}.
+            </p>
+            <br/>
+            <p>Cordialement!</p>
+            ]]>
+       </field>
+     </record>
+   </data>
+</odoo>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_attestation">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="hr_employee_custom.doc_layout">
+                        <div class="page" style="padding:120px 0px 100px 0px;">
+                            <table style="border-collapse:collapse;bordercolor=#111111; align:center;">
+                                <tr>
+                                    <td style="border:none; width:20%;"></td>
+                                    <td style="border:3px solid black; width:60%; align:center; text-align:center;">
+                                        <h3 style="padding-top:20px; padding-bottom:20px;font-family:DejaVu Serif;">
+                                            <b>ATTESTATION DE TRAVAIL</b>
+                                        </h3>
+                                    </td>
+                                    <td style="border:none; width:20%;"></td>
+                                </tr>
+                            </table>
+                            <br></br>
+                            <br/>
+                            <p style="text-align:justify;">
+                                <p style="font-size: 19px;text-justify: inter-word;font-family:DejaVu Serif;">Je
+                                    soussigné
+                                    <t t-if="o.id != o.company_id.hr_manager_id.id">
+                                        <span t-field="o.company_id.hr_manager_id.first_name"
+                                              style="font-family:DejaVu Serif;"/>
+                                        <span t-field="o.company_id.hr_manager_id.name"
+                                              style="font-family:DejaVu Serif;"/>
+                                        , Directeur des
+                                        Ressources Humaines
+                                    </t>
+                                    <t t-if="o.id == o.company_id.hr_manager_id.id">
+                                        <span t-field="o.company_id.general_manager_id.first_name"
+                                              style="font-family:DejaVu Serif;"/>
+                                        <span t-field="o.company_id.general_manager_id.name"
+                                              style="font-family:DejaVu Serif;"/>
+                                        , Directeur Général
+                                    </t>
+                                    de
+                                    <strong>
+                                        <em>LA
+                                            <span t-field="o.company_id.name"
+                                                  style="text-transform: uppercase;font-family:DejaVu Serif;"/>
+                                        </em>
+                                    </strong>
+                                    , atteste que
+                                    <strong>
+                                        <t t-if="o.gender == 'male'">
+                                            Monsieur
+                                        </t>
+                                        <t t-if="o.gender == 'female'">
+                                            Madame
+                                        </t>
+                                        <span t-field="o.name" style="font-family:DejaVu Serif;"/>
+                                        <span t-field="o.first_name" style="font-family:DejaVu Serif;"/>,
+                                        Matricule: <span t-field="o.identification_id"
+                                                        style="font-family:DejaVu Serif;"/>,
+                                    </strong>
+                                </p>
+                                <p style="font-size: 19px;text-justify: inter-word;font-family:DejaVu Serif;">est
+                                    <t t-if="o.gender == 'male'">
+                                        employé
+                                    </t>
+                                    <t t-if="o.gender == 'female'">
+                                        employée
+                                    </t>
+                                    à
+                                    <span>
+                                        <em>LA
+                                            <span t-field="o.company_id.name"
+                                                  style="text-transform: uppercase;font-family:DejaVu Serif;"/>
+                                        </em>
+
+                                    </span>
+                                    depuis le
+                                    <strong>
+                                        <t t-if="o.start_date">
+                                            <span t-esc="o.start_date.strftime('%d %B %Y')"
+                                                  style="font-family:DejaVu Serif;text-transform:capitalize;"/>.
+                                        </t>
+                                        <t t-if="not o.start_date">
+                                            <span>XXXXXXX</span>.
+                                        </t>
+                                    </strong>
+                                </p>
+                                <p style="font-size: 19px;text-justify: inter-word;font-family:DejaVu Serif;">
+                                    <t t-if="o.gender == 'male'">
+                                        Il
+                                    </t>
+                                    <t t-if="o.gender == 'female'">
+                                        Elle
+                                    </t>
+                                    exerce présentement à la
+                                    <t t-if="o.direction_id">
+                                        <span t-field="o.direction_id.description"
+                                          style="font-family:DejaVu Serif;"/>
+                                    </t>
+                                    <t t-if="not o.direction_id">
+                                        <strong>XXXXXXX</strong>
+                                    </t>
+
+                                    en qualité
+                                    <t t-if="o.job_id">
+                                        <t t-if="o.job_id.name[0] in ('A','E','I','O','U','Y','a','e','i','o','u','y')">
+                                            d'
+                                        </t>
+                                        <t t-else="">
+                                            de
+                                        </t>
+                                        <strong>
+                                            <span t-field="o.job_id.name" style="font-family:DejaVu Serif;"/>.
+                                        </strong>
+                                    </t>
+                                    <t t-if="not o.job_id">
+                                        <strong>de XXXXXXX</strong>
+                                    </t>
+                                </p>
+                                <p style="font-size: 19px;text-justify: inter-word;font-family:DejaVu Serif;">
+                                    En foi de quoi, la présente Attestation lui est délivrée pour servir et valoir ce
+                                    que de droit.
+                                </p>
+                            </p>
+                            <br/>
+                            <div class="pull-right" style="font-size: 19px;margin-top: 20px;">
+                                <div style="margin-bottom: 10px;text-justify: auto;font-family:DejaVu Serif;">
+                                    <h6>Fait à Abidjan, le
+                                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"
+                                              style="font-family:DejaVu Serif;"/>
+                                    </h6>
+                                </div>
+                                <div style="margin-bottom: 80px;border-top:1px solid black;padding-top:10px;font-size:18px;font-family:DejaVu Serif;">
+                                    <h6 style="text-justify: auto;font-size:17px;font-family:DejaVu Serif;">
+                                        <t t-if="o.id != o.company_id.hr_manager_id.id">
+                                            <strong>Le Directeur des Ressources Humaines</strong>
+                                        </t>
+                                        <t t-if="o.id == o.company_id.hr_manager_id.id">
+                                            <strong>Le Directeur Général</strong>
+                                        </t>
+
+                                    </h6>
+                                </div>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <p style="text-justify: auto;font-family:DejaVu Serif;">
+                                    <strong>
+                                        <span style="padding-bottom:3px;border-bottom:1px solid black;font-size:19px;font-family:DejaVu Serif;">
+                                            <t t-if="o.id != o.company_id.hr_manager_id.id">
+                                                <span t-field="o.company_id.hr_manager_id.first_name"
+                                                      style="font-family:DejaVu Serif;"/>
+                                                <span t-field="o.company_id.hr_manager_id.name"
+                                                      style="font-family:DejaVu Serif;"/>
+                                            </t>
+                                            <t t-if="o.id == o.company_id.hr_manager_id.id">
+                                                <span t-field="o.company_id.general_manager_id.first_name"
+                                                      style="font-family:DejaVu Serif;"/>
+                                                <span t-field="o.company_id.general_manager_id.name"
+                                                      style="font-family:DejaVu Serif;"/>
+                                            </t>
+                                        </span>
+                                    </strong>
+                                </p>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

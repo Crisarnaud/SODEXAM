@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="historic_planning_holidays_tree" model="ir.ui.view">
+            <field name="name">save.planning.holiday.tree</field>
+            <field name="model">save.planning.holiday</field>
+            <field name="arch" type="xml">
+                <tree create="false">
+                    <field name="employee_id"/>
+                    <field name="date_return_last_holidays"/>
+                    <field name="estimed_date_leave"/>
+                    <field name="estimated_date_return_leave"/>
+                    <field name="number_days_estimed_holidays"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="action_historic_planning_holidays" model="ir.actions.act_window">
+            <field name="name">Historique des plannings des congés</field>
+            <field name="res_model">save.planning.holiday</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <menuitem name="Historique des plannings congés"  id="menu_hr_planning_holidays_root"  parent="hr_holidays.menu_hr_holidays_root"
+                  action="action_historic_planning_holidays" sequence="6"/>
+
+    </data>
+</odoo>

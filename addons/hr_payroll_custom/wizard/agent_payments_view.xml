@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="payroll_ci_raport_agent_payments_form">
+            <field name="name">payroll_ci_raport_agent_payments_form</field>
+            <field name="model">payroll_ci_raport.agent_payments</field>
+            <field name="arch" type="xml">
+                <form string="Agent_payments">
+                    <group col="4">
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+<!--                        <field name="rules_ids" widget="many2many_tags"/>-->
+                        <field name="employee_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="company_id" invisible="1"/>
+                    </group>
+                    <footer>
+                        <!--<button string="Imprimer en PDF" name="print_report_pdf" type="object" class="btn-primary"/>-->
+                        <button string="Imprimer en XLS" name="print_report_xls" type="object" class="btn-primary"/>
+                        <button string="Annuler" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_agent_payments" model="ir.actions.act_window">
+            <field name="name">Rapport des paiements/agent</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">payroll_ci_raport.agent_payments</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="payroll_ci_raport_agent_payments_menu" name="Rapport des paiements/agent"
+                  sequence="63"
+                  parent="hr_payroll_custom.menu_hr_payroll_rapport" action="action_agent_payments"/>
+
+
+    </data>
+</odoo>

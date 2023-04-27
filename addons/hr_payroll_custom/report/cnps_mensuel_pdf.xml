@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="cnps_mensuel_report_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="page" style="text-align: center; padding:30px 0px 100px 0px;">
+                    <div class="row" style="justify-content:space-between;">
+                        <p>
+                            <span style="font-family:DejaVu Serif;font-size:19px;text-align:left;">
+                                RAISON SOCIALE:
+                                <span t-esc="o.company_id.name"/>
+                            </span>
+                            <span style="font-family:DejaVu Serif;font-size:19px;margin-left:450px;">
+                                <span t-esc="o.name"/>
+                            </span>
+                        </p>
+                    </div>
+                    <br/>
+                    <table style="text-align:center;padding-top:10px;font-size:19px;border-collapse:collapse;">
+                        <tr>
+                            <td style="font-family:DejaVu Serif;font-size:16px;border:1px solid black">
+                                N°CNPS
+                            </td>
+                            <td style="font-family:DejaVu Serif;font-size:16px;border:1px solid black">
+                                NOM
+                            </td>
+                            <td style="font-family:DejaVu Serif;font-size:16px;border:1px solid black">
+                                PRENOMS
+                            </td>
+                            <td style="font-family:DejaVu Serif;font-size:16px;border:1px solid black">
+                                ANNÉE DE NAISSANCE
+                            </td>
+                            <td style="font-family:DejaVu Serif;font-size:16px;border:1px solid black">
+                                DATE D'EMBAUCHE
+                            </td>
+                            <td style="font-family:DejaVu Serif;font-size:16px;border:1px solid black">
+                                DATE DE DEPART
+                            </td>
+                            <td style="font-family:DejaVu Serif;font-size:16px;border:1px solid black">
+                                TYPE SALARIE
+                                <br/>
+                                M: Mensuel
+                                <br/>
+                                J : Journalier
+                                <br/>
+                                H: Horaire
+                            </td>
+                            <td style="font-family:DejaVu Serif;font-size:16px;border:1px solid black">
+                                DUREE
+                                <br/>
+                                TRAVAILLEE
+                            </td>
+                            <td width="135px"
+                                style="font-family:DejaVu Serif;font-size:16px;border:1px solid black">
+                                SALAIRE BRUT
+                            </td>
+                        </tr>
+                        <t t-foreach="o.other_line_ids" t-as="p">
+                            <t t-set="total" t-value="0"/>
+                            <tr>
+                                <td style="font-size:19px;border:1px solid black;width:19px">
+                                    <t t-esc="p.employee_id.identification_cnps"
+                                       style="font-family:DejaVu Serif;font-size:19px;"/>
+                                </td>
+                                <td style="font-size:19px;border:1px solid black">
+                                    <t t-esc="p.employee_id.name" style="font-family:DejaVu Serif;font-size:19px;"/>
+                                </td>
+                                <td style="font-size:19px;border:1px solid black">
+                                    <t t-esc="p.employee_id.first_name"
+                                       style="font-family:DejaVu Serif;font-size:19px;"/>
+                                </td>
+                                <td style="font-size:19px;border:1px solid black">
+                                    <t t-if="p.employee_id.birthday">
+                                        <t t-esc="p.employee_id.birthday.strftime('%Y')"
+                                           style="font-family:DejaVu Serif;font-size:19px;"/>
+                                    </t>
+                                    <t t-else=""></t>
+                                </td>
+                                <td style="font-size:19px;border:1px solid black">
+                                    <t t-if="p.employee_id.start_date">
+                                        <t t-esc="p.employee_id.start_date.strftime('%d/%m/%Y')"
+                                           style="font-family:DejaVu Serif;font-size:19px;"/>
+                                    </t>
+                                </td>
+                                <td style="font-size:19px;border:1px solid black">
+                                    <t t-if="p.employee_id.end_date">
+                                        <t t-esc="p.employee_id.end_date.strftime('%d/%m/%Y')"
+                                           style="font-family:DejaVu Serif;font-size:19px;"/>
+                                    </t>
+                                </td>
+                                <td style="font-size:19px;border:1px solid black">
+                                    <span t-esc="p.employee_id.type"
+                                          style="font-family:DejaVu Serif;font-size:19px;text-transform:uppercase;"/>
+                                </td>
+                                <td style="font-size:19px;border:1px solid black">
+                                    <span style="font-family:DejaVu Serif;font-size:19px;text-transform:uppercase;">
+                                        1
+                                    </span>
+                                </td>
+
+                                <td style="font-size:19px;border:1px solid black;text-align:right;">
+                                    <span t-esc="'{0:,.0f}'.format(int(round(p.amount_brut))).replace(',', ' ')"
+                                          style="font-family:DejaVu Serif;font-size:19px;"/>
+                                </td>
+                            </tr>
+                        </t>
+                        <tr>
+                            <td colspan="8"
+                                style="font-size:19px;border:1px solid black;width:19px;text-align:left;">
+                                TOTAL
+                            </td>
+                            <td colspan="1" style="font-size:19px;border:1px solid black;">
+                                <t t-set="subtotal" t-value="sum(p.amount_brut for p in o.other_line_ids)"/>
+                                <span t-esc="'{0:,.0f}'.format(int(round(subtotal))).replace(',', ' ')"
+                                      style="font-family:DejaVu Serif;font-size:19px;"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="footer">
+                        <div class="row">
+                            <div class="pagination" style="margin-left: auto;margin-right: auto;width: 6em;font-family:DejaVu Serif;">
+                                <span class="page"/>
+                                /
+                                <span class="topage"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

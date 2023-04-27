@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="contract_email_template" model="mail.template">
+            <field name="name">Confirmation de contrat</field>
+            <field name="email_from">${(object.employee_id.company_id.email or'')|safe }</field>
+            <field name="email_to">${(object.company_id.hr_manager_id.work_email or '')|safe}</field>
+            <field name="email_cc">${(object.company_id.alert_receiver_one.work_email or '')|safe};${(object.company_id.alert_receiver_two.work_email or '')|safe}</field>
+            <field name="subject">Nouveau contrat</field>
+            <field name="model_id" ref="hr_contract_custom.model_hr_contract"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.employee_id.user_id.lang}</field>
+            <field name="body_html"><![CDATA[
+            <p>Cher M. / Mme,</p>
+
+            <p>Un règlement fournisseur vient d'être crée , il vous est soumi pour validation </p>
+            <p>Veuillez cliquer <a href="${object.url_link}">ici</a> pour voir les détails.</p>
+
+            <br/>
+            <p>Cordialement.</p>
+            ]]></field>
+        </record>
+    </data>
+</odoo>

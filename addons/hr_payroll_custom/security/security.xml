@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="make_invisible" model="res.groups">
+            <field name="name">Afficher menu Facturation</field>
+        </record>
+
+        <record id="hr_payroll.group_hr_payroll_user" model="res.groups">
+            <field name="name">Officer</field>
+            <field name="category_id" ref="base.module_category_human_resources_payroll"/>
+            <field name="implied_ids"
+                   eval="[(4, ref('hr.group_hr_user'))]"/>
+            <field name="users" eval="[(3, ref('base.user_root'))]"/>
+        </record>
+
+        <record id="group_hr_payroll_consultant" model="res.groups">
+            <field name="name">Consultant</field>
+            <field name="category_id" ref="base.module_category_human_resources_payroll"/>
+        </record>
+
+        <record id="hr_payroll.group_hr_payroll_manager" model="res.groups">
+            <field name="name">Administrator</field>
+            <field name="implied_ids" eval="[(3, ref('base.user_root'))]"/>
+        </record>
+
+         <record model='ir.ui.menu' id='hr_work_entry_contract.menu_hr_payroll_configuration'>
+            <field name="groups_id" eval="[(3,ref('hr.group_hr_user'))]"/>
+        </record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="budget_personnal_charge_pdf">
+            <t t-call="web.html_container">
+                <t t-call="hr_payroll_custom.internal_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page">
+                            <div style="padding-top:5px;text-align:center;">
+                                <p style="padding-top:5px;">
+                                    <h5 style="font-family:DejaVu Serif;">
+                                        <b>CHARGES DU PERSONNEL BPCI</b><br/>
+                                        <b><span t-esc="o.name"/></b>
+                                    </h5>
+                                </p>
+                            </div>
+                            <br/>
+
+                            <h7 style="font-family:DejaVu Serif;"><strong>1. BUDGET CHARGES DU PERSONNEL</strong></h7>
+                            <table>
+                                <thead>
+                                    <tr style="background-color:#f1f1f1;">
+                                        <td style="font-family:DejaVu Serif;text-align:center;font-size:19px;">
+                                            Règles
+                                        </td>
+                                        <td style="font-family:DejaVu Serif;text-align:center;font-size:19px;width:150px;">
+                                            Budget
+                                        </td>
+                                        <td style="font-family:DejaVu Serif;text-align:center;font-size:19px;background-color:#DCDCDC;"/>
+                                        <td style="font-family:DejaVu Serif;text-align:center;font-size:19px;width:150px;">
+                                            Réalisé au <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/>
+                                        </td>
+                                        <td style="font-family:DejaVu Serif;text-align:center;font-size:19px;width:100px;">
+                                            Taux
+                                        </td>
+                                        <td style="font-family:DejaVu Serif;text-align:center;font-size:19px;width:170px;">
+                                            OBS
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach='o.salary_rules_ids' t-as='line'>
+                                        <td style="font-family:DejaVu Serif;font-size:19px;">
+                                            <span t-esc="line.rule_id.name"/>
+                                        </td>
+                                        <td style="font-family:DejaVu Serif;font-size:19px;text-align:center;">
+                                            <span t-esc="line.budget"/>
+                                        </td>
+                                        <td style="font-family:DejaVu Serif;text-align:center;font-size:19px;background-color:#DCDCDC;"/>
+                                        <td style="font-family:DejaVu Serif;font-size:19px;text-align:center;">
+                                            <span t-esc="line.budget_realized"/>
+                                        </td>
+                                        <td style="font-family:DejaVu Serif;text-align:center;font-size:19px;">
+                                            <span t-esc="line.rate"/>
+                                        </td>
+                                        <td style="font-family:DejaVu Serif;text-align:center;font-size:19px;">
+                                            <span t-esc="line.obs"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6" style="font-family:DejaVu Serif;text-align:center;font-size:19px;background-color:#DCDCDC;"/>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

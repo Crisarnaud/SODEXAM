@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+      <menuitem
+        id="hr_payroll.menu_hr_payroll_employees_root"
+        name="Employés"
+        parent="hr_work_entry_contract.menu_hr_payroll_root"
+        sequence="50"
+        groups="hr_payroll.group_hr_payroll_user,hr_payroll_custom.group_lecture,group_hr_payroll_consultant"/>
+
+    <menuitem
+        id="hr_payroll.menu_hr_payroll_payslips"
+        name="Bulletins de salaire"
+        parent="hr_work_entry_contract.menu_hr_payroll_root"
+        groups="hr_payroll.group_hr_payroll_user,hr_payroll_custom.group_lecture"/>
+
+    <menuitem
+        id="hr_payroll.menu_hr_payroll_report"
+        name="Reporting"
+        parent="hr_work_entry_contract.menu_hr_payroll_root"
+        sequence="70"
+        groups="hr_payroll.group_hr_payroll_manager"/>
+
+    <!-- **** Employees **** -->
+    <menuitem
+        id="hr_payroll.menu_hr_payroll_employees_configuration"
+        action="hr.open_view_employee_list_my"
+        parent="hr_payroll.menu_hr_payroll_employees_root"
+        sequence="10"/>
+
+    <menuitem
+        id="hr_payroll.menu_hr_payroll_contracts_configuration"
+        action="hr_payroll.action_hr_contract_repository"
+        parent="hr_payroll.menu_hr_payroll_employees_root"
+        sequence="20"/>
+
+    <!-- **** Payslips **** -->
+    <menuitem
+        id="hr_payroll.menu_hr_payroll_employee_payslips"
+        name="All Payslips"
+        parent="hr_payroll.menu_hr_payroll_payslips"
+        sequence="60"
+        action="hr_payroll.action_view_hr_payslip_month_form"
+        groups="hr_payroll.group_hr_payroll_user"/>
+
+    <menuitem
+        id="hr_payroll.menu_hr_payroll_employee_payslips_to_pay"
+        name="To Pay"
+        parent="hr_payroll.menu_hr_payroll_payslips"
+        sequence="20"
+        action="hr_payroll.hr_payslip_action_view_to_pay"
+        groups="hr_payroll.group_hr_payroll_user"/>
+
+      <menuitem
+        id="hr_payroll.menu_hr_payslip_run"
+        action="hr_payroll.action_hr_payslip_run_tree"
+        name="Batches"
+        sequence="80"
+        parent="hr_payroll.menu_hr_payroll_payslips"/>
+
+    <!-- **** Reporting **** -->
+    <menuitem id="hr_payroll.menu_report_payroll"
+        name="Payroll"
+        action="hr_payroll.payroll_report_action"
+        parent="hr_payroll.menu_hr_payroll_report"/>
+
+    <!-- **** Configuration **** -->
+
+    <menuitem
+        id="hr_payroll.menu_hr_payroll_global_settings"
+        name="Settings"
+        parent="hr_work_entry_contract.menu_hr_payroll_configuration"
+        sequence="0"
+        action="hr_payroll.action_hr_payroll_configuration"
+        groups="base.group_system"/>
+
+    <!-- Salary Configuration -->
+    <menuitem
+        id="hr_payroll.menu_hr_salary_configuration"
+        name="Salary"
+        parent="hr_work_entry_contract.menu_hr_payroll_configuration"
+        sequence="80"
+        groups="hr_payroll.group_hr_payroll_user"
+    />
+
+    <menuitem
+        id="hr_payroll.menu_action_hr_salary_rule_form"
+        action="hr_payroll.action_salary_rule_form"
+        name="Rules"
+        parent="hr_payroll.menu_hr_salary_configuration"
+        sequence="30"/>
+
+    <menuitem
+        id="hr_payroll.menu_action_hr_salary_rule_parameter"
+        action="hr_payroll.hr_rule_parameter_action"
+        name="Rule Parameters"
+        parent="hr_payroll.menu_hr_salary_configuration"
+        sequence="35"/>
+
+    <menuitem
+        id="hr_payroll.menu_hr_salary_rule_category"
+        action="hr_payroll.action_hr_salary_rule_category"
+        name="Rule Categories"
+        parent="hr_payroll.menu_hr_salary_configuration"
+        sequence="35"
+        groups="base.group_no_one"
+    />
+
+    <menuitem
+        id="hr_payroll.menu_hr_payroll_structure_view"
+        action="hr_payroll.action_view_hr_payroll_structure_list_form"
+        name="Structures"
+        parent="hr_payroll.menu_hr_salary_configuration"
+        sequence="20"
+    />
+
+    <menuitem
+        id="hr_payroll.menu_hr_payroll_structure_type"
+        name="Structure Types"
+        action="hr_payroll.action_hr_payroll_structure_type"
+        parent="hr_payroll.menu_hr_salary_configuration"
+        sequence="10"/>
+
+    <menuitem
+        id="hr_payroll.menu_hr_payslip_entry_type_view"
+        action="hr_payroll.action_view_hr_payslip_input_type"
+        parent="hr_payroll.menu_hr_salary_configuration"
+        name="Other Input Types"
+        sequence="40"/>
+
+    </data>
+</openerp>

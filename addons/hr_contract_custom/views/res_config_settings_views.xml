@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.hr</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="70"/>
+        <field name="inherit_id" ref="hr.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <div data-key="hr" position="inside">
+
+                <div id="hr_contract_res_conf" position="inside">
+                    <div id="hr_contract_model_id">
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-6 o_setting_box" id="alert_executive_end_contract">
+                                <div class="o_setting_right_pane">
+                                    <!--<div class="text-muted col-lg-12">Alerte fin de contrat pour les cadres (Mois)
+                                        <field name="alert_contract_expiry_cadre" string="Alerte fin de contrat pour les cadres"/>
+                                    </div>-->
+                                    <label for="alert_contract_expiry_cadre"/>
+                                    <span class="fa fa-lg " title="" role="img"
+                                          aria-label="Values set here are company-specific."/>
+                                    <div class="row">
+                                        <div class="text-muted col-lg-8">
+                                            Alerte fin de contrat pour les cadres (Jours).
+                                        </div>
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="mt16">
+                                            <field name="alert_contract_expiry_cadre"
+                                                   class="o_light_label"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box" id="alert_not_executive_end_contract">
+                                <div class="o_setting_right_pane">
+                                    <!--<div class="text-muted col-lg-12">
+                                        Alerte fin de contrat pour les non-cadres (Mois)
+                                        <field name="alert_contract_expiry_non_cadre" string="Alerte fin dontrat pour les non-cadres"/>
+                                    </div>-->
+                                    <label for="alert_contract_expiry_non_cadre"/>
+                                    <span class="fa fa-lg " title="Values set here are company-specific." role="img"
+                                          aria-label="Values set here are company-specific."/>
+                                    <div class="row">
+                                        <div class="text-muted col-lg-8">
+                                            Alerte fin de contrat pour les non-cadres (Jours).
+                                        </div>
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="mt16">
+                                            <field name="alert_contract_expiry_non_cadre"
+                                                   class="o_light_label"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box" id="alert_trial_contract_expiry">
+                                <div class="o_setting_right_pane">
+                                    <label for="alert_trial_contract_expiry"/>
+                                    <span class="fa fa-lg " title="Values set here are company-specific." role="img"
+                                          aria-label="Values set here are company-specific."/>
+                                    <div class="row">
+                                        <div class="text-muted col-lg-8">
+                                            Alerte fin de contrat essai (Jours).
+                                        </div>
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="mt16">
+                                            <field name="alert_trial_contract_expiry"
+                                                   class="o_light_label"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="email_template_real_planning" model="mail.template">
+            <field name="name">Template planning réel de congé</field>
+            <field name="email_from">${(object.employee_id.company_id.email or'')|safe }</field>
+            <field name="email_to">${(object.employee_id.work_email or '')|safe}</field>
+            <field name="subject">
+                %if object.state == 'done':
+                    Validation
+                %elif object.state == 'draft':
+                    Rejet
+                %else:
+                    Annulation
+                %endif
+                planning réel de congé de Mr/Mme/Mlle ${object.employee_id.name+ ' '+ object.employee_id.first_name}</field>
+            <field name="model_id" ref="model_hr_holiday_planning"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html">
+                <![CDATA[
+                    <p>Bonjour M/Mme ${object.employee_id.name},</p>
+                    <p>Votre planning réel de congés vient d'être
+                    %if object.state == 'done':
+                        validé.
+                    %elif object.state == 'draft':
+                        rejeté.
+                    %else:
+                        annulé.
+                    %endif
+                    </p>
+                    <p> Vous pouvez vous connecter au portail collaboratif pour avoir plus d'informations.</p>
+                    <p>Cordialement!</p>
+                ]]>
+            </field>
+        </record>
+    </data>
+</odoo>

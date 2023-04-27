@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <!-- <data>-->
+        <record id="hr_employee_resignation_form" model="ir.ui.view">
+            <field name="name">hr_employee_custom_employee_resignation_form</field>
+            <field name="model">hr_employee_custom.employee_resignation</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group col="4">
+                        <field name="date_debut"/>
+                        <field name="date_fin"/>
+                    </group>
+                    <group>
+                        <field name="motif_fin_contrat_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="all_motif"/>
+                    </group>
+                    <footer>
+                        <button name="print_employee_resignation_pdf" string="Imprimer en pdf" type="object" class="btn-primary"/>
+                        <button name="print_employee_resignation_xls" string="Imprimer en xls" type="object" class="btn-primary"/>
+                        <button string="Annuler" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_hr_employee_resignation">
+            <field name="name">Rapport des départs</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr_employee_custom.employee_resignation</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_hr_employee_resignation" name="Rapport des départs"
+                  parent="hr_employee_custom.menu_rapport_xls"
+                  action="action_hr_employee_resignation" groups="hr.group_hr_user"/>
+</odoo>

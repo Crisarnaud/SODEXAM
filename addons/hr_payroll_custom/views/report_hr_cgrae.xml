@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="hr_cgrae_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="article">
+                    <div class="head">
+                        <table>
+                            <tr>
+                                <td></td>
+                                <td>INSTITUTION DE PREVOYANCE SOCIALE <br/>CAISSE GENERALE DE RETRAITE DES AGENTS DE L'ETAT <br/>APPEL DE COTISATIONS</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="page">
+                        <div >DECOMPTES DES COTISATIONS DUES</div>
+                        <div>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td rowspan="2">RUBRIQUES</td>
+                                        <td rowspan="2">SOLDE BRUT <br/>INDICIAIRE</td>
+                                        <td colspan="2">PART SALARIALE</td>
+                                        <td colspan="2">PART PATRONALE</td>
+                                        <td colspan="2">TOTAL</td>
+                                    </tr>
+                                    <tr>
+                                        <td>TAUX</td>
+                                        <td></td>
+                                        <td>TAUX</td>
+                                        <td></td>
+                                        <td>TAUX</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>PENSION DE RETRAITE</td>
+                                        <td><sapn t-field="o.total_base" /></td>
+                                        <td>8,33 %</td>
+                                        <td><sapn t-field="o.total_cgrae_employee" /></td>
+                                        <td>16,67 %</td>
+                                        <td><sapn t-field="o.total_cgrae_employer" /></td>
+                                        <td>25 %</td>
+                                        <td><sapn t-esc="o.total_cgrae_employee + o.total_cgrae_employer" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>VALIDATION</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>ALLOCATION VIAGERE PERSO</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>TOTAL COTISATION A PAYER</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8"></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Banque</td>
+                                        <td>Date d'mission</td>
+                                        <td>Rfrence du titre de paiement</td>
+                                        <td>Montant</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8"></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="4">ATTENTION! <br/>Le titre de paiement doit tre libell  l'ordre de la "Caisse Gnrale de <br/>Retraite des Agents de l'Etat"</td>
+                                        <td colspan="3">Bordereau certifi exact,<br/><br/>
+A ........................le...................</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">CADRE RESERVE A L'IPS CGRAE(NE RIEN Y INSCRIRE S'IL VOUS PLAIT)</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td colspan="3">Signature et cachet</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date de reception</td>
+                                        <td>Visa du charg de <br/>compte</td>
+                                        <td colspan="6"></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td colspan="6"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
+

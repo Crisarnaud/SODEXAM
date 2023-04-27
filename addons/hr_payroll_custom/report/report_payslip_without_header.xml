@@ -1,0 +1,869 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="hr_payroll_custom.employee_infos">
+            <table id="table header_part2" class="act_as_table">
+                <tr>
+                    <td id="colpart1" style="font-family: Times New Roman,Arial;">Matricule</td>
+                    <td id="colpart2">
+                        <span t-field="o.employee_id.identification_id"/>
+                    </td>
+                    <td id="colpart4" colspan="3">NOM ET PRENOMS</td>
+                </tr>
+
+                <tr>
+                    <td id="colpart1">Catégorie salariale</td>
+                    <td id="colpart2">
+                        <span t-field="o.contract_id.categorie_salariale_id.name"/>
+                    </td>
+                    <td id="colpart6" colspan="3">
+                        <strong>
+                            <span t-field="o.employee_id.name"/>
+                            <span t-field="o.employee_id.first_name"/>
+                        </strong>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td id="colpart1">Part IGR</td>
+                    <td id="colpart2">
+                        <t t-if="o.state=='done'">
+                            <span t-field="o.igr_part"/>
+                        </t>
+                        <t t-if="o.state!='done'">
+                            <span t-field="o.employee_id.part_igr"/>
+                        </t>
+                    </td>
+                    <td id="colpart3" align="center" colspan="3">
+                        <span t-field="o.employee_id.address_home_id.zip"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="colpart1">Nationalité</td>
+                    <td id="colpart2">
+                        <span t-field="o.employee_id.country_id"/>
+                    </td>
+                    <td id="colpart1">Date d'embauche</td>
+                    <td id="colpart2" colspan="2">
+                        <span t-field="o.employee_id.start_date"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="colpart1">Situation matrimoniale</td>
+                    <td id="colpart2">
+                        <t t-if="o.state=='done'">
+                            <span t-field="o.marital_status"/>
+                        </t>
+                        <t t-if="o.state!='done'">
+                            <span t-field="o.employee_id.marital"/>
+                        </t>
+                    </td>
+                    <td id="colpart1">Direction</td>
+                    <td id="colpart2" colspan="2">
+                        <span t-field="o.employee_id.direction_id.name"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="colpart1">Anciennété</td>
+                    <td id="colpart2">
+                        <t t-if="o.payslip_an_anciennete != 0">
+                            <span t-field="o.payslip_an_anciennete"/>
+                            ans
+                        </t>
+                        <span t-field="o.payslip_mois_anciennete"/>
+                        mois
+                    </td>
+                    <td id="colpart1">Département</td>
+                    <td id="colpart2" colspan="2">
+                        <span t-field="o.employee_id.department_id.name"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="colpart1">
+                        <t t-if="o.employee_id.type == 'p'">
+                            Num. CGRAE
+                        </t>
+                        <t t-if="o.employee_id.type != 'p'">
+                            Num. CNPS
+                        </t>
+
+                    </td>
+                    <td id="colpart2">
+                        <t t-if="o.employee_id.type == 'p'">
+                            <span t-field="o.employee_id.num_cgare"/>
+                        </t>
+                        <t t-if="o.employee_id.type != 'p'">
+                            <span t-field="o.employee_id.identification_cnps"/>
+                        </t>
+                    </td>
+                    <td id="colpart1">Poste occupé</td>
+                    <td id="colpart2" colspan="2">
+                        <span t-field="o.employee_id.job_id.name"/>
+                    </td>
+                </tr>
+            </table>
+        </template>
+
+        <template id="hr_payroll_custom.payslip_body">
+            <t t-set="number_line" t-value="0"/>
+            <table id="line_ids">
+                <thead>
+                    <tr>
+                        <th rowspan="2" style="font-family: Times New Roman,Arial;">Code</th>
+                        <th rowspan="2" style="font-family: Times New Roman,Arial;">Designation</th>
+                        <th rowspan="2" style="font-family: Times New Roman,Arial;">Nombre</th>
+                        <th rowspan="2" style="font-family: Times New Roman,Arial;">Base</th>
+                        <th colspan="3" style="font-family: Times New Roman,Arial;">Employé</th>
+                        <th colspan="2" style="font-family: Times New Roman,Arial;">Employeur</th>
+                    </tr>
+                    <tr>
+                        <th>Taux</th>
+                        <th>Gain</th>
+                        <th>Retenue</th>
+                        <th>Taux</th>
+                        <th>Retenue</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-set="total_ret_div" t-value="0"/>
+                    <t t-set="total_ret_impot" t-value="0"/>
+                    <t t-set="ret" t-value="0"/>
+                    <t t-set="tot_net" t-value="0"/>
+<!--                    <t t-set="ret" t-value="total_ret_div + total_ret"/>-->
+                    <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="p">
+                        <t t-if="299 &gt; p.sequence and p.sequence &gt;=100 and p.amount != 0.0 and p.total != 0.0">
+                            <t t-set="number_line" t-value="number_line+1"/>
+                            <td id="colpart3" align="right">
+                                <span t-field="p.sequence"/>
+                            </td>
+                            <td id="colpart3">
+                                <span t-field="p.name"/>
+                            </td>
+                            <td id="colpart3" align="right">
+                                <t t-if="p.code != 'CONG' and p.code != 'CNGP' and p.code != 'RQ_CONG' and p.code != 'RQ_CONG'">
+                                    <t t-if="p.code != 'PANC'">
+                                        <t t-if="p.code == 'HS15' or p.code =='HS50' or p.code =='HS75' or p.code =='HS100'">
+                                            <span t-esc="int(p.quantity)"/>
+                                        </t>
+                                        <t t-if="p.code != 'HS15' and p.code != 'HS50' and p.code != 'HS75' and p.code != 'HS100'">
+                                            <span t-esc="o.get_amount_rubrique('WORK100')"/>
+                                        </t>
+                                    </t>
+                                    <t t-if="p.code == 'PANC'">
+                                        <span t-esc="o.payslip_an_anciennete"/>
+                                    </t>
+                                </t>
+                                <t t-if="p.code == 'CONG' or p.code == 'CNGP' ">
+                                    <span t-esc="o.number_days_off"/>
+                                </t>
+                                <t t-if="p.code == 'RQ_CONG' or p.code == 'RQ_CONG'">
+                                    <span t-esc="o.number_remaining_days_leave"/>
+                                </t>
+                            </td>
+                            <td id="colpart3" align="right">
+                                <span t-field="p.amount"/>
+                            </td>
+                            <td id="colpart3" align="right"/>
+                            <td id="colpart3" align="right">
+                                <span t-field="p.total"/>
+                            </td>
+                            <td id="colpart3" align="right"/>
+                            <td id="colpart3" align="right"/>
+                            <td id="colpart3" align="right"/>
+                        </t>
+                    </tr>
+                    <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="q">
+                        <t t-if="299 == q.sequence and q.amount != 0.0 and q.total != 0.0">
+                            <t t-set="number_line" t-value="number_line+1"/>
+                            <td id="colpart3">
+                                <span t-field="q.sequence"/>
+                            </td>
+                            <td id="colpart3">
+                                <span t-field="q.name"/>
+                            </td>
+                            <td id="colpart3"/>
+                            <td id="colpart3" align="right">
+                                <span t-field="q.amount"/>
+                            </td>
+                            <td id="colpart3" align="right">
+                                <span t-field="q.quantity"/>
+                            </td>
+                            <td id="colpart3" align="right"/>
+                            <td id="colpart3" align="right">
+                                <span t-field="q.total"/>
+                            </td>
+                            <td id="colpart3" align="right"/>
+                            <td id="colpart3" align="right"/>
+                        </t>
+                    </tr>
+                    <tr id="sous_total" t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="l"
+                        style="background-color: #D3E0EE;">
+                        <t t-if="l.sequence == 300">
+                            <t t-set="number_line" t-value="number_line+1"/>
+                            <td id="colpart3" align="right"/>
+                            <td id="colpart3">TOTAL BRUT IMPOSABLE</td>
+                            <td id="colpart3" align="right"/>
+                            <td id="colpart3" align="center"/>
+                            <td id="colpart3" align="center"/>
+                            <td id="colpart3" align="right">
+                                <span t-field="l.total"/>
+                            </td>
+                            <td id="colpart3" align="right"/>
+                            <td id="colpart3" align="right"/>
+                            <td id="colpart3" align="right"/>
+                        </t>
+
+                    </tr>
+
+                    <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="j">
+                        <t t-if="410 &gt;=j.sequence and j.sequence &gt;=400 and j.amount != 0.0 and j.total != 0.0">
+                            <t t-set="number_line" t-value="number_line+1"/>
+                            <td id="colpart3" align="right">
+                                <span t-field="j.sequence"/>
+                            </td>
+                            <td id="colpart3">
+                                <span t-field="j.name"/>
+                            </td>
+                            <td id="colpart3" align="right"></td>
+                            <td id="colpart3" align="right">
+                                <span t-field="j.amount"/>
+                            </td>
+                            <td id="colpart3" align="right">
+                                <t t-if="j.amount_select == 'percentage' and j.code != 'ACT' and j.code != 'PF' and j.code != 'TAXEAP' and j.code != 'TAXEFP'">
+                                    <span t-field="j.rate"/>
+                                </t>
+                            </td>
+                            <td id="colpart3" align="right"/>
+                            <td id="colpart3" align="right">
+                                <t t-if="j.code != 'ACT' and j.code != 'PF' and j.code != 'TAXEAP' and j.code != 'TAXEFP'">
+                                    <span t-field="j.total"/>
+                                </t>
+                                <t t-set="total_ret_impot" t-value="j.total + total_ret_impot"/>
+                            </td>
+                            <td id="colpart3" align="right">
+                                <t t-if="j.code == 'ITS'">
+                                    <span t-esc="o.getTauxByCode('ITS_P')"/>
+                                </t>
+                                <t t-if="j.code == 'CNPS'">
+                                    <span t-esc="o.getTauxByCode('CNPS_P')"/>
+                                </t>
+                                <t t-if="j.code == 'ACT'">
+                                    <span t-esc="o.getTauxByCode('ACT')"/>
+                                </t>
+                                <t t-if="j.code == 'PF'">
+                                    <span t-esc="o.getTauxByCode('PF')"/>
+                                </t>
+                                <t t-if="j.code == 'TAXEAP'">
+                                    <span t-esc="o.getTauxByCode('TAXEAP')"/>
+                                </t>
+                                <t t-if="j.code == 'TAXEFP'">
+                                    <span t-esc="o.getTauxByCode('TAXEFP')"/>
+                                </t>
+                            </td>
+                            <td id="colpart3" align="right">
+                                <t t-if="j.code == 'ITS'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('ITS_P'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'CNPS'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('CNPS_P'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'CMU'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('CMU_P'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'CGRAE_E'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('CGRAE_P'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'RGL_CGRAE_E'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('REG_CGRAE_P'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'CRRAE_E'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('CRRAE_PART'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'C_FAAM_E'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('CRRAE_FAAM_P'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'REG_C_FAAM_E'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('REG_CRRAE_FAAM_P'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'REG_CRRAE_E'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('REG_CRRAE_PART'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'ACT'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('ACT'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'PF'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('PF'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'TAXEAP'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('TAXEAP'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'TAXEFP'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('TAXEFP'))).replace(',', ' ')"/>
+                                </t>
+                            </td>
+                        </t>
+                    </tr>
+                    <tr id="sous_total" style="background-color: #D3E0EE;">
+                        <t t-set="number_line" t-value="number_line+1"/>
+                        <td id="colpart3" align="right"/>
+                        <td id="colpart3">TOTAL RETENUES IMPOTS</td>
+                        <td id="colpart3" align="right"/>
+                        <td id="colpart3" align="center"/>
+                        <td id="colpart3" align="right"/>
+                        <td id="colpart3" align="right"/>
+                        <td id="colpart3" align="right">
+<!--                            <t t-esc="total_ret_impot"/>-->
+                            <span t-esc="'{0:,.0f}'.format(int(total_ret_impot)).replace(',', ' ')"/>
+                        </td>
+                        <td id="colpart3" align="right"/>
+                        <td id="colpart3" align="right">
+                            <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('TTL_IMP_PART'))).replace(',', ' ')"/>
+                        </td>
+                    </tr>
+
+                    <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="j">
+                        <t t-if="498 &gt;=j.sequence and j.sequence &gt; 412 and j.amount != 0.0">
+                            <t t-set="number_line" t-value="number_line+1"/>
+                            <td id="colpart3" align="right">
+                                <span t-field="j.sequence"/>
+                            </td>
+                            <td id="colpart3">
+                                <span t-field="j.name"/>
+                            </td>
+                            <td id="colpart3" align="right"></td>
+                            <td id="colpart3" align="right">
+                                <span t-field="j.amount"/>
+                            </td>
+                            <td id="colpart3" align="right">
+                                <t t-if="j.amount_select == 'percentage' and j.code != 'ACT' and j.code != 'PF' and j.code != 'TAXEAP' and j.code != 'TAXEFP'">
+                                    <span t-field="j.rate"/>
+                                </t>
+                            </td>
+                            <td id="colpart3" align="right"/>
+                            <td id="colpart3" align="right">
+                                <t t-if="j.code != 'ACT' and j.code != 'PF' and j.code != 'TAXEAP' and j.code != 'TAXEFP'">
+                                    <span t-field="j.total"/>
+                                    <t t-set="total_ret_div" t-value="total_ret_div+j.total"/>
+                                </t>
+                            </td>
+                            <td id="colpart3" align="right">
+                                <t t-if="j.code == 'ITS'">
+                                    <span t-esc="o.getTauxByCode('ITS_P')"/>
+                                </t>
+                                <t t-if="j.code == 'CNPS'">
+                                    <span t-esc="o.getTauxByCode('CNPS_P')"/>
+                                </t>
+                                <t t-if="j.code == 'ACT'">
+                                    <span t-esc="o.getTauxByCode('ACT')"/>
+                                </t>
+                                <t t-if="j.code == 'PF'">
+                                    <span t-esc="o.getTauxByCode('PF')"/>
+                                </t>
+                                <t t-if="j.code == 'TAXEAP'">
+                                    <span t-esc="o.getTauxByCode('TAXEAP')"/>
+                                </t>
+                                <t t-if="j.code == 'TAXEFP'">
+                                    <span t-esc="o.getTauxByCode('TAXEFP')"/>
+                                </t>
+                            </td>
+                            <td id="colpart3" align="right">
+                                <t t-if="j.code == 'ITS'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('ITS_P'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'CNPS'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('CNPS_P'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'CMU'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('CMU_P'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'CGRAE_E'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('CGRAE_P'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'RGL_CGRAE_E'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('REG_CGRAE_P'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'CRRAE_E'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('CRRAE_PART'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'C_FAAM_E'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('CRRAE_FAAM_P'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'REG_C_FAAM_E'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('REG_CRRAE_FAAM_P'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'REG_CRRAE_E'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('REG_CRRAE_PART'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'ACT'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('ACT'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'PF'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('PF'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'TAXEAP'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('TAXEAP'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="j.code == 'TAXEFP'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('TAXEFP'))).replace(',', ' ')"/>
+                                </t>
+                            </td>
+                        </t>
+                    </tr>
+
+                    <tr id="sous_total" style="background-color: #D3E0EE;">
+                        <t t-set="number_line" t-value="number_line+1"/>
+                        <td id="colpart3" align="right"/>
+                        <td id="colpart3">TOTAL RETENUES DIVERSES</td>
+                        <td id="colpart3" align="right"/>
+                        <td id="colpart3" align="center"/>
+                        <td id="colpart3" align="right"/>
+                        <td id="colpart3" align="right"/>
+                        <td id="colpart3" align="right">
+                            <span t-esc="'{0:,.0f}'.format(int(total_ret_div)).replace(',', ' ')"/>
+                            <t t-set="ret" t-value="ret + total_ret_div"/>
+                            <!--                            <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('RET_DIV'))).replace(',', ' ')"/>-->
+                        </td>
+                        <td id="colpart3" align="right"/>
+                        <td id="colpart3" align="right">
+                            <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('TTL_COT_PART'))).replace(',', ' ')"/>
+                        </td>
+                    </tr>
+                    <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="m">
+                        <t t-if="599 &gt;=m.sequence and m.sequence &gt;= 500 and m.amount != 0.0 and m.total != 0.0">
+                            <t t-set="number_line" t-value="number_line+1"/>
+                            <td id="colpart3" align="right">
+                                <span t-field="m.sequence"/>
+                            </td>
+                            <td id="colpart3">
+                                <span t-field="m.name"/>
+                            </td>
+                            <td id="colpart3" align="right"/>
+                            <td id="colpart3" align="right">
+                                <span t-field="m.total"/>
+                            </td>
+                            <td id="colpart3" align="right"/>
+                            <td id="colpart3" align="right">
+                                <span t-field="m.total"/>
+                            </td>
+                            <td id="colpart3" align="right"></td>
+                            <td id="colpart3" align="right"></td>
+                            <td id="colpart3" align="right"></td>
+                        </t>
+                    </tr>
+                    <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="n">
+                        <t t-if="799 &gt;=n.sequence and n.sequence &gt;= 700 and n.amount != 0.0 and n.total != 0.0">
+                            <t t-set="number_line" t-value="number_line+1"/>
+                            <td id="colpart3" align="right">
+                                <span t-field="n.sequence"/>
+                            </td>
+                            <td id="colpart3">
+                                <span t-field="n.name"/>
+                            </td>
+                            <td id="colpart3" align="right"/>
+                            <td id="colpart3" align="right">
+                                <span t-field="n.amount"/>
+                            </td>
+                            <td id="colpart3" align="right"/>
+                            <td id="colpart3" align="right"></td>
+                            <td id="colpart3" align="right">
+                                <t t-esc="sum(n.amount)"/>
+                            </td>
+                            <td id="colpart3" align="right"></td>
+                            <td id="colpart3" align="right"></td>
+                        </t>
+                    </tr>
+                    <tr id="last_page">
+                        <td id="colpart10">nothing</td>
+                        <td id="colpart10"></td>
+                        <td id="colpart10"></td>
+                        <td id="colpart10"></td>
+                        <td id="colpart10"></td>
+                        <td id="colpart10"></td>
+                        <td id="colpart10"></td>
+                        <td id="colpart10"></td>
+                        <td id="colpart10"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!--		<br/>-->
+            <div class="col-xs-4 pull-right">
+                <t t-set="retenue" t-value="total_ret_impot + total_ret_div"/>
+                <table>
+                    <thead>
+                        <!--						<th>NET A PAYER</th>-->
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th style="vertical-align: middle">GAINS</th>
+                            <td id='net_part'>
+                                <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('T_GAIN'))).replace(',', ' ')"/>
+                            </td>
+
+                            <th style="vertical-align: middle">RETENUES</th>
+                            <td id='net_part'>
+
+                                <span t-esc="'{0:,.0f}'.format(int(retenue)).replace(',', ' ')"/>
+                            </td>
+
+                            <th>NET A PAYER</th>
+                            <td id='net_part'>
+                                 <t t-set="tot_net" t-value="o.get_amount_rubrique('T_GAIN') - retenue"/>
+                                <span t-esc="'{0:,.0f}'.format(int(tot_net)).replace(',', ' ')"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+
+        <template id="hr_payroll_custom.paysil_sum">
+            <div id="container">
+                <div>
+                    <table>
+                        <tr>
+                            <th id="colpart9">Cumul</th>
+                            <th id="colpart9">Salaire Brut Imposable</th>
+                            <th id="colpart9">Charges salariales
+                                <t t-if="o.employee_id.type == 'p'">CGRAE</t>
+                                <t t-if="o.employee_id.type != 'p'">CNPS</t>
+                            </th>
+                            <th id="colpart9">Charges patronales
+                                <t t-if="o.employee_id.type == 'p'">CGRAE</t>
+                                <t t-if="o.employee_id.type != 'p'">CNPS</t>
+                            </th>
+                            <th id="colpart9">Jours Travaillés</th>
+                            <th id="colpart9">Congés Acquis</th>
+                            <th id="colpart9">Congés pris</th>
+                            <th id="colpart9">Congés restants</th>
+                            <th id="colpart9">Avantages en nature</th>
+                        </tr>
+                        <tr>
+                            <th id="colpart9">Mois</th>
+                            <td id="colpart9">
+                                <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('BRUT'))).replace(',', ' ')"/>
+                            </td>
+                            <td id="colpart9">
+                                <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('RET'))).replace(',', ' ')"/>
+                            </td>
+                            <td id="colpart9">
+                                <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('TTL_IMP_PART'))).replace(',', ' ')"/>
+                            </td>
+                            <td id="colpart9">
+                                <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('TJRPAY'))).replace(',', ' ')"/>
+                            </td>
+                            <td id="colpart9">
+                                <span t-field="o.acquired_leave_month"/>
+                            </td>
+                            <td id="colpart9">
+                                <span t-field="o.taked_leave_month"/>
+                            </td>
+                            <td id="colpart9" rowspan="2">
+                                <span t-field="o.available_leave"/>
+                            </td>
+                            <td id="colpart9">
+                                <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('AVTGN'))).replace(',', ' ')"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th id="colpart9">Année</th>
+                            <td id="colpart9">
+                                <span t-esc="'{0:,.0f}'.format(int(o.get_somme_rubrique('BASE_BRUT_AN'))).replace(',', ' ')"/>
+                            </td>
+                            <td id="colpart9">
+                                <span t-esc="'{0:,.0f}'.format(int(o.get_somme_rubrique('TCS_A_CNPS'))).replace(',', ' ')"/>
+                            </td>
+                            <td id="colpart9">
+                                <span t-esc="'{0:,.0f}'.format(int(o.get_somme_rubrique('TCP_A_CNPS'))).replace(',', ' ')"/>
+                            </td>
+                            <td id="colpart9">
+                                <span t-esc="'{0:,.0f}'.format(int(o.get_amount_rubrique('TWDAYS'))).replace(',', ' ')"/>
+                            </td>
+                            <td id="colpart9">
+                                <span t-field="o.acquired_leave"/>
+                            </td>
+                            <td id="colpart9">
+                                <span t-field="o.taked_leave"/>
+                            </td>
+                            <td id="colpart9">
+                                <span t-esc="'{0:,.0f}'.format(int(o.get_somme_rubrique('AVTGN'))).replace(',', ' ')"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </template>
+
+        <template id="hr_payroll_custom.salary_tax">
+            <div id="container">
+                <div>
+                    <table>
+                        <tr>
+                            <th id="colpart9">Cumul</th>
+                            <th id="colpart9">ITS</th>
+                            <th id="colpart9">CN</th>
+                            <th id="colpart9">IGR</th>
+                            <th id="colpart9">
+                                <t t-if="o.employee_id.type == 'p'">CGRAE</t>
+                                <t t-if="o.employee_id.type != 'p'">CNPS</t>
+                            </th>
+                            <th id="colpart9">Jours depuis dernier congé</th>
+                            <th id="colpart9">Brut congé</th>
+                            <th id="colpart9">CMU</th>
+                            <th id="colpart9">CRRAE Emp.</th>
+                            <th id="colpart9">CRRAE FAAM Emp.</th>
+                        </tr>
+                        <tr>
+                            <th id="colpart9">Année</th>
+                            <td id="colpart9">
+                                <span t-esc="'{0:,.0f}'.format(int(o.get_somme_rubrique('ISA'))).replace(',', ' ')"/>
+                            </td>
+                            <td id="colpart9">
+                                <span t-esc="'{0:,.0f}'.format(int(o.get_somme_rubrique('CNAN'))).replace(',', ' ')"/>
+                            </td>
+                            <td id="colpart9">
+                                <span t-esc="'{0:,.0f}'.format(int(o.get_somme_rubrique('IGRA'))).replace(',', ' ')"/>
+                            </td>
+                            <td id="colpart9">
+                                <t t-if="o.employee_id.type == 'p'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_somme_rubrique('CGRAE_E_A'))).replace(',', ' ')"/>
+                                </t>
+                                <t t-if="o.employee_id.type != 'p'">
+                                    <span t-esc="'{0:,.0f}'.format(int(o.get_somme_rubrique('CNPS_E_A'))).replace(',', ' ')"/>
+                                </t>
+                            </td>
+                            <td id="colpart9">
+                                <span t-field="o.days_since_last_leave"/>
+                            </td>
+                            <td id="colpart9">
+                                <span t-field="o.gross_salary_leave"/>
+                            </td>
+                            <td id="colpart9">
+                                <span t-esc="'{0:,.0f}'.format(int(o.get_somme_rubrique('CMU_A'))).replace(',', ' ')"/>
+                            </td>
+                            <td id="colpart9">
+                                <span t-esc="'{0:,.0f}'.format(int(o.get_somme_rubrique('T_CRRAE_E'))).replace(',', ' ')"/>
+                            </td>
+                            <td id="colpart9">
+                                <span t-esc="'{0:,.0f}'.format(int(o.get_somme_rubrique('T_C_FAAM_E'))).replace(',', ' ')"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </template>
+
+        <template id="hr_payroll_custom.account">
+            <div id="container">
+                <div>
+                    <table>
+                        <tr id="account_head" t-foreach="o.employee_id.bank_ids" t-as="bank">
+                            <th id="colpart9">
+                                <span t-field="bank.bank_id.name"/>
+                            </th>
+                        </tr>
+                        <tr id="account_number">
+                            <th id="colpart9">
+                                <span t-field="o.employee_id.main_bank_id.acc_number"/>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </template>
+
+        <template id="hr_payroll_custom.report_payslip_without_header">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <!--                    				<t t-call="hr_payroll_custom.internal_layout">-->
+                    <style>
+                        h1 {font-weight:bold;}
+                        h2 {
+                        font-weight:bold;
+                        }
+                        div#item1 {float: left;width: 50%;
+                        padding-top:1px;
+                        }
+                        tr#sous_total {
+
+                        }
+                        th {
+                        border: 1px solid gray;
+                        text-align: center;
+                        background-color: #E6ECEB;
+                        height: 20px;
+                        }
+
+                        th#col1 {
+                        width: 10%;
+                        }
+                        th#col2 {
+                        width: 40%;
+                        }
+                        th#col3 {
+                        width: 10%;
+                        }
+                        th#col4 {
+                        width: 15%;
+                        }
+
+                        td {
+                        border: 1px solid gray;
+                        margin: 0px;
+                        padding-left: 5px;
+                        padding-right: 5px;
+                        }
+                        td#parttotal{
+                        border-bottom-style: dashed;
+                        border-top-style: dashed;
+                        }
+
+                        td#colpart2 {border-left: 0px; width:20%; }
+                        td#colpart1 { border-right: 0px; width: 20%;}
+                        td#colpart3 {
+                        border-top: 0px;
+                        border-bottom:0px;
+                        }
+                        td#colpart7 {
+                        border-top: 0px;
+                        border-bottom:0px;
+                        color: #FFFFFF;
+                        }
+                        td#colpart5 {border-top: 0px; }
+                        td#colpart4 {
+                        text-align: center;
+                        background-color: #E6ECEB;
+                        width: 60%;
+                        }
+                        td#colpart6 {
+                        border-top: 0px;
+                        border-bottom:0px;
+                        font-style: bold;
+                        text-align: center;
+                        }
+                        td#colpart8 {
+                        border-top: 0px;
+                        font-style: bold;
+                        text-align: center;
+                        }
+
+                        td#colpart9 {
+                        text-align: center;
+                        font-size: 10px;
+                        }
+                        div#bas_p {
+                        text-align: center;
+                        font-size: 10px;
+                        }
+
+                        td#colpart10 {
+                        border-top: 0px;
+                        color: #FFFFFF;
+                        }
+
+                        td#blank {
+                        border-top: 0px;
+                        border-bottom: 0px;
+                        border-right: 0px;
+                        border-left: 0px;
+                        width: 70%;
+                        }
+                        td#blank1 {
+                        background-color: #E6ECEB;
+                        font-size: 12px;
+                        font-style: bold;
+                        text-align: center;
+                        width: 30%;
+                        }
+                        td#blank2 {
+                        font-size: 20px;
+                        font-style: bold;
+                        text-align: center;
+                        width: 30%;
+                        }
+                        tr#part_row {
+                        background-color: #E6ECEB;
+                        text-align: center;
+                        width: 25%;
+                        }
+                        tr#part_second {
+                        text-align: center;
+                        width: 25%;
+                        }
+                        td#net_part{
+                        text-align: center;
+                        font-style: bold;
+                        font-size: 22px;
+                        }
+                        table {
+                        border-collapse: collapse;
+                        width: 100%;
+                        font-size: 14px;
+                        font-family: "Times New Roman", Arial;
+                        border-radius: 10px 10px 10px 10px;
+                        }
+                        div {
+                        font-size: 14px;
+                        font-family: "Times New Roman", Arial;
+                        }
+                    </style>
+                    <div class="page" style="padding:1px 0px 1px 0px;">
+                        <div>
+                            <table id="header_p" style="border-collapse: collapse;
+                        font-size: 12px;
+                        width: 100%; padding-top:1px;">
+                                <tr>
+                                    <td id="title_part" style="border:none; width: 50%;
+                       font-size: 35px; height:175px;
+                        font-style: italic;" colspan="2" align="left">
+                                    </td>
+                                    <td id="title_part" style="width: 50%;
+                       font-size: 27px;
+                        font-style: italic;text-align:center" colspan="3">
+                                        <h3>BULLETIN DE PAIE</h3>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td id="company" style="font-size: 12px;
+                        padding-left: 5px;" colspan="2">SOCIÉTÉ
+                                        <span t-field="o.company_id.name"></span>
+                                    </td>
+                                    <td colspan="2" align="center">
+                                        <strong>Période de paie</strong>
+                                    </td>
+                                    <td align="center">
+                                        <strong>Date de paie</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td id="company" style="font-size: 12px;
+                        padding-left: 5px;" colspan="2">CNPS EMPLOYEUR :
+                                        <span t-field="o.company_id.num_cnps"></span>
+                                    </td>
+                                    <td align="center">Du :
+                                        <span t-field="o.date_from"/>
+                                    </td>
+                                    <td align="center">Au :
+                                        <span t-field="o.date_to"/>
+                                    </td>
+                                    <td align="center">
+                                        <span t-field="o.date_to"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br/>
+                        <t t-call="hr_payroll_custom.employee_infos"/>
+                        <br/>
+                        <t t-call="hr_payroll_custom.payslip_body"/>
+                        <br/>
+                        <t t-call="hr_payroll_custom.paysil_sum"/>
+                        <br/>
+                        <t t-call="hr_payroll_custom.salary_tax"/>
+                        <br/>
+                        <t t-call="hr_payroll_custom.account"/>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

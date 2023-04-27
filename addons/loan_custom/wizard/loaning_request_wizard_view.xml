@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+    <record id="loaning_form_wizard_view" model="ir.ui.view">
+        <field name="name">hr.loaning.request.wizard.form</field>
+        <field name="model">hr.loaning.request.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <h1>
+                    <field name="name" string="Libellé" readonly="1"/>
+                </h1>
+                <group>
+                    <group>
+                        <field name="employee_id"/>
+                        <field name="amount_loan"/>
+                        <field name="rate"/>
+                        <field name='total_loan'/>
+                    </group>
+                    <group>
+                        <field name="option"/>
+                        <field name="date_loan"/>
+                        <field name="reimbursement_start_date"/>
+                        <field name="deadline" attrs="{'invisible' :[('option','=','lineaire')] }"/>
+                        <field name="deadline_interval"/>
+                        <field name="expiry_number" attrs="{'invisible' :[('option','=','variee')] }"/>
+                    </group>
+                </group>
+                <notebook>
+                    <page string="Echéances">
+                        <field name="deadline_ids" colspan="4" nolabel="1">
+                            <tree string="Echéances">
+                                <field name="name"/>
+                                <field name="amount" sum="Total des échéances"/>
+                                <field name="amount_paid" sum="Montant payé"/>
+                                <field name="sum_remaining" sum="Montants restants"/>
+                                <field name="scheduled_date"/>
+                                <field name="date_reimbursement_due"/>
+                                <field name="state_loan"/>
+                            </tree>
+                            <form string="Echeances" readonly="1">
+                                <header>
+                                    <field name="state_loan" widget="statusbar"/>
+                                </header>
+                                <sheet>
+                                    <group col="4">
+                                        <field name="name"/>
+                                        <field name="amount" sum="Total des échéances"/>
+                                        <field name="amount_paid" sum="Montant payé"/>
+                                        <field name="sum_remaining" sum="Montants restants"/>
+                                        <field name="scheduled_date"/>
+                                        <field name="date_reimbursement_due"/>
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </page>
+                    <page string="Notes">
+                        <field name="notes" nolabel="1"/>
+                    </page>
+                </notebook>
+                  <footer>
+                      <button name="action_validate_deadline" string="Valider" type="object" class="oe_highlight"/>
+                    <button string="Annuler" class="oe_link" special="cancel"/>
+                  </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="loaning_tree_view">
+        <field name="name">hr.loaning.tree</field>
+        <field name="model">hr.loaning.request.wizard</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Liste des emprunts" create="0">
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="amount_loan"/>
+                <field name="rate"/>
+                <field name="date_loan"/>
+                <field name="deadline"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_emprunt_loaning_view">
+        <field name="name">Echéanciers de paiement</field>
+        <field name="res_model">hr.loaning.request.wizard</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">new</field>
+    </record>
+
+
+    <record model="ir.ui.view" id="hr_doc_box_view">
+        <field name="name">hr.doc.box.form</field>
+        <field name="model">hr.doc.box</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="reference" required ="1"/>
+                         <field name="name"/>
+                        <field name="attachment_ids" widget="many2many_binary"/>
+                        <field name="line_id"/>
+                    </group>
+                </sheet>
+            </form>
+            <footer>
+                <button name="action_validate_box" string="Valider" type="object" class="oe_highlight"/>
+                <button string="Annuler" class="oe_link" special="cancel"/>
+            </footer>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="action_payment_checkout_view">
+        <field name="name">Payment at checkout</field>
+        <field name="res_model">hr.doc.box</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

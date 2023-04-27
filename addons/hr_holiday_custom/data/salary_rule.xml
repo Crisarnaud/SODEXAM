@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+         <!--        Salary rule that doubled when there is calculate allowances-->
+
+        <record id="ret_mug_civ" model="hr.salary.rule">
+            <field name="name">RET. MUGEF-CI/IVOIR PREVOYANCE</field>
+            <field name="sequence">427</field>
+            <field name="code">RET_MUG_IV</field>
+            <field name="category_id" ref="hr_payroll_custom.cat_ret_emp"/>
+            <field name="struct_id" ref="hr_payroll_custom.structure_cdd"/>
+             <field name="condition_select">none</field>
+            <field name="amount_select">fix</field>
+            <field name="amount_fix">5000</field>
+            <field name="rule_doubled">True</field>
+        </record>
+
+         <record id="ret_pens_civle" model="hr.salary.rule">
+            <field name="name">RET. Pension Civile</field>
+            <field name="sequence">403</field>
+            <field name="code">RET_PEN_CIV</field>
+            <field name="category_id" ref="hr_payroll_custom.impot_employ"/>
+            <field name="struct_id" ref="hr_payroll_custom.structure_fonctionnaire"/>
+             <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.RET_PEN_CIV</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = employee.indice * 233.457 * 0.0833</field>
+            <field name="rule_doubled">True</field>
+        </record>
+
+        <record id="ret_mudexam_fas" model="hr.salary.rule">
+            <field name="name">MUDEXAM FAS </field>
+            <field name="sequence">428</field>
+            <field name="code">RET_MUD_FAS</field>
+            <field name="category_id" ref="hr_payroll_custom.cat_ret_emp"/>
+            <field name="struct_id" ref="hr_payroll_custom.structure_cdd"/>
+             <field name="condition_select">python</field>
+             <field name="condition_python">if worked_days.WORK100.number_of_days == 30:
+        result = inputs.RET_MUD_FAS
+else:
+        result = 0</field>
+            <field name="amount_select">fix</field>
+            <field name="amount_fix">1000</field>
+            <field name="rule_doubled">False</field>
+        </record>
+        <record id="ret_synadexam" model="hr.salary.rule">
+            <field name="name">RETENUE SYNADEXAM </field>
+            <field name="sequence">425</field>
+            <field name="code">RET_SYN</field>
+            <field name="category_id" ref="hr_payroll_custom.cat_ret_emp"/>
+            <field name="struct_id" ref="hr_payroll_custom.structure_cdd"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.RET_SYN</field>
+            <field name="amount_select">fix</field>
+            <field name="amount_fix">2000</field>
+            <field name="rule_doubled">False</field>
+        </record>
+
+        <record id="ret_mug_ci" model="hr.salary.rule">
+            <field name="name">RET MUGEF CI</field>
+            <field name="sequence">426</field>
+            <field name="code">RET_MUG_CI</field>
+            <field name="category_id" ref="hr_payroll_custom.cat_ret_emp"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="struct_id" ref="hr_payroll_custom.structure_cdd"/>
+            <field name="amount_python_compute">result = 0.03 * payslip.paid_amount
+if result >= 7004:
+        result = 7004
+else:
+        result = 0.03 * payslip.paid_amount</field>
+            <field name="rule_doubled">True</field>
+        </record>
+
+        <record id="ret_mudex" model="hr.salary.rule">
+            <field name="name">RET MUDEXAM</field>
+            <field name="sequence">429</field>
+            <field name="code">RET_MUD</field>
+            <field name="category_id" ref="hr_payroll_custom.cat_ret_emp"/>
+            <field name="struct_id" ref="hr_payroll_custom.structure_cdd"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">fix</field>
+            <field name="rule_doubled">True</field>
+            <field name="amount_fix">15000</field>
+        </record>
+
+        <record id="coti_sidam" model="hr.salary.rule">
+            <field name="name">SIDAM</field>
+            <field name="sequence">430</field>
+            <field name="code">SID</field>
+            <field name="category_id" ref="hr_payroll_custom.cat_ret_emp"/>
+            <field name="struct_id" ref="hr_payroll_custom.structure_cdd"/>
+             <field name="condition_select">none</field>
+            <field name="amount_select">fix</field>
+            <field name="rule_doubled">True</field>
+            <field name="amount_fix">15000</field>
+        </record>
+
+        <record id="ivoir_sante" model="hr.salary.rule">
+            <field name="name">IVOIRE SANTE</field>
+            <field name="sequence">431</field>
+            <field name="code">IV_STE</field>
+            <field name="category_id" ref="hr_payroll_custom.cat_ret_emp"/>
+            <field name="struct_id" ref="hr_payroll_custom.structure_cdd"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">fix</field>
+            <field name="amount_fix">10000</field>
+            <field name="rule_doubled">True</field>
+        </record>
+
+        <record id="ivoir_phcie" model="hr.salary.rule">
+            <field name="name">IVOIRE PHARMACIE</field>
+            <field name="sequence">432</field>
+            <field name="code">IV_PHCIE</field>
+            <field name="category_id" ref="hr_payroll_custom.cat_ret_emp"/>
+            <field name="struct_id" ref="hr_payroll_custom.structure_cdd"/>
+             <field name="condition_select">none</field>
+            <field name="amount_select">fix</field>
+            <field name="amount_fix">10000</field>
+            <field name="rule_doubled">True</field>
+        </record>
+
+        <record id="pret_scol_sodex" model="hr.salary.rule">
+            <field name="name">PRET SCOLAIRE SODEXAM</field>
+            <field name="sequence">902</field>
+            <field name="code">PRET_SCOL</field>
+            <field name="category_id" ref="hr_payroll_custom.cat_ret_emp"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">fix</field>
+            <field name="quantity">1</field>
+            <field name="amount_fix">3000</field>
+            <field name="struct_id" ref="hr_payroll_custom.structure_cdd"/>
+            <field name="rule_doubled">True</field>
+        </record>
+
+        <!--        after allowances-->
+
+
+    </data>
+</odoo>

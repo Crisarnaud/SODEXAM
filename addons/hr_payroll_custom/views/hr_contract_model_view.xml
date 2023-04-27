@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="hr_contract_form_view_2_inherit">
+            <field name="name">hr_contract_form_2_inherit</field>
+            <field name="model">hr.contract</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name='information']" position="replace">
+                    <page string="Informations sur le salaire" name="information"
+                          groups="hr_payroll.group_hr_payroll_manager">
+                        <group name="main_info">
+                            <group name="salary_and_advantages" string="Avantages mensuels en espèces">
+                                <field name="hr_convention_id"/>
+                                <field name="hr_secteur_id"/>
+                                <field name="categorie_salariale_id"/>
+                                <label for="wage"/>
+                                <div class="o_row" name="wage">
+                                    <field name="wage" nolabel="1"/>
+                                    <span>/ mois</span>
+                                </div>
+                                <field name="sursalaire"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_contract_form_view">
+            <field name="name">hr_contract_form_inherit</field>
+            <field name="model">hr.contract</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="hr_contract_custom.hr_contract_inh_extension_form"/>
+            <field name="arch" type="xml">
+                <header position="inside">
+                    <xpath expr="//field[@name='state']" position="replace">
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="draft,open,availability,pending,close,cancel"
+                               groups="hr_payroll.group_hr_payroll_manager"
+                               options="{'clickable': '1'}"
+                        />
+                    </xpath>
+                    <button name="%(action_hr_inverse_form_view)d" type="action" string="Calcul Inverse"
+                            groups="hr_payroll.group_hr_payroll_manager"/>
+
+<!--                    <button name="define_date_return_availability" type="object" string="Retour de disponibilité"-->
+<!--                            groups="hr_payroll.group_hr_payroll_manager"/>-->
+                </header>
+                <notebook position="inside">
+                    <page string="Primes">
+                        <field name="hr_payroll_prime_ids">
+                            <tree string="Les primes" editable="top">
+                                <field name="prime_id"/>
+                                <field name="montant_prime"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+                <xpath expr="//field[@name='job_id']" position="after">
+                    <field name="struct_id" required="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_contract_model_inherit_form_view">
+            <field name="name">hr_contract_model_form_inherit</field>
+            <field name="model">hr.model.contract</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="hr_contract_custom.hr_model_contract_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='titre_poste']" position="after">
+                    <field name="structure_salariale"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

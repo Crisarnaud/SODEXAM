@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="hr_cgrae_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page" style="font-family: sans-serif; padding:10px 0px 0px 0px;">
+                        <style>
+                            table, td, th {
+                            border: none;
+                            font-family: sans-serif, "Gill Sans";
+                            font-size: 16px;
+                            border-collapse : separate;
+                            border-spacing : 10px;
+                            text-align:center;
+                            }
+
+                            .tab {
+                            margin-left: 50px;
+                            width: 100%;
+                            border-collapse : separate;
+                            border-spacing : 10px;
+                            text-align:center;
+                            }
+
+                            td {
+                            border: none;
+                            text-align: justify;
+                            }
+
+                            .p {
+                            border-collapse: collapse;
+                            border: 1px solid black;
+                            width: 70%;
+
+                            }
+
+                            .footer{
+                            display: flex;
+                            justify-content: center;
+                            padding: 5px;
+                            }
+
+                        </style>
+                        <div class="article">
+                            <div class="head">
+                                <table class='tab'>
+                                    <tr>
+                                        <td rowspan="2" style="width: 20%; font-size: 16px; text-align:left;">
+                                            <span style="float:center">
+                                                <img src='/hr_cgrae/static/src/img/cgrae.png' style="max-height: 80px;"/>
+                                            </span>
+
+                                        </td>
+                                        <td style="width: 60%; text-align:center">
+                                            Processus gestion des cotisations et contrôle d'exploitation
+                                        </td>
+                                        <td rowspan="2" style="width: 20%; text-align: left; font-size: 14px;">
+                                            Référence : <span t-esc="o.name"/>
+                                            <br/>
+                                            Version: <br/>
+                                            Date: <span t-esc="datetime.datetime.now().strftime('%d/%m/%Y')"/><br/>
+                                            Page: 1/1<br/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;"> <b><h3>Déclaration mensuelle de cotisation</h3></b></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="page">
+                                <div style="text-align:right;">PERIODE: <span t-esc="o.date_from.strftime('%B-%Y')"/> </div>
+                                <div>
+                                    <table>
+                                        <tr>
+                                            <td style="width:20%"><b>RAISON SOCIALE:</b></td>
+                                            <td colspan="4" style="width:80%">
+                                                <span t-esc="o.company_id.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:none;"></td>
+                                            <td colspan="4" style="border:none;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:20%">
+<!--                                                <b>SIGLE:</b>-->
+                                            </td>
+                                            <td colspan="4" style="width:80%">
+<!--                                                <span t-esc="o.company_id.logo_web"/>-->
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:none;"></td>
+                                            <td colspan="4" style="border:none;"></td>
+                                        </tr>
+                                        <tr style="height:10px;">
+                                            <td style="width:20%"><b>N°EMPLOYEUR: </b></td>
+                                            <td style="width:20%"><b>ADRESSE POSTALE: </b></td>
+                                            <td style="width:10%"><b>TEL: <span t-esc="o.company_id.phone"/></b></td>
+                                            <td style="width:15%"><b>FAX: </b></td>
+                                            <td style="width:35%"><b>EMAIL: <span t-esc="o.company_id.email"/></b></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:none;"></td>
+                                            <td style="border:none;"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="width:30%"><b>LOCALISATION GÉOGRAPHIQUE</b></td>
+                                            <td colspan="4" style="width:70%"><span t-esc="o.company_id.street"/></td>
+                                        </tr>
+                                    </table>
+                                    <p style="margin-left:30px"> <b><u>DECOMPTE DES COTISATIONS DUES</u></b></p>
+                                    <table>
+                                        <tr>
+                                            <td style="text-align:center" rowspan="2">RUBRIQUES</td>
+                                            <td style="text-align:center" rowspan="2">EFFECTIFS</td>
+                                            <td style="text-align:center" rowspan="2">
+                                                SALAIRES BRUTS INDICIAIRES SOUMIS A <br/> COTISATION
+                                            </td>
+                                            <td style="text-align:center">PART SALARIALE <br/> (8.33%)</td>
+                                            <td style="text-align:center">PART PATRONALE <br/> (16.67%)</td>
+                                            <td style="text-align:center">TOTAL DES COTISATIONS DUES<br/>(25%)</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:center">MONTANT</td>
+                                            <td style="text-align:center">MONTANT</td>
+                                            <td style="text-align:center">MONTANT</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:center">PENSION DE RETRAITE</td>
+                                            <td style="text-align:center"><sapn t-field="o.count_cotisant" /></td>
+                                            <td style="text-align:center"><span t-esc="o.total_base"/></td>
+                                            <td style="text-align:center"><sapn t-field="o.total_cgrae_employee" /></td>
+                                            <!--                                        <td>16,67 %</td>-->
+                                            <td style="text-align:center"><sapn t-field="o.total_cgrae_employer" /></td>
+                                            <!--                                        <td>25 %</td>-->
+                                            <td style="text-align:center"><sapn t-esc="o.total_cgrae_employee + o.total_cgrae_employer" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:center"><b>ALLOCATION VIAGERE PERSONNALITES</b></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td style="text-align:center">0</td>
+                                            <td style="text-align:center">0</td>
+                                            <td style="text-align:center">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:center"><b>VALIDATION DES SERVICES TEMPORAIRES</b></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td style="text-align:center">0</td>
+                                            <td style="text-align:center">0</td>
+                                            <td style="text-align:center">0</td>
+                                        </tr>
+                                        <tr>
+                                            <!--<t t-set="eff_total" t-value="sum(o.count_cotisant)"/>-->
+                                            <!--<t t-set="sb_total" t-value="sum(o.count_cotisant)"/>-->
+                                            <td style="text-align:center">TOTAUX</td>
+                                            <td style="text-align:center">
+                                                <b>
+                                                <span t-esc="o.count_cotisant"/>
+                                                </b>
+                                            </td>
+                                            <td style="text-align:center">
+                                                <b>
+                                                    <span t-esc="o.total_base"/>
+                                                </b>
+                                            </td>
+                                            <td style="text-align:center">
+                                                <b>
+                                                    <span t-esc="o.total_cgrae_employee"/>
+                                                </b>
+                                            </td>
+                                            <td style="text-align:center">
+                                               <b>
+                                                    <sapn t-field="o.total_cgrae_employer" />
+                                                </b>
+                                            </td>
+                                            <td style="text-align:center">
+                                                 <b>
+                                                    <sapn t-esc="o.total_cgrae_employee + o.total_cgrae_employer" />
+                                                </b>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table style="border-spacing:2px">
+                                        <tr>
+                                            <td style="border:none; width:30%;border-spacing:2px;text-align:left">
+                                                Bordereau certifié exact,
+                                            </td>
+                                            <td style="border:none; width:20%"></td>
+                                            <td style="border:none; width:30%;border-spacing:2px;text-align:left">
+                                                A Abidjan, le <span t-esc="datetime.datetime.now().strftime('%d/%m/%Y')"/>
+                                            </td>
+                                            <td style="border:none; width:20%"></td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2" style="width:30%; text-align:center;border-spacing:2px;">
+                                                <h8> <b>ATTENTION!</b></h8> <br/>
+                                                <h8>
+                                                    <b>Le titre de paiement doit libellé à l'ordre de
+                                                        "Caisse Générale de Retraite des Agents de l/'Etat".
+                                                        Même en l'abscence de tout paiement, la présent e déclaration
+                                                        doit être dûment remplie et obligatoirement retournée à
+                                                        l'IPS-CGRAE au plus tard le 30 du mois en cours.</b>
+                                                </h8>
+
+                                            </td>
+                                            <td style="border:none; width:20%; text-align:center"></td>
+                                            <td style="width:30%; text-align:center">
+                                                    <b>Signature et cachet de l'employeur</b>
+                                            </td>
+                                            <td style="border:none; width:20%"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:none;"></td>
+                                            <td style="border:1px solid black;"></td>
+                                        </tr>
+                                    </table>
+                                    <br/>
+                                    <table class="tab">
+                                        <tr>
+                                            <td colspan="7" style="text-align:center">
+                                                <b>
+                                                    CADRE RESERVE A L'IPS-CGRAE
+                                                    (NE RIEN Y INSCRIRE S'IL VOUS PLAÎT)
+                                                </b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:center"><b>Date de réception</b></td>
+                                            <td style="text-align:center"><b>N°Pièce comptable</b></td>
+                                            <td style="text-align:center"><b>Banque</b></td>
+                                            <td style="text-align:center"><b>Référence du titre de paiement</b></td>
+                                            <td style="text-align:center"><b>Date émission</b></td>
+                                            <td style="text-align:center"><b>Montant</b></td>
+                                            <td style="text-align:center"><b>Visa Agent Recouvrement</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="height:50px"></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+

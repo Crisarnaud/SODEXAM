@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="hr_payroll_custom.report_hr_disa_pdf">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page" style="font-family: sans-serif;display:inline-block;padding-top:1px;">
+                        <div class="head">
+                            <div class="row" style="justify-content:space-between;">
+                                <p>
+                                    <span style="font-family:DejaVu Serif;font-size:19px;text-align:left;">
+                                        RAISON SOCIALE:
+                                        <span t-esc="o.company_id.name"/>
+                                    </span>
+                                    <span style="font-family:DejaVu Serif;font-size:19px;margin-left:450px;">
+                                        <span t-esc="o.name"/>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="page">
+                            <div>
+                                <table style="width:100%;border-collapse:collapse">
+                                    <tr>
+                                        <td rowspan="2" style="border:1px solid black;text-align:center">
+                                            N° ORDRE
+                                        </td>
+                                        <td rowspan="2" width="60px" style="border:1px solid black;text-align:center">
+                                            NOM
+                                        </td>
+                                        <td rowspan="2" style="border:1px solid black;text-align:center">PRENOMS</td>
+                                        <td rowspan="2" style="border:1px solid black;text-align:center">N°CNPS</td>
+                                        <td rowspan="2" style="border:1px solid black;text-align:center">
+                                            ANNEE DE NAISSANCE
+                                        </td>
+                                        <td colspan="2" style="border:1px solid black;text-align:center">DATES</td>
+                                        <td rowspan="2" style="border:1px solid black;text-align:center">
+                                            SALAIRE HORAIRES OU MENSUELS
+                                        </td>
+                                        <td rowspan="2" width="110px" style="border:1px solid black;text-align:center">
+                                            SALAIRE BRUT NON PLAFONNE
+                                        </td>
+                                        <td rowspan="2" style="border:1px solid black;text-align:center">
+                                            NOMBRE DE MOIS TRAVAILLE
+                                        </td>
+                                        <td rowspan="2" style="border:1px solid black;text-align:center">
+                                            SALAIRE ANNUEL SOUMIS A COTISATION AT/PF
+                                        </td>
+                                        <td rowspan="2" width="110px" style="border:1px solid black;text-align:center">
+                                            SALAIRE ANNUEL SOUMIS A COTISATION AU TITRE DU REGIME RETRAITE
+                                        </td>
+                                        <td rowspan="2" style="border:1px solid black;text-align:center">
+                                            LE SALARIE COTISE AU TITRE:
+                                            <br/>
+                                            1- AM
+                                            <br/>
+                                            2- PF
+                                            <br/>
+                                            3- AT
+                                            <br/>
+                                            4- Retraite
+                                            <br/>
+                                        </td>
+                                        <td rowspan="2"  width="160px" style="border:1px solid black;text-align:center">
+                                            OBS
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:center">
+                                            Embauche
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center">
+                                            Départ
+                                        </td>
+                                    </tr>
+                                    <t t-set="num" t-value="1"/>
+                                    <t t-set="num" t-value="1"/>
+                                    <t t-set="num" t-value="1"/>
+                                    <t t-foreach="o.disa_line_ids" t-as="line">
+                                        <tr>
+                                            <td style="border:1px solid black;text-align:center">
+                                                <span t-esc="line.identification_id"/>
+                                            </td>
+                                            <td style="border:1px solid black;text-align:left">
+                                                <span t-esc="line.employee_id.name "/>
+                                            </td>
+                                            <td style="border:1px solid black;text-align:left">
+                                                <span t-esc="line.employee_id.first_name"/>
+                                            </td>
+                                            <td style="border:1px solid black;text-align:center">
+                                                <span t-esc="line.employee_id.identification_cnps"/>
+                                            </td>
+                                            <td style="border:1px solid black;text-align:center">
+                                                <t t-if="line.employee_id.birthday">
+                                                    <span t-esc="line.employee_id.birthday.strftime('%Y')"/>
+                                                </t>
+                                            </td>
+                                            <td style="border:1px solid black;text-align:center">
+                                                <span t-esc="line.hiring_date"/>
+                                            </td>
+                                            <td style="border:1px solid black;text-align:center">
+                                                <span t-esc="line.date_of_departure"/>
+                                            </td>
+                                            <td style="border:1px solid black;text-align:center">
+                                                <span t-esc="line.employee_type"/>
+                                            </td>
+                                            <td style="border:1px solid black;text-align:right">
+                                                <span t-esc="'{0:,.0f}'.format(line.total_gross).replace(',', ' ')"/>
+                                            </td>
+                                            <td style="border:1px solid black;text-align:center">
+                                                <span t-esc="line.work_time"/>
+                                            </td>
+                                            <td style="border:1px solid black;text-align:right">
+                                                <span t-esc="'{0:,.0f}'.format(line.other_gross).replace(',', ' ')"/>
+                                            </td>
+                                            <td style="border:1px solid black;text-align:right">
+                                                <span t-esc="'{0:,.0f}'.format(line.cnps_gross).replace(',', ' ')"/>
+                                            </td>
+                                            <td style="border:1px solid black;text-align:center">
+                                                <span t-esc="line.contribution"/>
+                                            </td>
+                                            <td style="border:1px solid black;text-align:center">
+                                                <span t-esc="line.comment"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <tr>
+                                        <td colspan="8" style="border:1px solid black;text-align:center">
+                                            TOTAL
+                                        </td>
+                                        <td style="border:1px solid black;text-align:right">
+                                            <span t-esc="'{0:,.0f}'.format(o.total_general_brut).replace(',', ' ')"/>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center"></td>
+                                        <td style="border:1px solid black;text-align:right">
+                                            <span t-esc="'{0:,.0f}'.format(o.total_cotisation_pf_am).replace(',', ' ')"/>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:right">
+                                            <span t-esc="'{0:,.0f}'.format(o.total_general_retraite).replace(',', ' ')"/>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center"></td>
+                                        <td style="border:1px solid black;text-align:center"></td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <div class="row">
+                                <div class="pagination"
+                                     style="margin-left: auto;margin-right: auto;width: 6em;font-family:DejaVu Serif;">
+                                    <span class="page"/>
+                                    /
+                                    <span class="topage"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+

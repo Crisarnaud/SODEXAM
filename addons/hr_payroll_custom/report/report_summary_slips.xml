@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_summary_slips_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="hr_payroll_custom.doc_layout">
+                        <div class="page" style="padding:120px 0px 100px 0px;margin-top:300px;font-family:DejaVu Serif;">
+                            <div class="row">
+                                <div class="col-3"></div>
+                                <div class="col-6" style="margin-left:50px;">
+                                    <strong>
+                                            <span style="font-family:DejaVu Serif;width:180px;text-transform:uppercase;font-size:15px;">
+                                                BORDEREAUX RECAPITULATIF DES SALAIRES<br/>
+                                                MOIS : <span t-field="o.name" style="font-family:DejaVu Serif;"/>
+                                            </span>
+                                    </strong>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            <br/>
+                            <table style="margin-top:10px;">
+                                <thead>
+                                    <tr>
+                                        <th style="background-color:white;font-size:15px;width:45%;">BANQUE</th>
+                                        <th style="background-color:white;text-align:center;font-size:15px;width:20%;">MONTANT A VIRER</th>
+                                        <th style="background-color:white;text-align:center;font-size:15px;width:35%;">OBSERVATIONS</th>
+                                    </tr>
+                                </thead>
+                                <t t-foreach="o.bank_group_line()" t-as="group_line">
+                                    <tbody>
+                                        <t t-set="general_total" t-value="0"/>
+                                        <t t-foreach="group_line" t-as="bank">
+                                            <tr>
+                                                <td class="text-left" style="font-size:20px;"><span t-esc="bank['name']" stytle="text-transform:uppercase;"/></td>
+                                                <t t-set="cumul_bank" t-value="sum(line.amount for line in bank['lines'])"/>
+                                                <td class="text-right" style="font-size:20px;"><span t-esc="o.format_amount(cumul_bank)"/></td>
+                                                <td class="text-left" style="font-size:20px;"></td>
+                                            </tr>
+                                        </t>
+                                        <tr>
+                                            <t t-foreach="group_line" t-as="bank">
+                                                <t t-set="subtotal" t-value="sum(line.amount for line in bank['lines'])"/>
+                                                <t t-set="general_total" t-value="general_total + subtotal"/>
+                                            </t>
+                                            <td style="font-size:20px;">
+                                                <strong>TOTAL GENERAL: </strong>
+                                            </td>
+                                            <td class="text-right" style="font-family:DejaVu Serif;font-size:20px;">
+                                                <span t-esc="o.format_amount(general_total)" />
+                                            </td>
+                                            <td style="font-size:20px;">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </t>
+                            </table>
+
+                            <div class="row" style="font-size:14px;margin-top:20px;">
+                                <div class="col-7">
+                                </div>
+                                <div class="col-5" style="font-family:DejaVu Serif;text-align:left;border-bottom: 1px solid black;">
+                                    Abidjan, le
+                                    <span t-esc="datetime.datetime.now().strftime('%d %B %Y')" style="font-family:DejaVu Serif;"/>
+                                </div>
+                            </div>
+
+                            <div class="row" style="font-family:DejaVu Serif;font-size:16px;margin-top:15px;">
+                                <div class="col-7"></div>
+                                <div class="col-5" style="font-family:DejaVu Serif;text-align:left;">
+                                    <strong>Le Directeur des Ressources Humaines</strong>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:150px;font-family:DejaVu Serif;font-size:17px;">
+                                <div class="col-7"></div>
+                                <div class="col-5" style="font-family:DejaVu Serif;">
+                                    <strong style="border-bottom: 1px solid black;">
+                                        <span t-field="o.company_id.hr_manager_id.first_name" style="font-family:DejaVu Serif;"/>
+                                        <span t-field="o.company_id.hr_manager_id.name" style="font-family:DejaVu Serif;"/>
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

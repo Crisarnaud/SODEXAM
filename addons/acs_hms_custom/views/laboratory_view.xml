@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="patient_laboratory_test_request_form_inherit" model="ir.ui.view">
+            <field name="name">Test Requests</field>
+            <field name="model">acs.laboratory.request</field>
+            <field name="inherit_id" ref="acs_laboratory.patient_laboratory_test_request_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//header" position="replace">
+                    <header>
+                        <button name="button_requested" states="draft" string="Confirmer" type="object"
+                                class="oe_highlight" confirm="Voulez vous confirmer?"/>
+                        <button name="create_invoice" string="Créer facture"
+                                attrs="{'invisible': ['|','|','|',('state', 'in', ['cancel','to_invoice']),('no_invoice', '=', True),('invoice_id', '!=', False),('acs_laboratory_invoice_policy','!=','any_time')]}"
+                                type="object" class="oe_highlight" groups="account.group_account_invoice"
+                                confirm="Voulez vous créer une facture?"/>
+                        <button name="button_cancel" states="accepted" string="Cancel" type="object"
+                                confirm="Voulez vous annuler?"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,accepted,done"/>
+                    </header>
+                </xpath>
+                <xpath expr="//field[@name='hospitalization_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='physician_id']" position="after">
+                    <field name="speciality_id"/>
+                </xpath>
+
+                <xpath expr="//field[@name='treatment_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='patient_id']" position="after">
+                    <field name="insurance_id" String="Nom de l'assurance"/>
+                </xpath>
+
+                <xpath expr="//field[@name='laboratory_group_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='action_view_lab_samples']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='action_view_test_results']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+
+                <xpath expr="//field[@name='group_patient_ids']" position="replace">
+                    <field name="group_patient_ids" widget="many2many_tags"
+                           attrs="{'invisible': [('is_group_request','=',False)]}" string="Autre clients"/>
+                </xpath>
+
+                <xpath expr="//field[@name='line_ids']/tree/field[@name='test_id']" position="after">
+                    <field name="product_id"/>
+                </xpath>
+
+                <xpath expr="//field[@name='line_ids']/tree/field[@name='test_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_delete': True, 'no_open':True}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hms_test_view_form_inherit" model="ir.ui.view">
+            <field name="name">Test Requests</field>
+            <field name="model">acs.lab.test</field>
+            <field name="inherit_id" ref="acs_laboratory.hms_test_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='acs_use_other_test_sample']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='product_id']" position="replace">
+                    <field name="product_id" domain="[('type','=','service')]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

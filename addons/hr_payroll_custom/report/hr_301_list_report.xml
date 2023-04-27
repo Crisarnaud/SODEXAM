@@ -1,0 +1,1144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="hr_payroll_custom.hr_301_list_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="hr_payroll_custom.301_layout">
+                        <div class="page" style="font-family: sans-serif;display:inline-block;padding:0;margin:0;">
+                            <div class="head">
+                                <div style="text-align:left;padding-top:1px">
+                                    <table style="width:100%;border:none">
+                                        <tr>
+                                            <td style="border:none">
+                                                <p style="text-align:left;margin-left:10px;padding-top:1px">
+                                                    REPUBLIQUE DE CÔTE D'IVOIRE
+                                                    <br/>
+                                                    <span style="text-align:center;margin-left:55px">---</span>
+                                                    <br/>
+                                                    MINISTÈRE DE L'ECONOMIE
+                                                    <br/>
+                                                    ET DES FINANCES
+                                                    <br/>
+                                                    <span style="text-align:center;margin-left:55px">---</span>
+                                                    <br/>
+                                                    DIRECTION GENERALE DES IMPOTS
+                                                    <br/>
+                                                    <span style="text-align:center;margin-left:55px">---</span>
+                                                </p>
+
+                                                <table style="border:1px solid">
+                                                    <tr>
+                                                        <td style="text-align:center;border:1px solid">
+                                                            CACHET DU SERVICE
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border:1px solid;height:80px;"/>
+                                                    </tr>
+                                                </table>
+                                                <br/>
+                                                <table style="border:1px solid">
+                                                    <tr>
+                                                        <td style="text-align:center;border:1px solid">
+                                                            DATE DE RECEPTION
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="height:80px;border:1px solid"/>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td style="border:none">
+                                                <p>
+                                                    <h5 style="text-align:center">
+                                                        <b>ETAT DES SALAIRES</b>
+                                                    </h5>
+                                                    <h6>ET DES REMUNERATIONS ASSIMILEES PAYES DURANT L'ANNEE</h6>
+                                                </p>
+                                                <p style="text-align:center">ANNEE:
+                                                    <b>
+                                                        <span t-esc="o.date_from.strftime('%Y')"/>
+                                                    </b>
+                                                </p>
+                                                <p>
+                                                    <h7>
+                                                        <b style="margin-left:19px">(A transmettre à l'adresse ci-contre
+                                                            le 31 janvier de
+                                                            l'année suivante au plus tard)
+                                                        </b>
+                                                    </h7>
+                                                </p>
+                                                <p style="margin-left:10px;">
+                                                    N°Compte:
+                                                    <b>
+                                                        <span t-esc="o.company_id.account_number"
+                                                              style="margin-left:40px"/>
+                                                    </b>
+                                                    <br/>
+                                                    Date de dépôt de dossier:
+                                                    <br/>
+                                                    Nom et prénom:
+                                                    <span style="margin-left:50px">
+                                                        <b>
+                                                            <span t-esc="o.company_id.name "/>
+                                                        </b>
+                                                    </span>
+                                                    <br/>
+                                                    Profession:
+                                                    <span style="margin-left:15px">
+                                                        <b>
+                                                            <span t-esc="o.company_id.profession"/>
+                                                        </b>
+                                                    </span>
+                                                    <span style="margin-left:165px">Tel.:
+                                                        <b>
+                                                            <span t-esc="o.company_id.phone"/>
+                                                        </b>
+                                                    </span>
+                                                    <br/>
+                                                    Adresse: Localité:
+                                                    <b>
+                                                        <span t-esc=" o.company_id.city "/>
+                                                    </b>
+                                                    <span style="margin-left:200px">
+                                                        Quartier:
+                                                        <b>
+                                                            <span t-esc="o.company_id.street2"/>
+                                                        </b>
+                                                    </span>
+                                                    <br/>
+                                                    <span>Rue:
+                                                        <b>
+                                                            <span t-esc="o.company_id.street"/>
+                                                        </b>
+                                                        <span style="margin-left:130px">N° du lot:</span>
+                                                    </span>
+                                                    <p style="margin-left:10px;">Nom et adresse du comptable: BP.
+                                                        <span style="margin-left:150px">Tél:</span>
+                                                    </p>
+                                                    <p style="margin-left:10px;">Exercice comptable du:
+                                                        <b>
+                                                            <span t-esc="o.date_from.strftime('%d/%m/%Y')"/>
+                                                        </b>
+                                                        au
+                                                        <b>
+                                                            <span t-esc="o.date_to.strftime('%d/%m/%Y')"/>
+                                                        </b>
+                                                        <br/>
+                                                        Si l'entreprise (1) possède plusieurs établissements(2),
+                                                        indiquer, en ce qui concerne la présente déclaration, le
+                                                        <br/>
+                                                        nombre des établissements auxquels elle s'applique:
+                                                    </p>
+                                                </p>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                    <b>
+                                        <h6 style="margin-left:27px;">
+                                            TABLEAU I. -ETAT RECAPITULATIF DES VERSEMENTS EFFECTUES OU A EFFECTUER
+                                            <br/>
+                                            AU TITRE DES DIVERS IMPOTS SUR LES SALAIRES ET DE L'IMPOT GENERAL SUR LE
+                                            REVENU
+                                        </h6>
+                                    </b>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <table style="width:100%;border-collapse:collapse;">
+                                        <tr>
+                                            <td rowspan="4" style="border:1px solid black;text-align:center;">
+                                                <br/>
+                                                <br/>
+                                                <br/>MOIS
+                                                <br/>
+                                                <br/>
+                                                <br/>
+                                                <br/>
+                                                <br/>1
+                                            </td>
+                                            <td rowspan="4" style="border:1px solid black;text-align:center">
+                                                <br/>
+                                                <br/>DATE des versements<br/>effectués<br/>(J,M,A)
+                                                <br/>
+                                                <br/>2
+                                            </td>
+                                            <td rowspan="4" style="border:1px solid black;text-align:center">
+                                                <br/>
+                                                <br/>MONTANT GLOBAL<br/>des versements<br/>effectués<br/>ou à effectuer
+                                                <br/>
+                                                <br/>3
+                                            </td>
+                                            <td colspan="6" style="border:1px solid black;text-align:center">DETAIL DES
+                                                VERSEMENTS<br/>effectués ou à effectuer
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" style="border:1px solid black;text-align:center">
+                                                IMPOTS RETENUS AUX EMPLOYES
+                                            </td>
+                                            <td colspan="2" style="border:1px solid black;text-align:center">
+                                                IMPOTS A LA CHARGE DE L'EMPLOYEUR
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="border:1px solid black;text-align:center">
+                                                Régime général
+                                            </td>
+                                            <td style="border:1px solid black;text-align:center">
+                                                Régime général et agricole
+                                            </td>
+                                            <td rowspan="2" style="border:1px solid black;text-align:center">
+                                                <br/>
+                                                <br/>C.R.N.S<br/>7
+                                            </td>
+                                            <td colspan="2" style="border:1px solid black;text-align:center">
+                                                Régime général et agricole
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:1px solid black;text-align:center;width:70px;">
+                                                I.S<br/>4
+                                            </td>
+                                            <td style="border:1px solid black;text-align:center;width:70px;">
+                                                C.N.<br/>5
+                                            </td>
+                                            <td style="border:1px solid black;text-align:center;width:70px;">
+                                                I.G.R<br/>6
+                                            </td>
+                                            <td style="border:1px solid black;text-align:center">
+                                                Personnel local<br/>8
+                                            </td>
+                                            <td style="border:1px solid black;text-align:center">
+                                                Personnel expat<br/>9
+                                            </td>
+                                        </tr>
+                                        <t t-foreach="o.versement_ids" t-as="line">
+                                            <tr>
+                                                <td style="border:1px solid black;text-align:center">
+                                                    <t t-if="line.month not in (13,14)">
+                                                        <span t-esc="line.month"/>
+                                                    </t>
+                                                    <t t-if="line.month == 13">13 (ajust.)</t>
+                                                    <t t-if="line.month == 14">14 TOTAL</t>
+
+                                                </td>
+                                                <td style="border:1px solid black;text-align:center">
+                                                    <t t-if="line.date">
+                                                        <span t-esc="line.date.strftime('%d/%m/%Y')"/>
+                                                    </t>
+                                                    <t t-else=""/>
+                                                </td>
+                                                <td style="border:1px solid black;text-align:center">
+                                                    <span t-esc="'{0:,.0f}'.format(round(line.amount_total)).replace(',', ' ')"/>
+                                                </td>
+                                                <td style="border:1px solid black;text-align:center">
+                                                    <span t-esc="'{0:,.0f}'.format(round(line.amount_is)).replace(',', ' ')"/>
+                                                </td>
+                                                <td style="border:1px solid black;text-align:center">
+                                                    <span t-esc="'{0:,.0f}'.format(round(line.amount_cn)).replace(',', ' ')"/>
+                                                </td>
+                                                <td style="border:1px solid black;text-align:center">
+                                                    <span t-esc="'{0:,.0f}'.format(round(line.amount_igr)).replace(',', ' ')"/>
+                                                </td>
+                                                <td style="border:1px solid black;text-align:center">
+
+                                                </td>
+                                                <td style="border:1px solid black;text-align:center">
+                                                    <span t-esc="'{0:,.0f}'.format(round(line.local_employee)).replace(',', ' ')"/>
+                                                </td>
+                                                <td style="border:1px solid black;text-align:center">
+                                                    <span t-esc="'{0:,.0f}'.format(round(line.expat_employee)).replace(',', ' ')"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </table>
+                                </div>
+                            </div>
+                            <div style="page-break-after: always;"/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div>
+                                <p>
+                                    <b>
+                                        <h4>TABLEAU III.- VERIFICATION DES VERSEMENTS EFFECTUES</h4>
+                                    </b>
+                                </p>
+                                <table style="width:100%;border-collapse:collapse;">
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:left">
+                                            N°DE COMPTE
+                                            <br/>
+                                            <span t-esc="o.company_id.account_number"/>
+
+                                        </td>
+                                        <td style="border:1px solid black;text-align:left">
+                                            REGIME GENERAL<br/>Personnel local
+                                        </td>
+                                        <td style="border:1px solid black;text-align:left">
+                                            REGIME GENERAL<br/>Personnel expatrié
+                                        </td>
+                                        <td style="border:1px solid black;text-align:left">
+                                            REGIME AGRICOLE
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:left">
+                                            <b>EFFECTIFS (au 31 déc. Ou à la cessation d'activité)</b>
+                                            <br/>
+                                            <div style="display: inline-flex;">
+                                                <div style="float:left;width:300px;">
+                                                    <b>- Effectifs totaux</b>
+                                                </div>
+                                                <div style="margin-left:300px;border-bottom:solid 1px black;border-left:solid 1px black;border-right:solid 1px black;text-align:center;">
+                                                    <span t-esc="o.total_employee"/>
+                                                </div>
+                                            </div>
+                                            <b>- Effectifs des seul salariés dont le salaire est inférieur au
+                                                <br/>
+                                                minimum
+                                                individuel:
+                                                <br/>
+                                                <div style="display: inline-flex;">
+                                                    <div style="float:left;width:300px;">
+                                                        (non déclaré au tableau II)
+                                                    </div>
+                                                    <div style="margin-left:300px;border-bottom:solid 1px black;border-left:solid 1px black;border-right:solid 1px black;text-align:center;">
+                                                        <t t-if="o.total_employee_sal_min > 0">
+                                                            <span style="text-align:right;"
+                                                                  t-esc="'{0:,.0f}'.format(o.total_employee_sal_min).replace(',', ' ')"/>
+                                                        </t>
+                                                        <t t-else="">-</t>
+                                                    </div>
+                                                </div>
+                                            </b>
+
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;vertical-align:top;">
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;">
+                                                <span t-esc="o.total_employee"/>
+                                            </div>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;">
+                                                -
+                                            </div>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:left;vertical-align:top;">
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:left;vertical-align:top;">
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:left">
+                                            <b>SALAIRES ANNUELS</b>
+                                            <br/>
+                                            <b>- Montants des salaires déclarés individuellement
+                                                <br/>
+                                                (Tableau II, Col.14) . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                                . . . . . . . . . . . . . . . .
+                                            </b>
+                                            <br/>
+                                            <b>- Montants des salaires non déclarés au tableau II
+                                                <br/>
+                                                (inférieurs au minimum) . . . . . . . . . . . . . . . . . . . . . . . .
+                                                . . . . . . . . . . . . . .
+                                            </b>
+                                            <br/>
+                                            <br/>
+                                            <div style="display: inline-flex;">
+                                                <b>
+                                                    <div style="float:left;width:300px;">
+                                                        - Total des salaires en espèces
+                                                    </div>
+                                                    <div style="margin-left:300px;border-bottom:solid 1px black;border-left:solid 1px black;border-right:solid 1px black;text-align:center;">
+                                                        <span t-esc="'{0:,.0f}'.format(o.total_amount_brut_total).replace(',', ' ')"/>
+                                                    </div>
+                                                </b>
+                                            </div>
+                                            <b>
+                                                |03| + |04|
+                                            </b>
+                                            <br/>
+                                            <b>- Montant des avantages en nature (cf.Tableau II,<br/>col.15 et 16 plus
+                                                éventuellement avantages sur salaires
+                                                <br/>
+                                                non déclarés au tableau II . . . . . . . . . . . . . . . . . . . . . . .
+                                                . . . . . . . . . . . . .
+                                            </b>
+                                            <br/>
+                                            <br/>
+                                            <div style="display: inline-flex;">
+                                                <b>
+                                                    <div style="float:left;width:300px;">
+                                                        - Total des salaires versés
+                                                    </div>
+                                                    <div style="margin-left:300px;border-bottom:solid 1px black;border-left:solid 1px black;border-right:solid 1px black;text-align:center;">
+                                                        <span t-esc="'{0:,.0f}'.format(o.total_total_gross).replace(',', ' ')"/>
+                                                    </div>
+                                                </b>
+                                            </div>
+                                            <b>
+                                                |05| + |06|
+                                            </b>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;vertical-align:top;">
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;">
+                                                <span t-esc="'{0:,.0f}'.format(o.total_amount_brut_total).replace(',', ' ')"/>
+                                            </div>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;">
+                                                -
+                                                <br/>
+                                            </div>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;">
+                                                <span t-esc="'{0:,.0f}'.format(o.total_amount_brut_total).replace(',', ' ')"/>
+                                            </div>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;">
+                                                <span t-esc="'{0:,.0f}'.format(o.total_natural_advantage_software + o.total_natural_advantage_other + o.total_cash_advantage).replace(',', ' ')"/>
+                                            </div>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;">
+                                                <span t-esc="'{0:,.0f}'.format(o.total_total_gross).replace(',', ' ')"/>
+                                            </div>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:left;vertical-align:top;">
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:left;vertical-align:top;">
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:left;vertical-align:top;">
+                                            <b>IMPOTS</b>
+                                            <br/>
+                                            <br/>
+                                            <div style="display: inline-flex;">
+                                                <b>
+                                                    <div style="float:left;width:300px;">
+                                                        - I.S. |07|* 80% * 1.5 %)
+                                                    </div>
+                                                    <div style="margin-left:300px;border-bottom:solid 1px black;border-left:solid 1px black;border-right:solid 1px black;text-align:center;">
+                                                        <span t-esc="'{0:,.0f}'.format(o.total_amount_is).replace(',', ' ')"/>
+                                                    </div>
+                                                </b>
+                                            </div>
+                                            <br/>
+                                            <div style="display: inline-flex;">
+                                                <b>
+                                                    <div style="float:left;width:300px;">
+                                                        - C.N. (TAB. I col. 5)
+                                                    </div>
+                                                    <div style="margin-left:300px;border-bottom:solid 1px black;border-left:solid 1px black;border-right:solid 1px black;text-align:center;">
+                                                        <span t-esc="'{0:,.0f}'.format(o.total_amount_cn).replace(',', ' ')"/>
+                                                    </div>
+                                                </b>
+                                            </div>
+                                            <br/>
+                                            <div style="display: inline-flex;">
+                                                <b>
+                                                    <div style="float:left;width:300px;">
+                                                        - I.G.R (TAB. I col. 6)
+                                                    </div>
+                                                    <div style="margin-left:300px;border-bottom:solid 1px black;border-left:solid 1px black;border-right:solid 1px black;text-align:center;">
+                                                        <t t-if="o.total_amount_igr > 0">
+                                                            <span t-esc="'{0:,.0f}'.format(o.total_amount_igr).replace(',', ' ')"/>
+                                                        </t>
+                                                        <t t-else="">-</t>
+                                                    </div>
+                                                </b>
+                                            </div>
+                                            <br/>
+                                            <div style="display: inline-flex;">
+                                                <b>
+                                                    <div style="float:left;width:300px;">
+                                                        - C.N.S. |07| * 1%
+                                                    </div>
+                                                    <div style="margin-left:300px;border-bottom:solid 1px black;border-left:solid 1px black;border-right:solid 1px black;text-align:center;">
+                                                        -
+                                                    </div>
+                                                </b>
+                                            </div>
+                                            <br/>
+                                            <div style="display: inline-flex;">
+                                                <b>
+                                                    <div style="float:left;width:300px;">
+                                                        - Total des impôts retenus aux salariés
+                                                    </div>
+                                                    <div style="margin-left:300px;border-bottom:solid 1px black;border-left:solid 1px black;border-right:solid 1px black;text-align:center;">
+                                                        <span t-esc="'{0:,.0f}'.format(o.total_amount_is + o.total_amount_cn + o.total_amount_igr).replace(',', ' ')"/>
+                                                        <t t-set="total_employee_tax"
+                                                           t-value="o.total_amount_is + o.total_amount_cn + o.total_amount_igr"/>
+                                                    </div>
+                                                </b>
+                                            </div>
+                                            <b>
+                                                |08| + |09| + |10| + |11|
+                                            </b>
+                                            <br/>
+                                            <br/>
+                                            <div style="display: inline-flex;">
+                                                <b>
+                                                    <div style="float:left;width:300px;">
+                                                        - Impôts à la charge de l'employeur
+                                                    </div>
+                                                    <div style="margin-left:300px;border-bottom:solid 1px black;border-left:solid 1px black;border-right:solid 1px black;text-align:center;">
+                                                        <span t-esc="'{0:,.0f}'.format(o.total_amount_is).replace(',', ' ')"/>
+                                                        <t t-set="employer_tax" t-value="o.total_amount_is"/>
+                                                    </div>
+                                                </b>
+                                            </div>
+                                            <b>
+                                                Locaux |07| * 80% * 3.5%
+                                                <br/>
+                                                Expatr |07| * 80% * 15%
+                                            </b>
+                                            <br/>
+                                            <div style="display: inline-flex;">
+                                                <b>
+                                                    <div style="float:left;width:300px;">
+                                                        - Total des impôts dûs
+                                                    </div>
+                                                    <div style="margin-left:300px;border-bottom:solid 1px black;border-left:solid 1px black;border-right:solid 1px black;text-align:center;">
+                                                        <span t-esc="'{0:,.0f}'.format(total_employee_tax + employer_tax).replace(',', ' ')"/>
+                                                    </div>
+                                                </b>
+                                            </div>
+                                            <b>
+                                                |12| + |13|
+                                                <br/>
+                                            </b>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;vertical-align:top;">
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;">
+                                                <span t-esc="'{0:,.0f}'.format(o.total_amount_is).replace(',', ' ')"/>
+                                            </div>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;">
+                                                <span t-esc="'{0:,.0f}'.format(o.total_amount_cn).replace(',', ' ')"/>
+                                            </div>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;">
+                                                <span t-esc="'{0:,.0f}'.format(o.total_amount_igr).replace(',', ' ')"/>
+                                            </div>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;">
+                                                <span t-esc="'{0:,.0f}'.format(o.total_amount_is + o.total_amount_cn + o.total_amount_igr).replace(',', ' ')"/>
+                                            </div>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;">
+                                                <span t-esc="'{0:,.0f}'.format(employer_tax).replace(',', ' ')"/>
+                                            </div>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;">
+                                                <span t-esc="'{0:,.0f}'.format(total_employee_tax + employer_tax).replace(',', ' ')"/>
+                                            </div>
+
+                                        </td>
+                                        <td style="border:1px solid black;text-align:left;vertical-align:top;">
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:left;vertical-align:top;">
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <div style="border-bottom:solid 1px black;"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br/>
+                                <p>
+                                    <b>TABLEAU IV.- RAPPROCHEMENT AVEC LA COMPTABILITE</b>
+                                </p>
+                                <p>
+                                    <div style="display: inline-flex;">
+                                        <div style="float:left;width:700px;">
+                                            des salaires en espèces du Regime général (Tab. III, ligne 5, colonne 1+2)
+                                            . . . . . . . . . . . . . . . . :
+                                            <br/>
+                                            des salaires en espèces du Regime agricole (Tab. III, ligne 5, colonne 3)
+                                            . . . . . . . . . . . . . . . . . . : +
+                                        </div>
+                                        <div style="margin-left:700px;border-bottom:solid 1px black;text-align:right;">
+                                            <span t-esc="'{0:,.0f}'.format(o.total_amount_brut_total).replace(',', ' ')"/>
+                                            <br/>
+                                            0
+                                        </div>
+                                    </div>
+                                </p>
+
+                                <p>
+                                    <div style="display: inline-flex;">
+                                        <div style="float:left;width:700px;">
+                                            Montant total des salaires en espèces assujettis aux impôts sur les
+                                            salaires . . . . . . . . . . . . . . . . :
+                                            <br/>
+                                            A ajouter, éventuellement, les sommes exonérées (indemnités de départ
+                                            inférieures à
+                                            50.000 francs; 50% des indemnités de départ supérieures à 50.000 francs)
+                                            . . . . . . . . . . . . . . . . . . . . . . : +
+                                        </div>
+                                        <div style="margin-left:700px;border-bottom:solid 1px black;text-align:right;">
+                                            <span t-esc="'{0:,.0f}'.format(o.total_amount_brut_total).replace(',', ' ')"/>
+                                            <br/>
+                                            <span t-esc="'{0:,.0f}'.format(o.total_amount_tp + o.total_amount_af).replace(',', ' ')"/>
+                                        </div>
+                                    </div>
+                                </p>
+                                <p>
+                                    <div style="display: inline-flex;">
+                                        <div style="float:left;width:700px;">
+                                            Total à rapprocher du montant des salaires comptabilisés
+                                            (.....................)
+                                            . . . . . . . . . . . . . . . . . . :
+                                        </div>
+                                        <div style="margin-left:700px;border-bottom:solid 1px black;text-align:right;">
+                                            <span t-esc="'{0:,.0f}'.format(o.total_amount_brut_total + o.total_amount_tp + o.total_amount_af).replace(',', ' ')"/>
+                                        </div>
+                                    </div>
+                                </p>
+                                <br/>
+                                <p>
+                                    <div style="display: inline-block;">
+                                        <div style="display: inline-block;float:left;width:110px;height:110px;border: solid 1px black;text-align:center;vertical-align:middle;">
+                                            <p style="font-size:10px;">CACHET</p>
+                                        </div>
+                                        <div style="display: inline-block;float:left;width:590px;">
+                                            <span style="margin-left:440px">A Abidjan, le</span>
+                                            <br/>
+                                            <br/>
+                                            <span style="margin-left:440px">Signature</span>
+                                        </div>
+                                        <div style="display: inline-block;float:rigth;border-bottom:dashed 2px black;width:135px;text-align:right;">
+                                            <span t-esc="datetime.datetime.now().strftime('%d/%m/%Y')"/>
+                                        </div>
+                                    </div>
+                                </p>
+                            </div>
+                            <br/>
+                            <br/>
+                            <div style="page-break-after: always;"/>
+                            <div>
+                                <p style="text-align:center;">
+                                    <b>
+                                        <h4>TAXES A LA CHARGE DE L'EMPLOYEUR A VERSER AU FDFP</h4>
+                                    </b>
+                                </p>
+                                <span>Reportez ci-dessous les informations suivantes :</span>
+                                <table style="width:100%;border-collapse:collapse;">
+
+                                    <tr>
+                                        <td colspan="2"
+                                            style="border:1px solid black;text-align:left;border-bottom:none;border-right:none;">
+                                            PERIODE D'IMPOSITION:
+                                            <span t-esc="o.date_from.strftime('%m')" style="margin-left:10px"/>
+                                            <t t-if="3 >= int(o.date_from.strftime('%m')) and int(o.date_from.strftime('%m'))>=1">
+                                                <t t-set="quarter" t-value="1"/>
+                                                <span style="margin-left:20px">0
+                                                    <t t-esc="quarter"/>
+                                                </span>
+                                            </t>
+                                            <t t-if="int(o.date_from.strftime('%m'))>3 and  6>=int(o.date_from.strftime('%m'))">
+                                                <t t-set="quarter" t-value="2"/>
+                                                <span style="margin-left:20px">0
+                                                    <t t-esc="quarter"/>
+                                                </span>
+                                            </t>
+                                            <t t-if="9 >= int(o.date_from.strftime('%m')) and int(o.date_from.strftime('%m'))>6">
+                                                <t t-set="quarter" t-value="3"/>
+                                                <span style="margin-left:20px">0
+                                                    <t t-esc="quarter"/>
+                                                </span>
+                                            </t>
+                                            <t t-if="12 >= int(o.date_from.strftime('%m')) and int(o.date_from.strftime('%m'))>9">
+                                                <t t-set="quarter" t-value="4"/>
+                                                <span style="margin-left:20px">0
+                                                    <t t-esc="quarter"/>
+                                                </span>
+                                            </t>
+                                            <span style="margin-left:29px">
+                                                <span t-esc="o.date_from.strftime('%Y')"/>
+                                            </span>
+                                        </td>
+
+                                        <td colspan="2"
+                                            style="border:1px solid black;text-align:right;border-bottom:none;border-left:none;">
+                                            N° DE COMPTE:
+                                            <b>
+                                                <span t-esc="o.company_id.account_number" style="margin-left:15px;"/>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"
+                                            style="border:1px solid black; border-top:none;border-right:none;">
+                                            <span style="margin-left:150px">
+                                                <span style="margin-left:3px">Mois</span>
+                                                <span style="margin-left:7px">Trim</span>
+                                                <span style="margin-left:14px">Année</span>
+                                            </span>
+                                        </td>
+                                        <td colspan="2" style="border-top:none;border-left:none;"/>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="4"
+                                            style="border:1px solid black;text-align:left;border-left:none;border-right:none;"/>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:left;border-right:none;">
+                                            - Nom et Prénoms
+                                        </td>
+                                        <td colspan="2" style="border:1px solid black;text-align:center;width: 400px">
+                                            <b>
+                                                <span t-esc="o.company_id.name"/>
+                                            </b>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;width: 250px">
+                                            EFFECTIF
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:left;border-right:none;">
+                                            - Activité principale
+                                        </td>
+                                        <td colspan="2" style="border:1px solid black;text-align:center">
+                                            <b>
+                                                <span t-esc="o.company_id.profession"/>
+                                            </b>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:left">Cadres :
+                                            <b>
+                                                <span t-esc="o.executive_number" style="margin-left:20px;"/>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:left;border-right:none;">
+                                            - Forme juridique
+                                        </td>
+                                        <td colspan="2" style="border:1px solid black;text-align:center">
+                                            <b>
+                                                <span t-esc="o.company_id.legal_status"/>
+                                            </b>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:left">Maîtrises :
+                                            <b>
+                                                <span t-esc="o.agent_control_number" style="margin-left:12px;"/>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:left;border-right:none;">
+                                            - Adresse : B.P :
+                                        </td>
+                                        <td colspan="2" style="border:1px solid black;text-align:center">
+                                            <b>
+                                                <span t-esc="o.company_id.address" style="margin-left:20px;"/>
+                                                Tél.:
+                                                <span t-esc="o.company_id.phone" style="margin-right:20px;"/>
+                                            </b>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:left">
+                                            Employés :
+                                            <b>
+                                                <span t-esc="o.employee_number" style="margin-left:8px;"/>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:left;border-right:none;">
+                                            - Centre des impôts
+                                        </td>
+                                        <td colspan="2" style="border:1px solid black;text-align:center">
+                                            <b>
+                                                <span t-esc="o.company_id.tax_base_service"/>
+                                            </b>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:left">
+                                            Ouvriers :
+                                            <b>
+                                                <span t-esc="o.worker_number" style="margin-left:15px;"/>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br/>
+                                <table style="width:100%;border-collapse:collapse">
+                                    <tr>
+                                        <td colspan="4" style="border:1px solid black;text-align:center">
+                                            <strong>VERSEMENTS OBLIGATOIRES</strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:left;border-bottom:none;">
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center">
+                                            TOTAL SALAIRES BRUTS
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center">
+                                            TAUX (%)
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center">
+                                            MONTANT A PAYER
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:left;border-top:none;border-bottom:none;">
+                                            14 - TAXE D'APPRENTISSAGE . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            . . . .
+                                        </td>
+                                        <td rowspan="2" style="border:1px solid black;text-align:center">
+                                            <t t-foreach="o.training_tax_ids" t-as="line">
+                                                <t t-if="line.sequence == 1">
+                                                    <span t-esc="'{0:,.0f}'.format(line.gross_salary).replace(',', ' ')"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;border-bottom:none;">
+                                            <t t-foreach="o.training_tax_ids" t-as="line">
+                                                <t t-if="line.sequence == 1">
+                                                    <span t-esc="str('%.2f'%line.tax).replace('.', ',')"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;border-bottom:none;">
+                                            <t t-foreach="o.training_tax_ids" t-as="line">
+                                                <t t-if="line.sequence == 1">
+                                                    <span t-esc="'{0:,.0f}'.format(line.tax_amount).replace(',', ' ')"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:left;border-top:none;">
+                                            15 - TAXE A LA FORMATION PROFESSIONNELLE CONTINUE
+                                            <br/>
+                                            "part complémentaires" . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            .
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;border-top:none;">
+                                            <t t-foreach="o.training_tax_ids" t-as="line">
+                                                <t t-if="line.sequence == 2">
+                                                    <span t-esc="str('%.2f'%line.tax).replace('.', ',')"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;border-top:none;">
+                                            <t t-foreach="o.training_tax_ids" t-as="line">
+                                                <t t-if="line.sequence == 2">
+                                                    <span t-esc="'{0:,.0f}'.format(line.tax_amount).replace(',', ' ')"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br/>
+                                <table>
+                                    <t t-foreach="o.training_tax_ids" t-as="line">
+                                        <tr style="border:none;">
+                                            <td style="border:none;">
+                                                Règlement joint à l'ordre de "FDFP
+                                                <span t-esc="line.name"/>
+                                                "
+                                            </td>
+                                        </tr>
+                                        <tr style="border:none;">
+                                            <td style="border:none;margin-left:100px;">
+                                                Chèque bancaire N°: . . . . . . . . . . . . . . . . . .
+                                                . . . . . . . . . . . .
+                                                du . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                                sur . . . . . . . . . . . . . . . . . .
+                                                . . . . . . . . . . . . . . . . . .
+                                            </td>
+                                        </tr>
+                                        <tr style="border:none;">
+                                            <td style="border:none;margin-left:100px;">
+                                                Numéraire
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                                <hr/>
+                                <table style="width:100%;border-collapse:collapse">
+                                    <tr>
+                                        <td colspan="2" style="border:1px solid black;text-align:center">
+                                            <strong>REGULARISATION A EFFECTUER EN FIN D'ANNEE</strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:center">
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;width:40%">
+                                            MONTANT
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:left;border-bottom:none;">
+                                            16 - Masse salariale totale de l'exercice . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . . . .
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;border-bottom:dashed 1px black;">
+                                            <span t-esc="'{0:,.0f}'.format(o.total_payroll).replace(',', ' ')"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:left;border-top:none;border-bottom:none;">
+                                            17 - Contribution 1.2 % sur l'exercice . . . . . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . . . . . .
+                                            <br/>
+                                            <span style="margin-left:15px;">( |16| * 1.2 % )</span>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;border-top:none;border-bottom:dashed 1px black;">
+                                            <span t-esc="'{0:,.0f}'.format(round(o.exercise_contribution)).replace(',', ' ')"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:left;border-top:none;border-bottom:none;">
+                                            18 - Versements déjà effectués au titre de FPC . . . . . . . . . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . .
+                                            <br/>
+                                            <span style="margin-left:15px;">( |15| des 12 mois )</span>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;border-top:none;border-bottom:dashed 1px black;">
+                                            <span t-esc="'{0:,.0f}'.format(o.payments_already_made).replace(',', ' ')"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:left;border-top:none;border-bottom:none;">
+                                            19 - Engagements sur plans agréés par le FDFP (utilisation direct) . . . . .
+                                            . . . . . . . . . . . . . .
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;border-top:none;border-bottom:dashed 1px black;">
+                                            <span t-esc="'{0:,.0f}'.format(o.commitment_on_plan).replace(',', ' ')"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:left;border-top:none;">
+                                            20 - Versement à effectuer si |17| est supérieur à |18| + |19| . . . . . .
+                                            . . . . . . . . . . . . . . . . . . . .
+                                            <br/>
+                                            <span style="margin-left:15px;">20 = |17| - ( |18| + |19| )</span>
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;width:40%;border-top:dashed 1px black;">
+                                            <t t-if="o.payment_to_be_made > 0">
+                                                <span t-esc="'{0:,.0f}'.format(o.payment_to_be_made).replace(',', ' ')"/>
+                                            </t>
+                                            <t t-else="">NEANT</t>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                                <!--<br/>-->
+                                <table>
+                                    <tr style="border:none;">
+                                        <td style="border:none;">
+                                            <span>Règlement joint à l'ordre du FDFP " Taxe à la FPC "</span>
+                                        </td>
+                                    </tr>
+                                    <tr style="border:none;">
+                                        <td style="border:none;">
+                                            <span>Chèque bancaire barré n° . . . . . . . . . . . . . . . . . . . .
+                                                . . . . du . . . . . . . . . . . . . . . . . . . . . . . . sur .
+                                                . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr style="border:none;">
+                                        <td style="border:none;">
+                                            <span>Numéraires :</span>
+                                        </td>
+                                    </tr>
+                                    <tr style="border:none;">
+                                        <td style="border:none;">
+                                            <span>
+                                                Joindre les pièces justificatives d'agrément par le Secrétariat Général
+                                                du FDFP
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table style="width:100%;border-collapse:collapse">
+                                    <tr>
+                                        <td style="border:none;text-align:right"/>
+                                        <td style="border:none;text-align:right">
+                                            A .................................. le ..................................
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:none;text-align:right"/>
+                                        <td style="border:none;text-align:right;">
+                                            <span style="margin-right:100px;">Signature et cachet</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <hr/>
+                                <table style="width:100%;border-collapse:collapse">
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:center;width:35%">
+                                            REGULARISATION
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;width:35%">
+                                            INDEMNITE DE RETARD
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;width:30%">
+                                            VISA
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:left;border-bottom:none;">
+                                            <br/>
+                                            R. R. de . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                        </td>
+                                        <td style="border:1px solid black;text-align:left;border-bottom:none;">
+                                            <br/>
+                                            N° . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                        </td>
+                                        <td style="border:1px solid black;text-align:left;border-bottom:none;">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:left;border-bottom:none;border-top:none;">
+                                            Article . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;border-bottom:none;border-top:none;">
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;border-bottom:none;border-top:none;">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;text-align:left;border-top:none;">
+                                            Montant . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                        </td>
+                                        <td style="border:1px solid black;text-align:left;border-top:none;">
+                                            Montant . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;border-top:none;">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

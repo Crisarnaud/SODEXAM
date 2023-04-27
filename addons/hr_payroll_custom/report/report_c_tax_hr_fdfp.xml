@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_c_tax_hr_fdfp">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="hr_FDFP.fdfp_layout">
+                    <div class="page" style="padding:1px 0px 5px 0px;">
+                        <div>
+                            <p style="font-size:12px">
+                                Reportez ci-dessous les informations suivantes:
+                            </p>
+                            <table style="width:100%;border:1px solid black;border-collapse:collapse">
+                                <tr>
+                                    <td style="height:10px;border:none">
+                                        <span style="margin-left:192px;font-size:12px"> <span style="margin-left:2px">Mois</span>
+                                            <span style="margin-left:5px">Trim</span>
+                                            <span style="margin-left:5px">Année</span></span>
+                                    </td>
+                                    <td style="height:10px;border:none">
+
+                                    </td>
+                                </tr>
+                                <tr style="height:16px;">
+                                    <td style="border:none;border-bottom:1px solid black;font-size:12px">PERIODE D'IMPOSITION: <span style="margin-left:43px"> <span t-esc="o.date_from.strftime('%m')" style="margin-left:10px"/></span>
+                                        <t t-if="3 >= int(o.date_from.strftime('%m')) and int(o.date_from.strftime('%m'))>=1">
+                                            <t t-set="quarter" t-value="1"/>
+                                            <span style="margin-left:20px">0<t t-esc="quarter"/></span>
+                                        </t>
+                                        <t t-if="int(o.date_from.strftime('%m'))>3 and  6>=int(o.date_from.strftime('%m'))">
+                                            <t t-set="quarter" t-value="2"/>
+                                            <span style="margin-left:20px">0<t t-esc="quarter" /></span>
+                                        </t>
+                                        <t t-if="9 >= int(o.date_from.strftime('%m')) and int(o.date_from.strftime('%m'))>6">
+                                            <t t-set="quarter" t-value="3"/>
+                                            <span style="margin-left:20px">0<t t-esc="quarter"/></span>
+                                        </t>
+                                        <t t-if="12 >= int(o.date_from.strftime('%m')) and int(o.date_from.strftime('%m'))>9">
+                                            <t t-set="quarter" t-value="4"/>
+                                            <span style="margin-left:20px">0<t t-esc="quarter"/></span>
+                                        </t>
+                                        <span t-esc="o.date_from.strftime('%Y')" style="margin-left:14px"/></td>
+                                    <td style="border:none;font-size:12px"> <b>No de COMPTE</b></td>
+                                </tr>
+                                <tr style="height:40px;">
+                                    <td style="width:70%;font-size:12px;">
+                                        <p style="margin-left:10px;font-size:12px">
+                                            - NOM et PRENOMS (Raison sociale) <b> <span t-esc="o.company_id.name"/> </b><br/>
+                                            - ACTIVITÉ <br/>
+                                            - FORME JURIDIQUE <br/>
+                                            - ADRESSE: BP <b> <span t-esc="o.company_id.street     "/> </b> TEL: <b> <span t-esc="o.company_id.phone"/> </b><br/>
+                                            - RECETTES DES IMPOTS DIVERS D <br/>
+                                        </p>
+                                    </td>
+                                    <td style="widht:30%;border:1px solid black;font-size: 12px;">
+                                        <p style="text-align:center;font-size: 12px;">EFFECTIF</p>
+                                        <p style="margin-left:10px;font-size:12px">
+                                            CADRES:  <br/>
+                                            MAITRISES: <br/>
+                                            EMPLOYES: <span t-esc="o.salaries_number"/> <br/>
+                                            OUVRIERS:
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table style="width:100%;border:1px solid;border-collapse:collapse;font-size: 15px;">
+                                <tr style="height:15px">
+                                    <td colspan="4" style="width:100%;text-align:center;border:1px solid black;font-size:12px;">VERSEMENTS OBLIGATOIRES</td>
+                                </tr>
+                                <tr style="height:30px">
+                                    <td style ="border:none"></td>
+                                    <td style="text-align:center;border:1px solid black"><p style="font-size: 12px;">TOTAL SALAIRES BRUTS</p></td>
+                                    <td style="text-align:center;border:1px solid black"><p style="font-size: 12px;">TAUX (%)</p></td>
+                                    <td style="text-align:center;border:1px solid black"><p style="font-size: 12px">MONTANTS À PAYER</p></td>
+                                </tr>
+                                <t t-foreach="o.line_ids" t-as="line">
+                                    <tr>
+                                        <td style="border:None;text-align:left">
+                                            <span t-esc="line.rule_id.name"/>
+                                        </td>
+                                        <td style="border:None;text-align:center;border-left:1px solid black;border-right:1px solid black">
+                                            <b> <span t-esc="round(line.brut_total)"/> </b>
+                                        </td>
+                                        <td style="border:None;text-align:center;border-left:1px solid black;border-right:1px solid black">
+                                            <b> <span t-esc="line.taux"/></b>
+                                        </td>
+                                        <td style="border:None;text-align:center;border-left:1px solid black;">
+                                            <b><span t-esc="round(line.amount_contributed)"/> </b>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                            <table style="border:none">
+                                <tr>
+                                    <td style="border:none;width:70%">
+                                        <p style="font-size: 12px;">
+                                            Règlement joint à l'ordre de "FDFP Taxe d'Apprentissage" <br/>
+                                            <span style="margin-left:15px">
+                                                Chèque bancaire N°:  <br/>
+                                            </span>
+                                            <span style="margin-left:15px">
+                                                Numéraire
+                                            </span>
+                                            <br/>
+                                            Règlement joint à l'ordre de "FDFP Taxe à la FPC" <br/>
+                                            <span style="margin-left:15px;font-size:12px">
+                                                Chèque bancaire N°: <br/>
+                                            </span>
+                                            <span style="margin-left:15px;font-size:12px">
+                                                Numéraires:
+                                            </span> <br/>
+                                            <b>* CUMUL FPC A CE JOUR (1): </b> <br/>
+                                            Il s'agit de la taxe FPC (0.6%) conservée pour la formation depuis le début de l'année)
+                                        </p>
+                                    </td>
+                                    <td style="border:none"></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+
+
+                    <table style="width:100%;border:1px solid black;border-collapse:collapse;height:60px;font-size: 15px;">
+                        <tr style="height:15px">
+                            <td colspan="2" style="text-align:center;border:1px solid black;font-size: 12px;">
+                                <b>REGULARISATION À EFFECTUER EN FIN D'ANNÉE</b>
+                            </td>
+                        </tr>
+                        <tr style="height:10px;">
+                            <td style="border:none"></td>
+                            <td style="text-align:center;border:1px solid black;font-size: 12px;">MONTANT A PAYER</td>
+                        </tr>
+                        <tr style="height:40px;">
+                            <td style="border-top:none">
+                                <p style="font-size: 12px;">
+                                    16 - Masse salariale totale de l'exercice <br/>
+                                    17 - Contribution 1.2% sur l'exercice (|16| * 1.2%) <br/>
+                                    18 - Versements déjà effectués au titre de FPC (|15| des 12 mois) <br/>
+                                    19 - Engagements sur plans agréés par le FDFP (utilisation directe)(2) <br/>
+                                    20 - Versements à effectuer si |17| est supérieur à |18| + |19| <br/>
+                                    |20| = |17| - (|18| + |19|) <br/>
+                                </p>
+                            </td>
+                            <td style="border:1px solid black"></td>
+                        </tr>
+                    </table>
+
+                    <table style="width:100%;border:none">
+                        <tr>
+                            <td style="border:none">
+                                <p style="font-size: 12px;"> Règlement joint à l'ordre de "FDFP Taxe à la FPC" <br/>
+                                    Chèque bancaire N°: <br/>
+                                    Numéraire </p>
+                                <p style="font-size: 12px;">(2) Joindre les pièces justificatives d'agrément par le Sécretariat Général du FDFP </p>
+                            </td>
+                            <td style="border:none"></td>
+                            <td style="border:none;width:40%">
+                                <p style="text-align:center;margin-left:60px;font-size:15px;padding-top:20px">
+                                    <br/>
+                                    À ABIDJAN, le <span t-esc="datetime.datetime.now().strftime('%d/%m/%Y')"/> <br/>
+                                    Signature et cachet
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="padding-top:5px;height:30px;border:1px solid black;border-collapse:collapse;width:100%;font-size:15px;">
+                        <tr>
+                            <td style="text-align:center;border:1px solid black;font-size: 12px;width:32%">REGULARISATION</td>
+                            <td style="text-align:center;border:1px solid black;font-size: 12px;width:33%">INDEMNITÉ DE RETARD</td>
+                            <td style="text-align:center;border:1px solid black;font-size: 12px;width:35%">VISA</td>
+                        </tr>
+                        <tr style="height:80px">
+                            <td style="border:1px solid black;height:30px"></td>
+                            <td style="border:1px solid black;height:30px"></td>
+                            <td style="border:1px solid black;height:30px"></td>
+                        </tr>
+                    </table>
+                    <b>N.B:</b>
+                    <li style="font-size:12px"> <b> Aucune compensation sur les taxes FDFP n'est admise </b> </li>
+                    <li style="font-size:12px"> <b> Ne peuvent bénéficiaire des financements que les entreprises appliquant le SMIG </b> </li>
+                    <p style="font-size:12px"><b>(1) Le montant cumulé de la taxe FPC (0.6%) sur 12 mois est reversé en fin d'année si vous n'
+                        avez pas eu de plan de formation agréé par le FDFP.</b>
+                    </p>
+
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

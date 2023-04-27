@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_hms_physician_form_inherit" model="ir.ui.view">
+            <field name="name">hms.physician.form</field>
+            <field name="model">hms.physician</field>
+            <field name="inherit_id" ref="acs_hms.view_physician_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_treatment']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_prescription']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='email']" position="attributes">
+                    <attribute name="required">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='is_primary_surgeon']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="required">1</attribute>
+                </xpath>
+
+                <xpath expr="//page[2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <!--<xpath expr="//field[@name='email']" position="attributes">
+                    <attribute name="required">0</attribute>
+                </xpath>-->
+                <xpath expr="//field[@name='followup_service_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='appointment_duration']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='department_ids']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_hms_physician_surgery_form_inherit" model="ir.ui.view">
+            <field name="name">hms.physician.form</field>
+            <field name="model">hms.physician</field>
+            <field name="inherit_id" ref="acs_hms_surgery.view_physician_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_surgery_physician']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_hms_physician_hospitalization_form_inherit" model="ir.ui.view">
+            <field name="name">hms.physician.form</field>
+            <field name="model">hms.physician</field>
+            <field name="inherit_id" ref="acs_hms_hospitalization.view_physician_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_hospitalization']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="view_hms_physician_laboratory_form_inherit" model="ir.ui.view">
+            <field name="name">hms.physician.form</field>
+            <field name="model">hms.physician</field>
+            <field name="inherit_id" ref="acs_laboratory.view_physician_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_lab_request']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_lab_result']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_hms_physician_commission_form_inherit" model="ir.ui.view">
+            <field name="name">hms.physician.form</field>
+            <field name="model">hms.physician</field>
+            <field name="inherit_id" ref="acs_hms_commission.view_physician_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='commission_role_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

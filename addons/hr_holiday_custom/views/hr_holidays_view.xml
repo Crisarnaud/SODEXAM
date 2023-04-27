@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <record id="hr_leave_type_extension" model="ir.ui.view">
+        <field name="name">hr.leave.type.form</field>
+        <field name="model">hr.leave.type</field>
+        <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form"/>
+        <field name="arch" type="xml">
+            <field name="request_unit" position="after">
+                <field name="is_calendar"/>
+            </field>
+            <field name="allocation_type" position="after">
+                <field name="nbre_jr_max" attrs="{'invisible': [('allocation_type', '!=', 'legal')],
+                            'required': [('allocation_type', '=', 'legal')]}"/>
+            </field>
+            <field name="color_name" position="before">
+                <field name="code"/>
+            </field>
+            <field name="leave_validation_type" position="after">
+                <field name="no_validation"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_leaves_inh_form_view">
+        <field name="name">hr.leave.view.form.inherit</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_form_manager"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="replace">
+                <field name="state"/>
+            </xpath>
+            <xpath expr="//header" position="replace">
+                <header>
+                    <button string="Valider" name="action_validate" type="object" class="oe_highlight"
+                            states="draft"
+                            groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_responsible"/>
+
+                    <button string="Annuler" name="action_cancel" type="object" class="oe_highlight"
+                            states="confirm"/>
+                    <button string="Remettre en brouillon" name="action_draft" type="object"
+                            attrs="{'invisible': ['|', ('can_reset', '=', False), ('state', 'not in', ['confirm', 'refuse'])]}"/>
+
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,validate"/>
+                </header>
+            </xpath>
+
+
+            <xpath expr="//field[@name='holiday_status_id']" position="before">
+                <label for="employee_id"/>
+                <h1><field name="employee_id"/></h1>
+            </xpath>
+
+            <xpath expr="//field[@name='department_id']" position="before">
+                <field name="direction_id"/>
+            </xpath>
+
+            <xpath expr="//group/field[@name='employee_id']" position="replace">
+            </xpath>
+
+
+            <xpath expr="//field[@name='number_of_days']" position="replace">
+                <field name="number_of_days" attrs="{'readonly':[('state','=', 'validate')]}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='department_id']" position="after">
+                <field name="service_id"/>
+            </xpath>
+
+            <xpath expr="//field[@name='department_id']" position="after">
+                <field name="service_id"/>
+                <field name="justification"/>
+            </xpath>
+
+            <xpath expr="//field[@name='payslip_status']" position="before">
+                <field name="to_pay"/>
+            </xpath>
+
+            <xpath expr="//field[@name='payslip_status']" position="replace">
+                <field name="payslip_status" readonly="1"/>
+            </xpath>
+
+            <field name="payslip_status" position="after">
+                <field name="code" invisible="1"/>
+            </field>
+
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="motif_refus" attrs="{'invisible': [('refuse', '=', 'non')] }"/>
+                <field name="company_id" groups="base.group_multi_company" readonly="1" invisible="0"/>
+                <field name="date_noty_start" string="Date notif départ" invisible="1"/>
+                <field name="date_noty_return" string="Date notif retour" invisible="1"/>
+                <field name="vacation_destination" attrs="{'invisible':[('code', '!=', 'CONG')]}"/>
+                <field name="interim_id" attrs="{'invisible':[('code', '!=', 'CONG')]}"/>
+                <field name="other_contact" attrs="{'invisible':[('code', '!=', 'CONG')]}"/>
+                <field name="code" invisible="1"/>
+                <field name="refuse" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="hr_leave_view_form_ext">
+        <field name="name">hr.leave.form.ext</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='holiday_status_id']" position="replace">
+                <label for="holiday_status_id"/>
+                <field name="holiday_status_id"/>
+            </xpath>
+
+             <xpath expr="//field[@name='employee_id']" position="replace">
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_hr_holidays_filter_inherit">
+        <field name="name">hr.holidays.filter.inherit</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.view_hr_holidays_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='managed_people']" position="replace">
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_hr_leave_allocation_filter" model="ir.ui.view">
+        <field name="name">hr.holidays.filter_allocations.inherit</field>
+        <field name="model">hr.leave.allocation</field>
+        <field name="inherit_id" ref="hr_holidays.view_hr_leave_allocation_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='managed_people']" position="replace">
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

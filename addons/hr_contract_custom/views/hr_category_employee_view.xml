@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <!-- les catégories d'employé -->
+        <record model="ir.ui.view" id="hr_contract_category_tree_view">
+            <field name="name">hr.category.contract.tree</field>
+            <field name="model">hr.category.contract</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Catégories d'employés">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="sequence" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_contract_category_form_view">
+            <field name="name">hr.category.contract.form</field>
+            <field name="model">hr.category.contract</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Primes">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" select="1"/>
+                                <field name="sequence"/>
+                            </group>
+                            <group>
+                                <field name="code"/>
+                            </group>
+                        </group>
+                        <field name="description" placeholder="Description de la catégorie d'employé"/>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_hr_contract_category_tree_view">
+            <field name="name">Catégories d'employé</field>
+            <field name="res_model">hr.category.contract</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="hr_contract_category_tree_view"/>
+        </record>
+
+
+</odoo>

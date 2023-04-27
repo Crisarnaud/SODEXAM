@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Action Menu Tree view -->
+        <record id="previsional_leave_tree_view" model="ir.ui.view">
+            <field name="name">hr.previsional.leave.tree</field>
+            <field name="model">hr.previsional.leave</field>
+            <field name="arch" type="xml">
+                <tree string="Congé prévisionnel">
+                    <field name="employee_id"/>
+                    <field name="previsional_departure_date"/>
+                    <field name="return_date"/>
+                    <field name="numbers_of_days"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action Menu Calendar view -->
+        <record id="previsional_leave_calendar_view" model="ir.ui.view">
+            <field name="name">hr.previsional.leave.calendar</field>
+            <field name="model">hr.previsional.leave</field>
+            <field name="priority" eval="2"/>
+            <field name="arch" type="xml">
+                <calendar string="Congé prévisionnel Calendar" date_start="previsional_departure_date"
+                          color="employee_id">
+                    <field name="employee_id"/>
+                    <field name="return_date"/>
+                </calendar>
+            </field>
+        </record>
+
+        <!-- Action Menu Form view -->
+        <record id="previsional_leave_form_view" model="ir.ui.view">
+            <field name="name">hr.previsional.leave.form</field>
+            <field name="model">hr.previsional.leave</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Congé prévisionnel" version="7.0">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="employee_id"/>
+                                <field name="numbers_of_days"/>
+                                <field name="fifteen_days_after_departure"/>
+                                <field name="employee_email"/>
+                            </group>
+                            <group>
+                                <field name="departure_date" invisible="1"/>
+                                <field name="previsional_departure_date"/>
+                                <field name="return_date"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action Menu gantt view -->
+        <record id="previsional_leave_gantt_view" model="ir.ui.view">
+            <field name="name">hr.previsional.leave.gantt</field>
+            <field name="model">hr.previsional.leave</field>
+            <field name="arch" type="xml">
+                <gantt date_stop="previsional_departure_date" date_start="departure_date"
+                       string="Congé prévisionnel gantt"
+                       default_group_by="workcenter_id">
+                </gantt>
+            </field>
+        </record>
+
+        <!-- Action Menu Item Related To Above Action Window -->
+        <record id="action_previsional_menu" model="ir.actions.act_window">
+            <field name="name">Rapport</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.previsional.leave</field>
+            <field name="view_mode">tree,form,calendar,gantt</field>
+            <field name="help" type="html">
+                <p>
+                    Créer un congé previsionnel
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_previsional_rapport"
+                  name="Rapport"
+                  parent="hr_holidays.menu_hr_holidays_root"
+                  groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user"
+        />
+
+        <menuitem id="menu_previsional_leave"
+                  name="Congé prévisionnel"
+                  parent="menu_previsional_rapport"
+                  action="action_previsional_menu"/>
+
+    </data>
+</odoo>
+

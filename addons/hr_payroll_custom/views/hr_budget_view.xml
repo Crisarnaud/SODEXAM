@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="hr_payroll_budget_form_view">
+            <field name="name">hr.payroll.budget.form</field>
+            <field name="model">hr.payroll.budget</field>
+            <field name="arch" type="xml">
+                <form string="Budget">
+                    <header>
+                        <button name="action_submit" states="draft" string="Valider"
+                                type="object" class="oe_highlight" confirm="Voulez-vous Valider ?"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group></group>
+                            <field name="salary_rules_ids">
+                                <tree editable="bottom">
+                                    <field name="state" invisible="1"/>
+                                    <field name="rule_id" attrs="{'readonly': [('state','=','done')]}"/>
+                                    <field name="name" invisible="1"/>
+                                    <field name="budget" attrs="{'readonly': [('state','=','done')]}"/>
+                                    <field name="budget_realized" readonly="1" force_save="1"/>
+                                    <field name="rate" readonly="1" force_save="1"/>
+                                    <field name="obs"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_payroll_budget_tree">
+            <field name="name">training.certificate.tree</field>
+            <field name="model">hr.payroll.budget</field>
+            <field name="arch" type="xml">
+                <tree string="Budget">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_payroll_budget_pivot_view">
+            <field name="name">hr.payroll.budget.pivot</field>
+            <field name="model">hr.payroll.budget</field>
+            <field name="arch" type="xml">
+                <pivot string="Budget" disable_linking="True">
+                    <field name="name" type="row"/>
+                    <field name="name" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_hr_payroll_budget">
+            <field name="name">Budget</field>
+            <field name="res_model">hr.payroll.budget</field>
+            <field name="view_mode">tree,form,pivot</field>
+        </record>
+
+        <menuitem id="hr_payroll_budget_view"
+                  name="Budget"
+                  parent="hr_work_entry_contract.menu_hr_payroll_configuration"
+                  sequence="2"
+                  action="action_hr_payroll_budget"/>
+
+    </data>
+</odoo>

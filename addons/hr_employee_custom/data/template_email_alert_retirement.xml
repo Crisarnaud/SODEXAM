@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+        <record id="template_alert_email__retirement" model="mail.template">
+            <field name="name">Alerte depart à la retraite</field>
+            <field name="model_id" ref="hr_employee_custom.model_hr_employee"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="email_from">${(object.company_id.email or'')|safe }</field>
+            <field name="email_to">${(object.company_id.hr_manager_id.work_email or '')|safe}</field>
+            <field name="email_cc">
+                ${(object.company_id.alert_receiver_one.work_email or '')|safe};${(object.company_id.alert_receiver_two.work_email or '')|safe}
+            </field>
+            <field name="subject">Alerte départ à la retraite Matricule (${object.identification_id})</field>
+            <!--<field name="lang">${object.user_id.lang}</field>-->
+            <field name="body_html">
+                <![CDATA[
+            <p>Bonjour Monsieur/ Madame,</p>
+
+            <p>Nous vous informons que l'agent <b>${object.name} ${object.first_name}</b> Matricule: <b>${object.identification_id}</b>
+            est admis à faire valoir ses droits à la retraite le <b>${format_tz(object.estimated_date_retirement, tz = 'UTC', format='%d-%m-%Y')}</b>.
+            </p>
+            <br/>
+            <p>Cordialement!</p>
+            ]]>
+            </field>
+        </record>
+    </data>
+</odoo>

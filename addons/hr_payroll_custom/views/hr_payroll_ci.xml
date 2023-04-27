@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="hr_payslip_ci_search_view_inherit">
+            <field name="name">hr_payslip_ci.inherit.search</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                </xpath>
+                <xpath expr="//field[@name='employee_id']" position="before">
+                    <field name="identification_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_payslip_ci_tree_view_inherit">
+            <field name="name">hr_payslip_ci.inherit.tree</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='number']" position="after">
+                </xpath>
+                <xpath expr="//field[@name='employee_id']" position="before">
+                    <field name="identification_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_payslip_ci_form_view">
+            <field name="name">hr.payslip.form</field>
+            <field name="model">hr.payslip</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <button name="action_refresh_from_work_entries" position="replace">
+                    <button string="Recalculer les prestations"
+                            name="action_refresh_from_work_entries"
+                            type="object"
+                            title="Recompute the worked days lines and the payslip lines, in case you modified the work entries"
+                            attrs="{'invisible': ['|','|',('id', '=', False), ('state', 'not in', ['draft', 'verify']), ('employee_id', '=', False)]}"/>
+                </button>
+                <!--                <button name="compute_sheet" position="before">-->
+                <!--                    <button string="Confirmer" name="action_payslip_done" type="object"-->
+                <!--                            attrs="{'invisible':[('state', '!=', 'verify')]}"-->
+                <!--                            class="oe_highlight"/>-->
+                <!--                </button>-->
+                <button name="compute_sheet" position="after">
+                    <button name="%(hr_payroll_custom.action_hr_payroll_calcul_inverse_form_view)d"
+                            string="Calcul inverse"
+                            type="action"
+                            attrs="{'invisible':['|', ('id', '=', False), ('state', 'not in', ('draft','verify'))]}"/>
+                    <button name="calculate_leave_allowances" string="Calcul des congés" type="object"
+                            confirm="Voulez-vous vraiment calculer l'allocation congé de cet employé?"
+                            invisible="0"
+                            attrs="{'invisible':['|', ('id', '=', False), ('state', 'not in', ('draft','verify'))]}"
+                    />
+                </button>
+
+                <xpath expr="//field[@name='contract_id']" position="replace">
+                    <field name="contract_id" context="{'default_employee_id': employee_id}"
+                           domain="[('employee_id','=',employee_id),('date_start','&lt;=',date_to),
+                           '|',('date_end','&gt;=',date_from),('date_end','=',False),
+                            ('state','=','open')]"/>
+                </xpath>
+
+                <xpath expr="//button[@name='action_payslip_cancel']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('state','!=','verify')]}</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='action_payslip_done']" position="replace">
+                    <button string="Confirmer" name="action_payslip_done" type="object"
+                            attrs="{'invisible':[('state', '!=', 'verify')]}"
+                            class="oe_highlight"/>
+
+                </xpath>
+
+                <field name='payslip_run_id' position="after">
+                    <field name="tranche_id"/>
+                </field>
+                <field name='name' position="after">
+                    <label for="payslip_an_anciennete" string="Ancienneté"/>
+                    <div>
+                        <field name="payslip_an_anciennete" class="oe_inline"/>Ans-<field name="payslip_mois_anciennete"
+                                                                                          class="oe_inline"/>Mois
+                    </div>
+                </field>
+
+                <xpath expr="//page/div" position="after">
+                    <div colspan="4">
+                        <group col="4">
+                            <field name="payment_method"/>
+                            <field name="include_gratification" invisible="1"/>
+                            <field name="type" invisible="1"/>
+                            <field name="department_id" invisible="1"/>
+                            <field name="nature_employe" invisible="1"/>
+                            <field name="contribution_days"/>
+                            <field name="worked_days"/>
+                            <field name="cumul_worked_days"/>
+                            <field name="cumul_base_impot" invisible="1"/>
+                            <field name="cumul_cn" invisible="1"/>
+                            <field name="cumul_igr" invisible="1"/>
+                            <field name="cumul_worked_days" invisible="1"/>
+                            <field name="number_of_month" invisible="1"/>
+                            <field name="base_daily"/>
+                            <field name="brut_imposable"/>
+                            <field name="brut_total"/>
+                            <field name="cumul_brut_percu"/>
+                            <field name="cumul_salary_charges" readonly="1"/>
+                            <field name="cumul_salary_charges_cnps" readonly="1"/>
+                            <field name="cumul_employer_charges" readonly="1"/>
+                            <field name="cumul_employer_charges_cnps" readonly="1"/>
+                            <field name="cumul_periode_travaille"/>
+                            <field name="cumul_is_paid"/>
+                            <field name="cumul_igr_paid"/>
+                            <field name="cumul_cn_paid"/>
+                            <field name="cumul_cnps_paid"/>
+                            <field name="cumul_cgrae_paid"/>
+                            <field name="cumul_cmu_paid"/>
+                            <field name="cumul_crrae_employee_paid"/>
+                            <field name="cumul_crrae_faam_employee_paid"/>
+                        </group>
+                    </div>
+                </xpath>
+                <xpath expr="//page/field[@name='line_ids']/tree/field[@name='category_id']" position="after">
+                    <field name="date_from" invisible="0"/>
+                    <field name="date_to" invisible="0"/>
+                </xpath>
+                <xpath expr="//field[@name='input_line_ids']/tree/field[@name='input_type_id']" position="before">
+                    <field name="salary_rule_id"/>
+                </xpath>
+                <xpath expr="//field[@name='input_line_ids']/tree/field[@name='input_type_id']" position="after">
+                    <field name="name" force_save="1" readonly="0"/>
+                </xpath>
+                <xpath expr="//field[@name='input_line_ids']/tree/field[@name='input_type_id']" position="replace">
+                    <field name="input_type_id" force_save="1" invisible="1" readonly="0"/>
+                </xpath>
+                <xpath expr="//field[@name='input_line_ids']/tree/field[@name='input_type_id']" position="after">
+                    <field name="code" force_save="1"/>
+                </xpath>
+                <!--                <xpath expr="//form/group/field[@name='amount']" position="before">-->
+                <!--                    <field name="code"/>-->
+                <!--                </xpath>-->
+                <!--                <xpath expr="//form/group/field[@name='contract_id']" position="after">-->
+                <!--                     <field name="name"/>-->
+                <!--                </xpath>-->
+                <xpath expr="//field[@name='salary_rule_id']" position="after">
+                    <field name="contract_id"/>
+                </xpath>
+                <xpath expr="//form/sheet" position="after">
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </xpath>
+
+            </field>
+        </record>
+
+        <!-- gestion des données d'entrées -->
+        <record model="ir.ui.view" id="hr_payslip_ci_hr_payslip_input_tree_view">
+            <field name="name">hr.payslip.input.form</field>
+            <field name="model">hr.payslip.input</field>
+            <field name="arch" type="xml">
+                <tree string="Calucul inverse">
+                    <field name="payslip_id"/>
+                    <field name="contract_id"/>
+                    <field name="code"/>
+                    <field name="number_days_off" attrs="{'invisible':[('code','!=','CNGP')]}"/>
+                    <field name="amount"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_hr_payslip_input_tree_view">
+            <field name="name">Les inputs des bulletins</field>
+            <field name="res_model">hr.payslip.input</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <!--<menuitem parent="hr_payroll_custom.menu_hr_payroll_rapport" action="action_hr_payslip_input_tree_view"
+                  name="Entrées des bulletins" id="hr_payslip_input_menu_id" sequence="1000"/>-->
+
+        <!-- gestion des jours d'entrées -->
+        <record model="ir.ui.view" id="hr_payslip_ci_hr_payslip_worked_days_tree_view">
+            <field name="name">hr.payslip.worked_days.form</field>
+            <field name="model">hr.payslip.worked_days</field>
+            <field name="arch" type="xml">
+                <tree string="Jours d'entrée">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="number_of_days"/>
+                    <field name="number_of_hours"/>
+                    <field name="payslip_id"/>
+                    <field name="contract_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_hr_payslip_worked_days_tree_view">
+            <field name="name">Les jours des bulletins</field>
+            <field name="res_model">hr.payslip.worked_days</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <!--<menuitem parent="hr_payroll_custom.menu_hr_payroll_rapport" action="action_hr_payslip_worked_days_tree_view"
+                  name="Jours sur bulletins" id="hr_payslip_worked_days_menu_id" sequence="5000"/>
+    -->
+
+        <!-- Lot de bulletins -->
+        <record id="hr_payslip_run_form_inh2" model="ir.ui.view">
+            <field name="name">hr.payslip.run.form</field>
+            <field name="model">hr.payslip.run</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>
+            <field name="arch" type="xml">
+                <!--                <xpath expr="//button[@name='close_payslip_run']" position="before">-->
+                <xpath expr="//header/button[@name='action_validate']" position="before">
+                    <button name="submit_to_validation" type="object" string="Soumettre pour validation" states="draft"
+                            class="oe_highlight"/>
+                    <button name="dispatched_slalary" type="object" string="Dispacher le salaire" states="in_progress"
+                            class="oe_highlight" invisible="1"/>
+                    <button name="action_rejected" type="object" string="Rejeter" states="in_progress"
+                            class="oe_highlight" groups="hr.group_hr_manager"/>
+                    <button name="close_payslip_run" type="object" string="Clôturer" states="in_progress"
+                            class="oe_highlight"
+                            groups="hr.group_hr_manager"/>
+                </xpath>
+
+                <xpath expr="//header/button[@name='action_validate']" position="after">
+                    <button name="recompute_sheets" type="object" string="Recalculer tous les bulletins"
+                            states="draft"/>
+                    <button name="%(action_import_input_salary_form_view)s" type="action"
+<<<<<<< HEAD
+                            string="Importer les éléments de salaires" attrs="{'invisible': [ ('state', 'not in', ['draft', 'verify'])]}"/>
+=======
+                            string="Importer les éléments de salaires"
+                            attrs="{'invisible': [ ('state', 'not in', ['draft', 'verify'])]}"/>
+
+>>>>>>> 24cac31f7532d905209cbe850b50c26ab1293d9e
+                </xpath>
+                <field name="state" position="replace">
+                    <field name="state" widget="statusbar" track_visiblity=""/>
+                </field>
+            </field>
+        </record>
+
+        <!-- Regle salariale -->
+        <record id="payroll_ci_hr_salary_rule_form_inherit" model="ir.ui.view">
+            <field name="name">payroll_ci.hr.salary.rule.form</field>
+            <field name="model">hr.salary.rule</field>
+            <field name="inherit_id" ref="hr_payroll.hr_salary_rule_form"/>
+            <field name="arch" type="xml">
+                <field name="appears_on_payslip" position="before">
+                    <field name="is_tax_fdfp"/>
+                </field>
+                <field name="appears_on_payslip" position="after">
+                    <field name="use_to_compute_leave"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>

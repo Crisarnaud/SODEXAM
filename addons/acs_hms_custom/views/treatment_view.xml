@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_hospital_hms_treatment_form_inherit" model="ir.ui.view">
+            <field name="name">hms.treatment.form</field>
+            <field name="model">hms.treatment</field>
+            <field name="inherit_id" ref="acs_hms.view_hospital_hms_treatment_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='physician_id']" position="attributes">
+                    <attribute name="string">Infirmier</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='diagnosis_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='age']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='attending_physician_ids']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='end_date']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='registration_product_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='physician_id']" position="after">
+                    <field name="consultation_nas" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='patient_procedure_ids']/tree"
+                       position="inside">
+                    <field name="consultation_nas" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='patient_procedure_ids']/tree/button[@name='action_create_invoice']"
+                       position="attributes">
+                    <attribute name="attrs">{'invisible': [('consultation_nas', '=', True)]}</attribute>
+                </xpath>
+
+
+                <xpath expr="//field[@name='date']" position="attributes">
+                    <attribute name="string">Date</attribute>
+                </xpath>
+
+
+                <xpath expr="//page[@name='patient_procedures']" position="attributes">
+                    <attribute name="string">Liste des soins</attribute>
+                </xpath>
+
+                <xpath expr="//page[@name='general_info']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//page[@name='other_info']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='patient_procedure_count']" position="attributes">
+                    <attribute name="string">Soins</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='patient_procedure_ids']/tree/field[@name='physician_id']"
+                       position="attributes">
+                    <attribute name="string">Infirmier</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='patient_procedure_ids']/tree/field[@name='product_id']"
+                       position="attributes">
+                    <attribute name="string">Soins</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="view_hospital_hms_surgery_form_inherit" model="ir.ui.view">
+            <field name="name">hms.treatment.form</field>
+            <field name="model">hms.treatment</field>
+            <field name="inherit_id" ref="acs_hms_surgery.view_hospital_hms_treatment_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_view_surgery']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_hospital_hms_treatment_laboratory_orm_inherit" model="ir.ui.view">
+            <field name="name">hms.treatment.form</field>
+            <field name="model">hms.treatment</field>
+            <field name="inherit_id" ref="acs_hms_laboratory.view_hospital_hms_treatment_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_lab_requests']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='action_view_test_results']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='action_create_procedure_invoice']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('consultation_nas', '=', True)]}</attribute>
+                </xpath>
+
+
+                <xpath expr="//button[@name='action_lab_request']" position="attributes">
+                    <attribute name="string">Demande d'examen</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_acs_patient_procedure_form_inherit" model="ir.ui.view">
+            <field name="name">acs.patient.procedure.form</field>
+            <field name="model">acs.patient.procedure</field>
+            <field name="inherit_id" ref="acs_hms.view_acs_patient_procedure_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="attributes">
+                    <attribute name="string">Soin</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='product_id']" position="after">
+                    <field name="consultation_nas" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//button[@name='action_create_invoice']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('consultation_nas', '=', True)]}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='physician_id']" position="attributes">
+                    <attribute name="string">Infirmier</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_acs_patient_procedure_list_inherit" model="ir.ui.view">
+            <field name="name">acs.patient.procedure.tree</field>
+            <field name="model">acs.patient.procedure</field>
+            <field name="inherit_id" ref="acs_hms.view_acs_patient_procedure_list"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="attributes">
+                    <attribute name="string">Soin</attribute>
+                </xpath>
+                <xpath expr="//field[@name='physician_id']" position="attributes">
+                    <attribute name="string">Infirmier</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

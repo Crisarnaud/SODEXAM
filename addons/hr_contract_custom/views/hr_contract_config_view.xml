@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+    <!-- les conventions -->
+    <record model="ir.ui.view" id="hr_convention_tree_view">
+        <field name="name">hr.convention.tree</field>
+        <field name="model">hr.convention</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Conventions">
+                <field name="name" string="libellé"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="hr_convention_form_view">
+        <field name="name">hr.convention.form</field>
+        <field name="model">hr.convention</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Conventions">
+                <sheet>
+                    <group colspan="2">
+                        <field name="name" string="libellé"/>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description"/>
+                        </page>
+                        <page string="Les Secteurs d'activtés">
+                            <field name="secteurs_ids">
+                                <tree string="Secteurs d'activités">
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="open_view_convention_tree" model="ir.actions.act_window">
+        <field name="name">Conventions</field>
+        <field name="res_model">hr.convention</field>
+        <field name="view_mode">form,tree</field>
+        <field name="view_id" ref="hr_convention_tree_view"/>
+    </record>
+
+
+    <!-- les sections -->
+    <record model="ir.ui.view" id="hr_secteur_activite_tree_view">
+        <field name="name">hr.secteur.activite.tree</field>
+        <field name="model">hr.secteur.activite</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Secteurs">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_secteur_activite_form_view">
+        <field name="name">hr.secteur.activite.form</field>
+        <field name="model">hr.secteur.activite</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Secteurs">
+                <sheet>
+                    <group colspan="2">
+                        <field name="name" select="1"/>
+                        <field name="hr_convention_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description"/>
+                        </page>
+                        <page string="Catégories">
+                            <field name="salaire_ids">
+                                <tree editable="top">
+                                    <field name='name' required="1"/>
+                                    <field name="salaire_base"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+
+    <record id="open_view_secteur_tree" model="ir.actions.act_window">
+        <field name="name">Secteurs</field>
+        <field name="res_model">hr.secteur.activite</field>
+        <field name="view_mode">form,tree</field>
+        <field name="view_id" ref="hr_secteur_activite_tree_view"/>
+    </record>
+
+
+    <!-- Catégories salariales -->
+    <record model="ir.ui.view" id="hr_categorie_salariale_tree_view">
+        <field name="name">hr.categorie.salariale.tree</field>
+        <field name="model">hr.categorie.salariale</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Catégorie Salariale">
+                <field name="name"/>
+                <field name="hr_secteur_activite_id" required="1"/>
+                <field name="salaire_base" required="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_categorie_salariale_form_view">
+        <field name="name">hr.categorie.salariale.form</field>
+        <field name="model">hr.categorie.salariale</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Catégories salariale">
+                <sheet>
+                    <group colspan="4">
+                        <field name="name" select="1" required="1"/>
+                        <field name="hr_secteur_activite_id"/>
+                        <field name="salaire_base"/>
+                    </group>
+                    <field name="description" placeholder="Description de la catégorie salariale"/>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="action_hr_categorie_salariale_tree_view">
+        <field name="name">Catégorie Salariale</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.categorie.salariale</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="hr_categorie_salariale_tree_view"/>
+    </record>
+
+
+    <record model="ir.ui.view" id="hr_employee_extension_2_form_view">
+        <field name="name">hr.employee.form</field>
+        <field name="model">hr.employee</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="hr_contract.hr_hr_employee_view_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_contract_id']" position="before">
+                <field name="payment_method"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_employee_extension_tree_view">
+        <field name="name">hr.employee.tree_inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="type">tree</field>
+        <field name="inherit_id" ref="hr.view_employee_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='parent_id']" position="after">
+                <field name="contract_state"/>
+            </xpath>
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-danger">contract_state=='availability'</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="country_inh_form_view">
+        <field name="name">res.country.form</field>
+        <field name="model">res.country</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="base.view_country_form"/>
+        <field name="arch" type="xml">
+            <field name="code" position="after">
+                <field name="nationalite"/>
+            </field>
+        </field>
+    </record>
+
+    <!--           les catégories de contrats -->
+    <record model="ir.ui.view" id="hr_type_contract_form_view">
+        <field name="name">hr.type.contract.form</field>
+        <field name="model">hr.type.contract</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </div>
+
+                    <group string="Notifications">
+                        <field name="delai_notif_fin"/>
+                        <field name="delai_notif_essai"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Description">
+                            <field name="description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_type_contract_tree_view">
+        <field name="name">hr.type.contract.tree</field>
+        <field name="model">hr.type.contract</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="delai_notif_fin"/>
+                <field name="delai_notif_essai"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_hr_type_contract_view">
+        <field name="name">Type de contrat</field>
+        <field name="res_model">hr.type.contract</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

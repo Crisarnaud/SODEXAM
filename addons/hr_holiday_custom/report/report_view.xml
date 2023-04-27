@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="paper_format_landscape" model="report.paperformat">
+            <field name="name">A4 - Landscape</field>
+            <field name="format">A4</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">15</field>
+            <field name="margin_bottom">30</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report id="action_employee_hr_holidays_recovery" model="hr.holidays.recovery"
+                string="Attestation de reprise de service"
+                menu= "True"
+                report_type="qweb-pdf"
+                name="hr_holiday_custom.report_hr_holidays_recovery"
+                file="Attestation de reprise de service"/>
+
+        <report
+                id="action_report_agent_on_leave"
+                model="hr.leave"
+                string="Liste des agents en congés"
+                menu="False"
+                report_type="qweb-pdf"
+                name="hr_holiday_custom.report_agent_on_leave"
+                file="hr_holiday_custom.report_agent_on_leave"/>
+
+        <report
+                id="action_planning_holiday_yearly_employee_pdf"
+                model="hr.employee"
+                string="Planning des congés annuel pdf"
+                menu="False"
+                report_type="qweb-pdf"
+                name="hr_holiday_custom.report_hr_planning_holiday_yearly_employee_pdf"
+                file="Planning des congés annuel"
+                attachment_use="True"
+                paperformat="paper_format_landscape"
+        />
+
+        <report
+                id="action_planning_holiday_yearly_employee_xls"
+                model="hr.employee"
+                string="Planning des congés annuel xls"
+                menu="False"
+                report_type="xlsx"
+                name="hr_holiday_custom.report_hr_planning_holiday_yearly"
+                file="Planning des congés annuel "
+                attachment_use="True"
+        />
+
+        <report
+                id="action_planning_holiday_monthly_employee_pdf"
+                model="hr.leave"
+                string="Planning des congés pris mensuellement pdf"
+                menu="False"
+                report_type="qweb-pdf"
+                name="hr_holiday_custom.report_hr_planning_holiday_monthly_employee_pdf"
+                file="Planning des congés pris mensuellement"
+                attachment_use="True"
+                paperformat="paper_format_landscape"
+        />
+
+        <report
+                id="action_planning_holiday_monthly_employee_xls"
+                model="hr.employee"
+                string="Planning des congés pris mensuellement xls"
+                menu="False"
+                report_type="xlsx"
+                name="hr_holiday_custom.report_synthetic_holiday"
+                file="Rapport synthétique des congés "
+                attachment_use="True"
+        />
+
+        <report id="action_all_hr_holidays_department"
+                model="hr.employee"
+                string="Liste de tous les congés."
+                menu="False"
+                report_type="xlsx"
+                name="hr_holiday_custom.report_all_holidays_department"
+                file="Liste de tous les congés."/>
+
+        <report id="action_all_hr_holidays_department_pdf"
+                model="hr.leave"
+                string="Liste de tous les congés par département"
+                menu="False"
+                report_type="qweb-pdf"
+                name="hr_holiday_custom.report_all_holidays_department_pdf"
+                file="Liste de tous les congés par département"
+                paperformat="paper_format_landscape"/>
+
+    </data>
+</odoo>

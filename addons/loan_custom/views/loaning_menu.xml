@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="loan_menu_id" name="Prêts" web_icon="loan_custom,static/description/icon.png"/>
+
+        <menuitem id="hr_advance_salary_menu" name="Avances sur salaire" parent="loan_menu_id"
+                  action="action_hr_advance_salary_view"
+                  sequence="100"/>
+
+        <menuitem id="demande_emprunt_menu" name="Prêts scolaires" parent="loan_menu_id"
+                  action="action_loan_request_user_view"
+                  sequence="2"/>
+    </data>
+</odoo>

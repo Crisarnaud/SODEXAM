@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!--    ajout du nombre a prendre en compte dans le calcul du
+            montant maximal pour le prêt dans le res_company-->
+    <record model="ir.ui.view" id="res_company_loaning_request_form_view">
+        <field name="name">res.company.form</field>
+        <field name="model">res.company</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="hr_employee_custom.res_company_update_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='favicon']" position="before">
+                <field name="number_maximum_amount"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!--     ajout du montant max dans la vue contract-->
+    <record model="ir.ui.view" id="hr_contract_quotite_form">
+        <field name="name">hr.contract.form</field>
+        <field name="model">hr.contract</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='sursalaire']" position="before">
+                <field name="maximum_amount"/>
+                <field name="maximum_amount_advance_salary"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--    formulaire de la demande de prêt-->
+
+    <record model="ir.ui.view" id="hr_loaning_request_form_view">
+        <field name="name">hr.loaning.request.form</field>
+        <field name="model">hr.loaning.request</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_validated" string="Valider"
+                            confirm="Voulez vous valider votre demande ?" type="object"
+                            attrs="{'invisible':['|', ('id', '=', False), ('state', '!=', 'draft')]}"/>
+                    <button name="action_generate_loaning" string="Générer l'échéancier de paiement"
+                            confirm="Voulez générer l'échéancier ?" type="object"
+                            attrs="{'invisible':[('state', '!=', 'validated')]}"/>
+                    <button name="action_done" string="Clôturer"
+                            confirm="Voulez vous clôturer la demande ?" type="object"
+                            attrs="{'invisible':[ ('state', '!=', 'echeance')]}"/>
+
+                    <button name="%(action_report_loaning)d"
+                            type="action"
+                            class="oe_stat_button"
+                            icon="fa-print"
+                            string="Imprimer"
+                            attrs="{'invisible':[('state','not in',('echeance','done'))]}"
+                    />
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <h4>
+                        <field name="name" String="Libellé" readonly="1"/>
+                    </h4>
+                    <group>
+                        <group>
+                            <field name="employe_id" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                            <field name="user_id" invisible="1"/>
+                            <field name="job_id" readonly="1"/>
+                            <field name="reason_request" required="1" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                        </group>
+                        <group>
+                            <field name="amount_request" required="1" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                            <field name="date_request" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                            <field name="date_deadline" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                            <field name="expiry_number"
+                                   attrs="{'invisible':[ ('state', 'not in', ('echeance','done'))]}"/>
+
+                            <field name="reimbursement_start_date" string=" Date début remboursement"
+                                   attrs="{'invisible':[ ('state', 'not in', ('echeance','done'))]}"/>
+                            <field name="option"
+                                   attrs="{'invisible':[ ('state', 'not in', ('echeance','done'))]}"/>
+
+                            <field name="deadline_interval" string="Intervalle de remboursement"
+                                   attrs="{'invisible':[ ('state', 'not in', ('echeance','done'))]}"/>
+
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Echeanciers" attrs="{'invisible':[ ('state', 'not in', ('echeance','done'))]}">
+                            <field name="deadline_ids" colspan="4" nolabel="1">
+                                <tree string="Echéances">
+                                    <field name="name"/>
+                                    <field name="amount" sum="Total des échéances"/>
+                                    <field name="amount_paid" sum="Montant payé"/>
+                                    <field name="scheduled_date"/>
+                                    <field name="state_loan"/>
+                                </tree>
+                                <form string="Echeances" readonly="1">
+                                    <header>
+                                        <button name="%(action_payment_checkout_view)d" type="action"
+                                                class="oe_stat_button" string="Paiement caisse"
+                                                attrs="{'invisible':[ ('state_loan', '!=', 'take')]}">
+                                        </button>
+                                        <field name="state_loan" widget="statusbar"/>
+                                    </header>
+                                    <sheet>
+                                        <group col="4">
+                                            <field name="name"/>
+                                            <field name="amount" sum="Total des échéances"/>
+                                            <field name="amount_paid" sum="Montant payé"/>
+                                            <field name="scheduled_date"/>
+                                        </group>
+                                        <notebook>
+                                            <page string="Informations caisse"
+                                                  attrs="{'invisible':[ ('state_loan', '!=', 'paid')]}">
+                                                <group>
+                                                    <field name="reference_box"/>
+                                                    <field name="name_box"/>
+                                                    <field name="attachment_ids" widget="many2many_binary"/>
+                                                </group>
+                                            </page>
+                                        </notebook>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="loan_request_tree_view">
+        <field name="name">hr.loaning.request.tree</field>
+        <field name="model">hr.loaning.request</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Loan request">
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="employe_id"/>
+                <field name="job_id"/>
+                <field name="reason_request"/>
+                <field name="amount_request"/>
+                <field name="date_request"/>
+                <field name="date_deadline"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_loan_request_user_view">
+        <field name="name">Demandes de prêt scolaire</field>
+        <field name="res_model">hr.loaning.request</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="loan_request_tree_view"/>
+    </record>
+</odoo>
